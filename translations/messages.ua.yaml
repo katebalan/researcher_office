@@ -1,15 +1,24 @@
-update: Змінити
-save: Зберегти
-back: Назад
-logout: Вихід
-login: Вхід
-delete: Видалити
+update: змінити
+save: зберегти
+back: назад
+logout: вихід
+login: вхід
+delete: видалити
+edit: редагувати
+add: створити
+show: перегляд
 
 menu:
-    main: Головна
-    schedule: Розклад
-    publication: Публікації
-    diploma: Дипломні роботи
-    news: Новини
-    scientific_interest: Наукові інтереси
-    colleagues: Колеги
+    main: головна
+    schedule: розклад
+    publication: публікації
+    diploma: дипломні роботи
+    news: новини
+    scientific_interest: наукові інтереси
+    colleagues: колеги
+
+scientific_interest: науковий інтерес
+colleage: колегу
+publication: публікацію
+diploma: дипломну роботу
+new: новий елемент

@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Edit User</h1>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'edit'|trans|capitalize ~ ' ' ~ 'colleage'|trans }}
+                </h3>
 
-    {{ include('user/_form.html.twig', {'button_label': 'update'}) }}
+                <div class="border-bottom pb-3 mb-4">
+                    {{ include('user/_form.html.twig', {'button_label': 'update'}) }}
 
-    <a href="{{ path('ro_user_index') }}" class="btn btn-sm btn-outline-primary">{{ 'back'|trans }}</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+                    {% include 'components/_buttons.thml.twig' with {
+                        'id': user.id,
+                        'back': 'ro_user_index',
+                        'delete': 'ro_user_delete'
+                    } %}
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

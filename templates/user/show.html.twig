@@ -64,9 +64,10 @@
         </div>
     </div>
 
-    <a href="{{ path('ro_user_index') }}" class="btn btn-sm btn-primary">Назад до списку</a>
-
-    <a href="{{ path('ro_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-primary">Редагувати</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    {% include 'components/_buttons.thml.twig' with {
+        'id': user.id,
+        'edit': 'ro_user_edit',
+        'back': 'ro_user_index',
+        'delete': 'ro_user_delete'
+    } %}
 {% endblock %}

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
-                    Наукові інтереси
+                    {{ 'menu.scientific_interest'|trans|capitalize }}
                 </h3>
 
                 <div class="border-bottom pb-3 mb-4">
@@ -20,7 +20,9 @@
                         {% endfor %}
                     </div>
 
-                    <a href="{{ path('ro_scientific_interest_new') }}" class="btn btn-sm btn-outline-primary">Додати новий</a>
+                    {% include 'components/_buttons.thml.twig' with {
+                        'create': 'ro_scientific_interest_new'
+                    } %}
                 </div>
             </div>
         </div>

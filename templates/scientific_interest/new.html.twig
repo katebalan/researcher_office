@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Додати новий науковий інтерес</h1>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'add'|trans|capitalize ~ ' ' ~ 'scientific_interest'|trans }}
+                </h3>
 
-    {{ include('scientific_interest/_form.html.twig') }}
+                <div class="border-bottom pb-3 mb-4">
+                    {{ include('scientific_interest/_form.html.twig') }}
 
-    <a href="{{ path('ro_scientific_interest_index') }}" class="btn btn-sm btn-primary">Назад до списку</a>
+                    {% include 'components/_buttons.thml.twig' with {
+                        'back': 'ro_scientific_interest_index'
+                    } %}
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

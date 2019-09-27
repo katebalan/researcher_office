@@ -15,14 +15,14 @@
 
 <div class="py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-        <a class="p-2 text-muted" href="{{ path('ro_index') }}">{{ 'menu.main'|trans }}</a>
-        <a class="p-2 text-muted" href="{{ path('ro_schedule') }}">{{ 'menu.schedule'|trans }}</a>
-        <a class="p-2 text-muted" href={{ path('ro_publication_index') }}>{{ 'menu.publication'|trans }}</a>
-        <a class="p-2 text-muted" href="{{ path('ro_diploma_index') }}">{{ 'menu.diploma'|trans }}</a>
-        <a class="p-2 text-muted" href="{{ path('ro_news') }}">{{ 'menu.news'|trans }}</a>
-        <a class="p-2 text-muted" href="{{ path('ro_scientific_interest_index') }}">{{ 'menu.scientific_interest'|trans }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_index') }}">{{ 'menu.main'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_schedule') }}">{{ 'menu.schedule'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href={{ path('ro_publication_index') }}>{{ 'menu.publication'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_diploma_index') }}">{{ 'menu.diploma'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_news') }}">{{ 'menu.news'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_scientific_interest_index') }}">{{ 'menu.scientific_interest'|trans|capitalize }}</a>
         {% if is_granted("ROLE_ADMIN") %}
-            <a class="p-2 text-muted" href="{{ path('ro_user_index') }}">{{ 'menu.colleagues'|trans }}</a>
+            <a class="p-2 text-muted" href="{{ path('ro_user_index') }}">{{ 'menu.colleagues'|trans|capitalize }}</a>
         {% endif %}
     </nav>
 </div>

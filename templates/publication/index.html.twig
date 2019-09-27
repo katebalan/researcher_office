@@ -24,18 +24,18 @@
                         </div>
 
                         <p class="col-md-2">
-                            <a href="{{ path('ro_publication_show', {'id': publication.id}) }}"
-                               class="btn btn-outline-primary btn-sm mb-2">Перегляд</a>
-                            <a href="{{ path('ro_publication_edit', {'id': publication.id}) }}"
-                               class="btn btn-outline-primary btn-sm mb-2">Редагувати</a>
-                            <a href="{{ path('ro_publication_delete', {'id': publication.id}) }}"
-                               class="btn btn-outline-danger btn-sm mb-2">Видалити</a>
+                            {% include 'components/_buttons.thml.twig' with {
+                                'id': publication.id,
+                                'edit': 'ro_publication_edit',
+                                'show': 'ro_publication_show'
+                            } %}
                         </p>
                     </div>
                 {% endfor %}
 
-                <a href="{{ path('ro_publication_new') }}"
-                   class="btn btn-outline-primary btn-sm">Додати публікацію</a>
+                {% include 'components/_buttons.thml.twig' with {
+                    'create': 'ro_publication_new'
+                } %}
             </div>
         </div>
     </main>

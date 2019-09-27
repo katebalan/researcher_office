@@ -48,9 +48,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('ro_publication_index') }}">back to list</a>
-
-    <a href="{{ path('ro_publication_edit', {'id': publication.id}) }}">edit</a>
-
-    {{ include('publication/_delete_form.html.twig') }}
+    {% include 'components/_buttons.thml.twig' with {
+        'id': publication.id,
+        'edit': 'ro_publication_edit',
+        'back': 'ro_publication_index',
+        'delete': 'ro_publication_delete'
+    } %}
 {% endblock %}
