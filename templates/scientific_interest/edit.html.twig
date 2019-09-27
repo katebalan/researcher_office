@@ -3,9 +3,10 @@
 {% block body %}
     <h1>Редагувати науковий інтерес</h1>
 
-    {{ include('scientific_interest/_form.html.twig', {'button_label': 'Змінити'}) }}
+    {{ include('scientific_interest/_form.html.twig', {'button_label': 'update'}) }}
 
     <a href="{{ path('ro_scientific_interest_index') }}" class="btn btn-sm btn-primary">Назад до списку</a>
 
-    {{ include('scientific_interest/_delete_form.html.twig') }}
+{#    {{ include('scientific_interest/_delete_form.html.twig') }}#}
+    {% include 'components/_delete_form.html.twig' with {'path': 'ro_scientific_interest_delete', 'id': scientific_interest.id} %}
 {% endblock %}

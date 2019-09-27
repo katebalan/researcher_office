@@ -8,21 +8,21 @@
             <a class="text-muted" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
             </a>
-            <a class="btn btn-sm btn-outline-secondary" href="{{ path('ro_logout') }}">Вихід</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{ path('ro_logout') }}">{{ 'logout'|trans }}</a>
         </div>
     </div>
 </header>
 
 <div class="py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-        <a class="p-2 text-muted" href="{{ path('ro_index') }}">Головна</a>
-        <a class="p-2 text-muted" href="{{ path('ro_schedule') }}">Розклад</a>
-        <a class="p-2 text-muted" href={{ path('ro_publication_index') }}>Публікації</a>
-        <a class="p-2 text-muted" href="{{ path('ro_diploma_index') }}">Дипломні роботи</a>
-        <a class="p-2 text-muted" href="{{ path('ro_news') }}">Новини</a>
-        <a class="p-2 text-muted" href="{{ path('ro_scientific_interest_index') }}">Наукові інтереси</a>
+        <a class="p-2 text-muted" href="{{ path('ro_index') }}">{{ 'menu.main'|trans }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_schedule') }}">{{ 'menu.schedule'|trans }}</a>
+        <a class="p-2 text-muted" href={{ path('ro_publication_index') }}>{{ 'menu.publication'|trans }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_diploma_index') }}">{{ 'menu.diploma'|trans }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_news') }}">{{ 'menu.news'|trans }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_scientific_interest_index') }}">{{ 'menu.scientific_interest'|trans }}</a>
         {% if is_granted("ROLE_ADMIN") %}
-            <a class="p-2 text-muted" href="{{ path('ro_user_index') }}">Колеги</a>
+            <a class="p-2 text-muted" href="{{ path('ro_user_index') }}">{{ 'menu.colleagues'|trans }}</a>
         {% endif %}
     </nav>
 </div>

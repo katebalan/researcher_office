@@ -3,9 +3,9 @@
 {% block body %}
     <h1>Edit Publication</h1>
 
-    {{ include('publication/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('publication/_form.html.twig', {'button_label': 'update'}) }}
 
-    <a href="{{ path('ro_publication_index') }}">back to list</a>
+    <a href="{{ path('ro_publication_index') }}" class="btn btn-outline-primary btn-sm">Назад</a>
 
     {{ include('publication/_delete_form.html.twig') }}
 {% endblock %}
