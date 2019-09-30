@@ -109,7 +109,12 @@ class User implements UserInterface
 
     public function __toString()
     {
-        return $this->getFirstName() . ' ' . $this->getSecondName();
+        $name = mb_substr($this->getFirstName(), 0, 1);
+        $patronymic = mb_substr($this->getPatronymic(), 0, 1);
+
+        $initials = $name ? $name . '. ' : '';
+        $initials = $patronymic ? $initials . $patronymic . '.' : $initials;
+        return $this->getSecondName() . ' ' . $initials;
     }
 
     public function getId(): ?int

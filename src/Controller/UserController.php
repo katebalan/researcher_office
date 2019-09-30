@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,11 +57,12 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="ro_user_show", methods={"GET"})
+     * @Security("user !== entity")
      */
-    public function show(User $user): Response
+    public function show(User $entity): Response
     {
         return $this->render('user/show.html.twig', [
-            'user' => $user,
+            'user' => $entity,
         ]);
     }
 
@@ -75,7 +77,11 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ro_user_index');
+            return $this->redirectToRoute(
+                $user === $this->getUser()
+                    ? 'ro_index'
+                    : 'ro_user_index'
+            );
         }
 
         return $this->render('user/edit.html.twig', [

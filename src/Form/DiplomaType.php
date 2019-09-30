@@ -19,7 +19,8 @@ class DiplomaType extends AbstractType
                 'widget' => 'single_text',
                 'format'      => 'MMMM yyyy',
                 'attr' => [
-                    'class' => 'js-datepicker'
+                    'class' => 'js-datepicker',
+                    'autocomplete' => 'off'
                 ]
             ])
             ->add('file')

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
-                    Публікації
+                    {{ 'menu.publication'|trans|capitalize }}
                 </h3>
 
                 {% for publication in publications %}
@@ -34,7 +34,7 @@
                 {% endfor %}
 
                 {% include 'components/_buttons.thml.twig' with {
-                    'create': 'ro_publication_new'
+                    'create': path('ro_publication_new')
                 } %}
             </div>
         </div>

@@ -1,48 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Diploma index</h1>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'menu.diploma'|trans|capitalize }}
+                </h3>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Author</th>
-                <th>Date</th>
-                <th>File</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for diploma in diplomas %}
-            <tr>
-                <td>{{ diploma.id }}</td>
-                <td>{{ diploma.name }}</td>
-                <td>{{ diploma.author }}</td>
-                <td>{{ diploma.date ? diploma.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ diploma.file }}</td>
-                <td>{{ diploma.createdAt ? diploma.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ diploma.updatedAt ? diploma.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    {% include 'components/_buttons.thml.twig' with {
-                        'id': diploma.id,
-                        'edit': 'ro_diploma_edit',
-                        'show': 'ro_diploma_show'
-                    } %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                {% for diploma in diplomas %}
+                    <div class="border-bottom pb-3 mb-4 row">
+                        <h5 class="font-weight-bold col-md-12">{{ diploma.name }}</h5>
+                        <div class="col-md-9">
+                            <p class="text-muted">
+                                {{ diploma.date ? diploma.date|date('D d/M/Y') : '' }} <br />
+                                {{ diploma.author }}
+                            </p>
+                        </div>
 
-    {% include 'components/_buttons.thml.twig' with {
-        'create': 'ro_diploma_new'
-    } %}
+                        <p class="col-md-3">
+                            {% include 'components/_buttons.thml.twig' with {
+                                'id': diploma.id,
+                                'edit': 'ro_diploma_edit',
+                                'show': 'ro_diploma_show'
+                            } %}
+                        </p>
+                    </div>
+                {% endfor %}
+
+                {% include 'components/_buttons.thml.twig' with {
+                    'create': path('ro_diploma_new', {'id': app.user.id})
+                } %}
+            </div>
+        </div>
+    </main>
 {% endblock %}

@@ -19,22 +19,20 @@ class PublicationRepository extends ServiceEntityRepository
         parent::__construct($registry, Publication::class);
     }
 
-    // /**
-    //  * @return Publication[] Returns an array of Publication objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Publication[] Returns an array of Publication objects
+      */
+    public function findByCoAuthor($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->leftJoin('p.coAuthors', 'co_authors')
+            ->where('co_authors.id = :val')
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Publication

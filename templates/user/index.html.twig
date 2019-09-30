@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
-                    {{ 'colleage'|trans|capitalize }}
+                    {{ 'menu.colleagues'|trans|capitalize }}
                 </h3>
 
                 <div class="row">
@@ -34,7 +34,7 @@
                 </div>
 
                 {% include 'components/_buttons.thml.twig' with {
-                    'create': 'ro_user_new'
+                    'create': path('ro_user_new')
                 } %}
             </div>
         </div>

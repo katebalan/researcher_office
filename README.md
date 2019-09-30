@@ -17,6 +17,7 @@ composer require profiler --dev
 composer require debug --dev
 
 composer require security
+composer require symfony/expression-language
 composer require orm
 composer require doctrine
 php bin/console make:user

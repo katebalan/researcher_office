@@ -223,6 +223,9 @@
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.5"
     },
+    "symfony/expression-language": {
+        "version": "v4.3.4"
+    },
     "symfony/filesystem": {
         "version": "v4.3.4"
     },
@@ -366,15 +369,6 @@
         "files": [
             "config/packages/security.yaml"
         ]
-    },
-    "symfony/security-core": {
-        "version": "v4.3.4"
-    },
-    "symfony/security-csrf": {
-        "version": "v4.3.4"
-    },
-    "symfony/security-guard": {
-        "version": "v4.3.4"
     },
     "symfony/security-http": {
         "version": "v4.3.4"

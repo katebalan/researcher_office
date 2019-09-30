@@ -18,7 +18,8 @@ class UserType extends AbstractType
             ->add('secondName')
             ->add('birthDate', DateType::class, [
                 'attr' => [
-                    'class' => 'js-datepicker-full'
+                    'class' => 'js-datepicker-full',
+                    'autocomplete' => 'off'
                 ],
                 'widget' => 'single_text',
                 'format'      => 'dd MMMM yyyy',

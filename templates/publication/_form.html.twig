@@ -1,4 +1,19 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-outline-success btn-sm mb-2">{{ button_label|default('save')|trans|capitalize }}</button>
+    <div class="row">
+        <div class="col-md-12">{{ form_row(form.name) }}</div>
+        <div class="col-md-6">
+            {{ form_row(form.coAuthors) }}
+            {{ form_row(form.coAuthorsSimple) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.date) }}
+            {{ form_row(form.place) }}
+            {{ form_row(form.pages) }}
+        </div>
+        <div class="col-md-12">
+            {{ form_row(form.notes) }}
+            {{ form_row(form.file) }}
+            <button class="btn btn-outline-success btn-sm mb-2">{{ button_label|default('save')|trans|capitalize }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}

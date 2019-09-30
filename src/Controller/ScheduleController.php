@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +14,12 @@ class ScheduleController extends AbstractController
      */
     public function index()
     {
-        $surname = 'Безносик';
-        $name = 'Олександр';
-        $patronymic = 'Юрійович';
-        /*$surname = 'Булах';
-        $name = 'Богдан';
-        $patronymic = 'Вікторович';*/
+        /** @var User $user */
+        $user = $this->getUser();
 
-        $fullName = $surname . '+' . $name . '+' .$patronymic;
+        $fullName = $user
+            ? $user->getSecondName() . '+' . $user->getFirstName() . '+' .$user->getPatronymic()
+            : '';
 
         $client = HttpClient::create();
         $response = $client->request(
@@ -29,7 +28,6 @@ class ScheduleController extends AbstractController
         );
 
         $content = $response->toArray();
-
         $content = $this->group_by('lesson_week', $content['data']);
 
         foreach ($content as &$lesson) {

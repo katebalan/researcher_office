@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Diploma;
+use App\Entity\User;
 use App\Form\DiplomaType;
 use App\Repository\DiplomaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,14 +22,14 @@ class DiplomaController extends AbstractController
     public function index(DiplomaRepository $diplomaRepository): Response
     {
         return $this->render('diploma/index.html.twig', [
-            'diplomas' => $diplomaRepository->findAll(),
+            'diplomas' => $diplomaRepository->findBy(['user' => $this->getUser()->getId()]),
         ]);
     }
 
     /**
-     * @Route("/new", name="ro_diploma_new", methods={"GET","POST"})
+     * @Route("/{id}/new", name="ro_diploma_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, User $user): Response
     {
         $diploma = new Diploma();
         $form = $this->createForm(DiplomaType::class, $diploma);
@@ -36,7 +37,7 @@ class DiplomaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $diploma->setUser($this->getUser());
+            $diploma->setUser($user);
             $entityManager->persist($diploma);
             $entityManager->flush();
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Publication;
+use App\Entity\User;
 use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,7 @@ class PublicationController extends AbstractController
     public function index(PublicationRepository $publicationRepository): Response
     {
         return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findAll(),
+            'publications' => $publicationRepository->findByCoAuthor($this->getUser()->getId()),
         ]);
     }
 
@@ -31,6 +32,10 @@ class PublicationController extends AbstractController
     public function new(Request $request): Response
     {
         $publication = new Publication();
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $publication->addCoAuthor($user);
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 

@@ -1,52 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Publication</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ publication.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ publication.name }}</td>
-            </tr>
-            <tr>
-                <th>CoAuthorsSimple</th>
-                <td>{{ publication.coAuthorsSimple }}</td>
-            </tr>
-            <tr>
-                <th>Place</th>
-                <td>{{ publication.place }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ publication.date ? publication.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Pages</th>
-                <td>{{ publication.pages }}</td>
-            </tr>
-            <tr>
-                <th>Notes</th>
-                <td>{{ publication.notes }}</td>
-            </tr>
-            <tr>
-                <th>File</th>
-                <td>{{ publication.file }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ publication.createdAt ? publication.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ publication.updatedAt ? publication.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                {{ 'Перегляд публікації'|trans|capitalize }}
+            </h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card flex-md-row mb-4">
+                        <div class="card-body d-flex flex-column align-items-start">
+                            <h3 class="mb-2 text-dark">
+                                {{ publication.name }}
+                            </h3>
+                            <div class="mb-3 text-muted">
+                                {{ publication.date ? publication.date|date('M d, Y') }} <br />
+                                {% for author in publication.coAuthors %}
+                                    {{ author }}
+                                {% endfor %}
+                                {{ publication.coAuthorsSimple }}
+                            </div>
+                            <p class="card-text mb-auto">
+                                {{ 'Place'|trans ~ ': ' ~ publication.place }}
+                            </p>
+                            <p class="card-text mb-auto">
+                                {{ 'Pages'|trans ~ ': ' ~ publication.pages }}
+                            </p>
+                            <p class="card-text mb-auto">
+                                {{ publication.notes }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% include 'components/_buttons.thml.twig' with {
         'id': publication.id,
