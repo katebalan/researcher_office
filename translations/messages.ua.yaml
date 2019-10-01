@@ -1,5 +1,6 @@
+# general
 update: змінити
-save: зберегти
+save: Зберегти
 back: назад
 logout: вихід
 login: вхід
@@ -7,7 +8,9 @@ delete: видалити
 edit: редагувати
 add: створити
 show: перегляд
+new: новий елемент
 
+# menu
 menu:
     main: головна
     schedule: розклад
@@ -21,8 +24,10 @@ scientific_interest: науковий інтерес
 colleage: колегу
 publication: публікацію
 diploma: дипломну роботу
-new: новий елемент
+change_password: Змінити пароль
+reset_password: Скинути пароль
 
+# forms
 Name: Назва
 Author: Автор
 Date: Дата
@@ -32,3 +37,17 @@ Co authors simple: Автори, яких немає в системі
 Place: Місце публікації
 Pages: Сторінки
 Notes: Нотатки
+Old password: Старий пароль
+New password: Новий пароль
+Repeat password: Повторити пароль
+First name: Ім'я
+Second name: Прізвище
+Patronymic: По-батькові
+Birth date: Дата народження
+Birth place: Місце народження
+Education: Освіта
+Degree: Науковий ступінь
+Biography: Біографія
+Interest: Інтереси
+Username: Ім'я користувача
+Email: Email

@@ -1,4 +1,22 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-outline-success btn-sm mb-2">{{ button_label|default('save')|trans|capitalize }}</button>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.secondName) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.patronymic) }}
+            {{ form_row(form.biography) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.birthDate) }}
+            {{ form_row(form.birthPlace) }}
+            {{ form_row(form.education) }}
+            {{ form_row(form.degree) }}
+            {{ form_row(form.interest) }}
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-outline-success btn-sm mb-2">{{ button_label|default('save')|trans|capitalize }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}

@@ -100,6 +100,11 @@ class User implements UserInterface
      */
     private $diplomas;
 
+    /**
+     * @var string
+     */
+    private $plainPassword;
+
     public function __construct()
     {
         $this->interest = new ArrayCollection();
@@ -379,6 +384,18 @@ class User implements UserInterface
                 $diploma->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }

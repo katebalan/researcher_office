@@ -4,9 +4,10 @@
 {% set delete = delete is defined ? delete : false %}
 {% set show = show is defined ? show : false %}
 {% set create = create is defined ? create : false %}
+{% set reset = reset is defined ? reset : false %}
 
 {% if show %}
-    <a href="{{ path(show, {'id': id}) }}" class="btn btn-outline-primary btn-sm mb-2">
+    <a href="{{ path(show, {'id': id}) }}" class="btn btn-outline-info btn-sm mb-2">
         {{ 'show'|trans|capitalize }}
     </a>
 {% endif %}
@@ -25,6 +26,12 @@
 
 {% if back %}
     <input class="btn btn-sm btn-outline-primary mb-2" type="button" value="{{ 'back'|trans|capitalize }}" onclick="history.back(-1)" />
+{% endif %}
+
+{% if reset %}
+    <a href="{{ reset }}" class="btn btn-outline-danger btn-sm mb-2">
+        {{ 'reset_password'|trans|capitalize }}
+    </a>
 {% endif %}
 
 {% if delete %}

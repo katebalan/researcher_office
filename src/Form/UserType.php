@@ -22,7 +22,7 @@ class UserType extends AbstractType
                     'autocomplete' => 'off'
                 ],
                 'widget' => 'single_text',
-                'format'      => 'dd MMMM yyyy',
+                'format' => 'dd MMMM yyyy'
             ])
             ->add('email')
             ->add('patronymic')

@@ -26,7 +26,8 @@
                                 {% include 'components/_buttons.thml.twig' with {
                                     'id': user.id,
                                     'edit': 'ro_user_edit',
-                                    'show': 'ro_user_show'
+                                    'show': 'ro_user_show',
+                                    'reset': path('ro_user_reset_password', {'id': user.id})
                                 } %}
                             </p>
                         </div>
