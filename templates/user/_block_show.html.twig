@@ -1,5 +1,5 @@
 <div class="row jumbotron p-3 p-md-5 rounded bg-light">
-    <h3 class="col-md-12 pb-3 px-0">{{ user.secondName ~ ' ' ~ user.firstName ~ ' ' ~ user.patronymic }}</h3>
+    <h3 class="col-md-12 pb-3 px-0">{{ user.getFullName() }}</h3>
     <div class="col-md-3 px-0">
         <div class="font-weight-bold">Дата народження</div>
         {% if user.birthPlace is not null %}
@@ -8,18 +8,22 @@
         {% if user.education is not null %}
             <div class="font-weight-bold">Освіта</div>
         {% endif %}
-        {% if user.degree is not null %}
-            <div class="font-weight-bold">Вчений ступінь</div>
+        {% if user.scientificDegree %}
+            <div class="font-weight-bold">{{ 'Scientific degree'|trans }}</div>
+        {% endif %}
+        {% if user.scientificRank %}
+            <div class="font-weight-bold">{{ 'Scientific rank'|trans }}</div>
         {% endif %}
         <div class="font-weight-bold">Username</div>
         <div class="font-weight-bold">Email</div>
         <div class="font-weight-bold">Учачник проекту з</div>
     </div>
     <div class="col-md-9 px-0">
-        <div class="">{{ user.birthDate|date }}</div>
+        <div class="">{{ user.birthDate|date('M d, Y') }}</div>
         <div class="">{{ user.birthPlace }}</div>
         <div class="">{{ user.education }}</div>
-        <div class="">{{ user.degree }}</div>
+        <div class="">{{ user.scientificDegree }}</div>
+        <div class="">{{ user.scientificRank }}</div>
         <div class="">{{ user.username }}</div>
         <div class="">{{ user.email }}</div>
         <div class="">{{ user.createdAt|date }}</div>

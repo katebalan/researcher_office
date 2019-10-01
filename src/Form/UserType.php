@@ -28,7 +28,8 @@ class UserType extends AbstractType
             ->add('patronymic')
             ->add('birthPlace')
             ->add('education')
-            ->add('degree')
+            ->add('scientificDegree')
+            ->add('scientificRank')
             ->add('biography')
             ->add('interest', null, [
                 'attr' => [

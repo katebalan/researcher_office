@@ -76,11 +76,6 @@ class User implements UserInterface
     private $education;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $degree;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $biography;
@@ -104,6 +99,16 @@ class User implements UserInterface
      * @var string
      */
     private $plainPassword;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ScientificRank", inversedBy="users")
+     */
+    private $scientificRank;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ScientificDegree", inversedBy="users")
+     */
+    private $scientificDegree;
 
     public function __construct()
     {
@@ -279,18 +284,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getDegree(): ?string
-    {
-        return $this->degree;
-    }
-
-    public function setDegree(string $degree): self
-    {
-        $this->degree = $degree;
-
-        return $this;
-    }
-
     public function getBiography(): ?string
     {
         return $this->biography;
@@ -398,5 +391,34 @@ class User implements UserInterface
         $this->plainPassword = $plainPassword;
 
         return $this;
+    }
+
+    public function getScientificRank(): ?ScientificRank
+    {
+        return $this->scientificRank;
+    }
+
+    public function setScientificRank(?ScientificRank $scientificRank): self
+    {
+        $this->scientificRank = $scientificRank;
+
+        return $this;
+    }
+
+    public function getScientificDegree(): ?ScientificDegree
+    {
+        return $this->scientificDegree;
+    }
+
+    public function setScientificDegree(?ScientificDegree $scientificDegree): self
+    {
+        $this->scientificDegree = $scientificDegree;
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->getSecondName() . ' ' . $this->getFirstName() . ' ' . $this->getPatronymic();
     }
 }

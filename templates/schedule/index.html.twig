@@ -7,6 +7,7 @@
                 <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
                     {{ 'menu.schedule'|trans|capitalize }}
                 </h3>
+                {% if content %}
                 <h4 class="mb-4">
                     Тиждень 1
                 </h4>
@@ -75,6 +76,11 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                {% else %}
+                    <p class="mb-4">
+                        {{ 'Інформації не знайдено для користувача'|trans ~ ' ' ~ app.user }}
+                    </p>
+                {% endif %}
             </div>
         </div>
     </main>

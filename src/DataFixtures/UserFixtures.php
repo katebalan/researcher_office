@@ -8,6 +8,36 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends BaseFixture
 {
+    private static $users = [
+        [
+            'username' => 'admin2',
+            'firstName' => 'Богдан',
+            'secondName' => 'Булах',
+            'patronymic' => 'Вікторович',
+            'email' => 'admin2@admin.com',
+            'birthDate' => '01-01-1990',
+            'roles' => ['ROLE_ADMIN']
+        ],
+        [
+            'username' => 'admin',
+            'firstName' => 'Катерина',
+            'secondName' => 'Балан',
+            'patronymic' => 'Григорівна',
+            'email' => 'ket11141@gmail.com',
+            'birthDate' => '18-11-1996',
+            'roles' => ['ROLE_ADMIN']
+        ],
+        [
+            'username' => 'user01',
+            'firstName' => 'Олександр',
+            'secondName' => 'Безносик',
+            'patronymic' => 'Юрійович',
+            'email' => 'user01@admin.com',
+            'birthDate' => '01-01-1990',
+            'roles' => []
+        ]
+    ];
+
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -20,26 +50,18 @@ class UserFixtures extends BaseFixture
 
     protected function loadData(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setUsername('admin');
-        $user->setFirstName('AdminName');
-        $user->setSecondName('AdminSurname');
-        $user->setUsername('admin');
-        $user->setEmail('admin@example.com');
-        $user->setBirthDate(new \DateTime(sprintf('-%d years', rand(30, 70))));
-        $user->setPassword($this->passwordEncoder->encodePassword($user, 'admin'));
-        $user->setRoles(['ROLE_ADMIN']);
-        $manager->persist($user);
-
-        $this->createMany(User::class, 10, function (User $user, $count) {
-            $user->setUsername(sprintf('teacher%d', $count));
-            $user->setFirstName(sprintf('Teacher%d', $count));
-            $user->setSecondName(sprintf('Researcher%d', $count));
-            $user->setUsername(sprintf('teacher%d', $count));
-            $user->setEmail(sprintf('teacher%d@example.com', $count));
-            $user->setBirthDate(new \DateTime(sprintf('-%d years', rand(30, 70))));
-            $user->setPassword($this->passwordEncoder->encodePassword($user, 'admin'));
-        });
+        foreach (self::$users as $user) {
+            $entity = new User();
+            $entity->setUsername($user['username']);
+            $entity->setFirstName($user['firstName']);
+            $entity->setSecondName($user['secondName']);
+            $entity->setPatronymic($user['patronymic']);
+            $entity->setEmail($user['email']);
+            $entity->setBirthDate(new \DateTime(sprintf('-%d years', rand(30, 70))));
+            $entity->setPassword($this->passwordEncoder->encodePassword($entity, 'admin'));
+            $entity->setRoles($user['roles']);
+            $manager->persist($entity);
+        }
 
         $manager->flush();
     }

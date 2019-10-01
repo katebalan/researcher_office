@@ -27,14 +27,17 @@ class ScheduleController extends AbstractController
             'https://api.rozklad.org.ua/v2/teachers/'. $fullName . '/lessons'
         );
 
-        $content = $response->toArray();
-        $content = $this->group_by('lesson_week', $content['data']);
+        $content = false;
+        if ($response->getStatusCode() === 200) {
+            $content = $response->toArray();
+            $content = $this->group_by('lesson_week', $content['data']);
 
-        foreach ($content as &$lesson) {
-            $lesson = $this->group_by('lesson_number', $lesson);
+            foreach ($content as &$lesson) {
+                $lesson = $this->group_by('lesson_number', $lesson);
 
-            foreach ($lesson as &$day) {
-                $day = $this->group_by('day_number', $day);
+                foreach ($lesson as &$day) {
+                    $day = $this->group_by('day_number', $day);
+                }
             }
         }
 

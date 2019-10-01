@@ -11,11 +11,12 @@
                 <div class="row">
                     {% for user in users %}
                         <div class="border-bottom pb-3 mb-4 row col-md-6">
-                            <h5 class="font-weight-bold col-md-12">{{ user.secondName ~ ' ' ~ user.firstName }}</h5>
+                            <h5 class="font-weight-bold col-md-12">{{ user.getFullName() }}</h5>
                             <div class="col-md-8">
-                                {% if user.degree %}
+                                {% if user.scientificRank or user.scientificDegree %}
                                     <p class="text-muted">
-                                        {{ user.degree }}
+                                        {{ user.scientificRank }} <br />
+                                        {{ user.scientificDegree }}
                                     </p>
                                 {% endif %}
                                 <div>Кількість публікацій: {{ user.publications|length }}</div>
