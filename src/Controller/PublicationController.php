@@ -22,7 +22,7 @@ class PublicationController extends AbstractController
     public function index(PublicationRepository $publicationRepository): Response
     {
         return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findByCoAuthor($this->getUser()->getId()),
+            'publications' => $publicationRepository->findAll(),
         ]);
     }
 

@@ -22,7 +22,7 @@ class DiplomaController extends AbstractController
     public function index(DiplomaRepository $diplomaRepository): Response
     {
         return $this->render('diploma/index.html.twig', [
-            'diplomas' => $diplomaRepository->findBy(['user' => $this->getUser()->getId()]),
+            'diplomas' => $diplomaRepository->findAll(),
         ]);
     }
 

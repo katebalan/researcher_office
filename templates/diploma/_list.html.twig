@@ -1,0 +1,28 @@
+<h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+    {{ 'menu.diploma'|trans|capitalize }}
+</h3>
+
+{% for diploma in diplomas %}
+    <div class="border-bottom pb-3 mb-4 row">
+        <h5 class="font-weight-bold col-md-12">
+            <a href="{{ path('ro_diploma_show', {'id': diploma.id}) }}" class="text-dark">
+                {{ diploma.name }}
+            </a>
+        </h5>
+        <div class="col-md-10">
+            <p class="text-muted">
+                {{ diploma.date ? diploma.date|date('D d/M/Y') : '' }} <br />
+            </p>
+            <div>{{ 'Автор'|trans }}: {{ diploma.author }}</div>
+            <div>{{ 'Керівник'|trans }}: {{ diploma.user }}</div>
+        </div>
+
+        <p class="col-md-2">
+            {% include 'components/_buttons.thml.twig' with {
+                'id': diploma.id,
+                'edit': 'ro_diploma_edit',
+                'show': 'ro_diploma_show'
+            } %}
+        </p>
+    </div>
+{% endfor %}

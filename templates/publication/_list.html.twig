@@ -1,0 +1,36 @@
+<h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+    {{ 'menu.publication'|trans|capitalize }}
+</h3>
+
+{% for publication in publications %}
+    <div class="border-bottom pb-3 mb-4 row">
+        <h5 class="font-weight-bold col-md-12">
+            <a href="{{ path('ro_publication_show', {'id': publication.id}) }}" class="text-dark">
+                {{ publication.name }}
+            </a>
+        </h5>
+        <div class="col-md-10">
+            <p class="text-muted">
+                {{ publication.date ? publication.date|date('D d/M/Y') : '' }} <br />
+                {% for author in publication.coAuthors %}
+                    {% set comma =  loop.last ? ' ': ', ' %}
+                    {{ author ~ comma }}
+                {% endfor %}
+                {{ publication.coAuthorsSimple ? ', ' ~ publication.coAuthorsSimple : '' }}
+            </p>
+            <div>Місце публікації: {{ publication.place }}</div>
+            {% if publication.pages %}
+                <div>Сторінки: {{ publication.pages }}</div>
+            {% endif %}
+            <div>{{ publication.notes }}</div>
+        </div>
+
+        <p class="col-md-2">
+            {% include 'components/_buttons.thml.twig' with {
+                'id': publication.id,
+                'edit': 'ro_publication_edit',
+                'show': 'ro_publication_show'
+            } %}
+        </p>
+    </div>
+{% endfor %}
