@@ -7,21 +7,29 @@
 require('../scss/app.scss');
 
 const $ = require('jquery');
+import jQuery from 'jquery';
 
 import 'select2';
 import 'select2/dist/css/select2.css';
 
 import 'bootstrap-datepicker';
+import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.uk.min';
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
+import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css';
 
 $(() => {
     $('.js-select2').select2();
+
     $('.js-datepicker').datepicker({
         format: "MM yyyy",
         viewMode: "months",
-        minViewMode: "months"
+        minViewMode: "months",
+        autoclose: true,
+        // language: 'uk'
     });
     $('.js-datepicker-full').datepicker({
-        format: "dd MM yyyy"
+        // language: 'uk',
+        format: "dd MM yyyy",
+        autoclose: true
     });
 });

@@ -9,14 +9,20 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var select2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
-/* harmony import */ var select2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(select2__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var select2_dist_css_select2_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! select2/dist/css/select2.css */ "./node_modules/select2/dist/css/select2.css");
-/* harmony import */ var select2_dist_css_select2_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(select2_dist_css_select2_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-datepicker */ "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js");
-/* harmony import */ var bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var bootstrap_datepicker_dist_css_bootstrap_datepicker3_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap-datepicker/dist/css/bootstrap-datepicker3.css */ "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css");
-/* harmony import */ var bootstrap_datepicker_dist_css_bootstrap_datepicker3_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datepicker_dist_css_bootstrap_datepicker3_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var select2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
+/* harmony import */ var select2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(select2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var select2_dist_css_select2_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! select2/dist/css/select2.css */ "./node_modules/select2/dist/css/select2.css");
+/* harmony import */ var select2_dist_css_select2_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(select2_dist_css_select2_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap-datepicker */ "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js");
+/* harmony import */ var bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var bootstrap_datepicker_dist_locales_bootstrap_datepicker_uk_min__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap-datepicker/dist/locales/bootstrap-datepicker.uk.min */ "./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.uk.min.js");
+/* harmony import */ var bootstrap_datepicker_dist_locales_bootstrap_datepicker_uk_min__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datepicker_dist_locales_bootstrap_datepicker_uk_min__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var bootstrap_datepicker_dist_css_bootstrap_datepicker3_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! bootstrap-datepicker/dist/css/bootstrap-datepicker3.css */ "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css");
+/* harmony import */ var bootstrap_datepicker_dist_css_bootstrap_datepicker3_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datepicker_dist_css_bootstrap_datepicker3_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var bootstrap_datepicker_dist_css_bootstrap_datepicker3_standalone_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css */ "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css");
+/* harmony import */ var bootstrap_datepicker_dist_css_bootstrap_datepicker3_standalone_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datepicker_dist_css_bootstrap_datepicker3_standalone_css__WEBPACK_IMPORTED_MODULE_6__);
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -31,15 +37,22 @@ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"
 
 
 
+
+
+
 $(function () {
   $('.js-select2').select2();
   $('.js-datepicker').datepicker({
     format: "MM yyyy",
     viewMode: "months",
-    minViewMode: "months"
+    minViewMode: "months",
+    autoclose: true // language: 'uk'
+
   });
   $('.js-datepicker-full').datepicker({
-    format: "dd MM yyyy"
+    // language: 'uk',
+    format: "dd MM yyyy",
+    autoclose: true
   });
 });
 
@@ -57,4 +70,4 @@ $(function () {
 /***/ })
 
 },[["./assets/js/app.js","runtime","vendors~app"]]]);
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hc3NldHMvanMvYXBwLmpzIiwid2VicGFjazovLy8uL2Fzc2V0cy9zY3NzL2FwcC5zY3NzIl0sIm5hbWVzIjpbInJlcXVpcmUiLCIkIiwic2VsZWN0MiIsImRhdGVwaWNrZXIiLCJmb3JtYXQiLCJ2aWV3TW9kZSIsIm1pblZpZXdNb2RlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7Ozs7OztBQU1BQSxtQkFBTyxDQUFDLGdEQUFELENBQVA7O0FBRUEsSUFBTUMsQ0FBQyxHQUFHRCxtQkFBTyxDQUFDLG9EQUFELENBQWpCOztBQUVBO0FBQ0E7QUFFQTtBQUNBO0FBRUFDLENBQUMsQ0FBQyxZQUFNO0FBQ0pBLEdBQUMsQ0FBQyxhQUFELENBQUQsQ0FBaUJDLE9BQWpCO0FBQ0FELEdBQUMsQ0FBQyxnQkFBRCxDQUFELENBQW9CRSxVQUFwQixDQUErQjtBQUMzQkMsVUFBTSxFQUFFLFNBRG1CO0FBRTNCQyxZQUFRLEVBQUUsUUFGaUI7QUFHM0JDLGVBQVcsRUFBRTtBQUhjLEdBQS9CO0FBS0FMLEdBQUMsQ0FBQyxxQkFBRCxDQUFELENBQXlCRSxVQUF6QixDQUFvQztBQUNoQ0MsVUFBTSxFQUFFO0FBRHdCLEdBQXBDO0FBR0gsQ0FWQSxDQUFELEM7Ozs7Ozs7Ozs7O0FDaEJBLHVDIiwiZmlsZSI6ImFwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBXZWxjb21lIHRvIHlvdXIgYXBwJ3MgbWFpbiBKYXZhU2NyaXB0IGZpbGUhXG4gKlxuICogV2UgcmVjb21tZW5kIGluY2x1ZGluZyB0aGUgYnVpbHQgdmVyc2lvbiBvZiB0aGlzIEphdmFTY3JpcHQgZmlsZVxuICogKGFuZCBpdHMgQ1NTIGZpbGUpIGluIHlvdXIgYmFzZSBsYXlvdXQgKGJhc2UuaHRtbC50d2lnKS5cbiAqL1xucmVxdWlyZSgnLi4vc2Nzcy9hcHAuc2NzcycpO1xuXG5jb25zdCAkID0gcmVxdWlyZSgnanF1ZXJ5Jyk7XG5cbmltcG9ydCAnc2VsZWN0Mic7XG5pbXBvcnQgJ3NlbGVjdDIvZGlzdC9jc3Mvc2VsZWN0Mi5jc3MnO1xuXG5pbXBvcnQgJ2Jvb3RzdHJhcC1kYXRlcGlja2VyJztcbmltcG9ydCAnYm9vdHN0cmFwLWRhdGVwaWNrZXIvZGlzdC9jc3MvYm9vdHN0cmFwLWRhdGVwaWNrZXIzLmNzcyc7XG5cbiQoKCkgPT4ge1xuICAgICQoJy5qcy1zZWxlY3QyJykuc2VsZWN0MigpO1xuICAgICQoJy5qcy1kYXRlcGlja2VyJykuZGF0ZXBpY2tlcih7XG4gICAgICAgIGZvcm1hdDogXCJNTSB5eXl5XCIsXG4gICAgICAgIHZpZXdNb2RlOiBcIm1vbnRoc1wiLFxuICAgICAgICBtaW5WaWV3TW9kZTogXCJtb250aHNcIlxuICAgIH0pO1xuICAgICQoJy5qcy1kYXRlcGlja2VyLWZ1bGwnKS5kYXRlcGlja2VyKHtcbiAgICAgICAgZm9ybWF0OiBcImRkIE1NIHl5eXlcIlxuICAgIH0pO1xufSk7XG4iLCIvLyBleHRyYWN0ZWQgYnkgbWluaS1jc3MtZXh0cmFjdC1wbHVnaW4iXSwic291cmNlUm9vdCI6IiJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hc3NldHMvanMvYXBwLmpzIiwid2VicGFjazovLy8uL2Fzc2V0cy9zY3NzL2FwcC5zY3NzIl0sIm5hbWVzIjpbInJlcXVpcmUiLCIkIiwic2VsZWN0MiIsImRhdGVwaWNrZXIiLCJmb3JtYXQiLCJ2aWV3TW9kZSIsIm1pblZpZXdNb2RlIiwiYXV0b2Nsb3NlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7Ozs7OztBQU1BQSxtQkFBTyxDQUFDLGdEQUFELENBQVA7O0FBRUEsSUFBTUMsQ0FBQyxHQUFHRCxtQkFBTyxDQUFDLG9EQUFELENBQWpCOztBQUNBO0FBRUE7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBRUFDLENBQUMsQ0FBQyxZQUFNO0FBQ0pBLEdBQUMsQ0FBQyxhQUFELENBQUQsQ0FBaUJDLE9BQWpCO0FBRUFELEdBQUMsQ0FBQyxnQkFBRCxDQUFELENBQW9CRSxVQUFwQixDQUErQjtBQUMzQkMsVUFBTSxFQUFFLFNBRG1CO0FBRTNCQyxZQUFRLEVBQUUsUUFGaUI7QUFHM0JDLGVBQVcsRUFBRSxRQUhjO0FBSTNCQyxhQUFTLEVBQUUsSUFKZ0IsQ0FLM0I7O0FBTDJCLEdBQS9CO0FBT0FOLEdBQUMsQ0FBQyxxQkFBRCxDQUFELENBQXlCRSxVQUF6QixDQUFvQztBQUNoQztBQUNBQyxVQUFNLEVBQUUsWUFGd0I7QUFHaENHLGFBQVMsRUFBRTtBQUhxQixHQUFwQztBQUtILENBZkEsQ0FBRCxDOzs7Ozs7Ozs7OztBQ25CQSx1QyIsImZpbGUiOiJhcHAuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKlxuICogV2VsY29tZSB0byB5b3VyIGFwcCdzIG1haW4gSmF2YVNjcmlwdCBmaWxlIVxuICpcbiAqIFdlIHJlY29tbWVuZCBpbmNsdWRpbmcgdGhlIGJ1aWx0IHZlcnNpb24gb2YgdGhpcyBKYXZhU2NyaXB0IGZpbGVcbiAqIChhbmQgaXRzIENTUyBmaWxlKSBpbiB5b3VyIGJhc2UgbGF5b3V0IChiYXNlLmh0bWwudHdpZykuXG4gKi9cbnJlcXVpcmUoJy4uL3Njc3MvYXBwLnNjc3MnKTtcblxuY29uc3QgJCA9IHJlcXVpcmUoJ2pxdWVyeScpO1xuaW1wb3J0IGpRdWVyeSBmcm9tICdqcXVlcnknO1xuXG5pbXBvcnQgJ3NlbGVjdDInO1xuaW1wb3J0ICdzZWxlY3QyL2Rpc3QvY3NzL3NlbGVjdDIuY3NzJztcblxuaW1wb3J0ICdib290c3RyYXAtZGF0ZXBpY2tlcic7XG5pbXBvcnQgJ2Jvb3RzdHJhcC1kYXRlcGlja2VyL2Rpc3QvbG9jYWxlcy9ib290c3RyYXAtZGF0ZXBpY2tlci51ay5taW4nO1xuaW1wb3J0ICdib290c3RyYXAtZGF0ZXBpY2tlci9kaXN0L2Nzcy9ib290c3RyYXAtZGF0ZXBpY2tlcjMuY3NzJztcbmltcG9ydCAnYm9vdHN0cmFwLWRhdGVwaWNrZXIvZGlzdC9jc3MvYm9vdHN0cmFwLWRhdGVwaWNrZXIzLnN0YW5kYWxvbmUuY3NzJztcblxuJCgoKSA9PiB7XG4gICAgJCgnLmpzLXNlbGVjdDInKS5zZWxlY3QyKCk7XG5cbiAgICAkKCcuanMtZGF0ZXBpY2tlcicpLmRhdGVwaWNrZXIoe1xuICAgICAgICBmb3JtYXQ6IFwiTU0geXl5eVwiLFxuICAgICAgICB2aWV3TW9kZTogXCJtb250aHNcIixcbiAgICAgICAgbWluVmlld01vZGU6IFwibW9udGhzXCIsXG4gICAgICAgIGF1dG9jbG9zZTogdHJ1ZSxcbiAgICAgICAgLy8gbGFuZ3VhZ2U6ICd1aydcbiAgICB9KTtcbiAgICAkKCcuanMtZGF0ZXBpY2tlci1mdWxsJykuZGF0ZXBpY2tlcih7XG4gICAgICAgIC8vIGxhbmd1YWdlOiAndWsnLFxuICAgICAgICBmb3JtYXQ6IFwiZGQgTU0geXl5eVwiLFxuICAgICAgICBhdXRvY2xvc2U6IHRydWVcbiAgICB9KTtcbn0pO1xuIiwiLy8gZXh0cmFjdGVkIGJ5IG1pbmktY3NzLWV4dHJhY3QtcGx1Z2luIl0sInNvdXJjZVJvb3QiOiIifQ==
