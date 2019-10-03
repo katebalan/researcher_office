@@ -7,7 +7,6 @@
 require('../scss/app.scss');
 
 const $ = require('jquery');
-import jQuery from 'jquery';
 
 import 'select2';
 import 'select2/dist/css/select2.css';

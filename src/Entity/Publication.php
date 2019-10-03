@@ -6,6 +6,8 @@ use App\Entity\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PublicationRepository")
@@ -59,6 +61,14 @@ class Publication
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $filepath;
+
+    /**
+     * @var File $file
+     *
+     * @Assert\NotBlank(message="Please, upload the file as a PDF file.")
+     * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $file;
 
@@ -170,12 +180,24 @@ class Publication
         return $this;
     }
 
-    public function getFile(): ?string
+    public function getFilepath(): ?string
+    {
+        return $this->filepath;
+    }
+
+    public function setFilepath(?string $filepath): self
+    {
+        $this->filepath = $filepath;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
     {
         return $this->file;
     }
 
-    public function setFile(?string $file): self
+    public function setFile(?File $file): self
     {
         $this->file = $file;
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\EventListener;
 
 use App\Entity\Activity;
+use App\Entity\Diploma;
+use App\Entity\Publication;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -67,22 +69,22 @@ class FileUploadListener
     {
         $folder = "";
         // upload only works for Products entities
-        if (!($entity instanceof Product or $entity instanceof Activity)) {
+        if (!($entity instanceof Publication or $entity instanceof Diploma)) {
             return;
         }
 
         $folder = $this->getFolder($entity);
 
-        $file = $entity->getImage();
+        $file = $entity->getFile();
 
         // only upload new files
         if ($file instanceof UploadedFile) {
             $fileName = $this->uploader->upload($file, $folder);
-            $entity->setImage($fileName);
+            $entity->setFilepath($fileName);
         } elseif ($this->file instanceof File) {
             // prevents the full file path being saved on updates
             // as the path is set on the postLoad listener
-            $entity->setImage($this->file->getFilename());
+            $entity->setFilepath($this->file->getFilename());
             unset($this->file);
         }
     }
@@ -97,15 +99,15 @@ class FileUploadListener
         $folder = "";
         $entity = $args->getEntity();
 
-        if (!($entity instanceof Products or $entity instanceof Activity)) {
+        if (!($entity instanceof Publication or $entity instanceof Diploma)) {
             return;
         }
 
         $folder = $this->getFolder($entity);
 
-        if ($fileName = $entity->getImage()) {
-            $entity->setImage(new File($this->uploader->getTargetDirectory() . $folder . '/' . $fileName));
-            $this->file = $entity->getImage();
+        if ($fileName = $entity->getFilepath()) {
+            $entity->setFile(new File($this->uploader->getTargetDirectory() . $folder . '/' . $fileName));
+            $this->file = $entity->getFile();
         }
     }
 
@@ -113,12 +115,12 @@ class FileUploadListener
     {
         $folder = '';
 
-        if ($object instanceof Products) {
-            $folder = "product";
+        if ($object instanceof Publication) {
+            $folder = "publication";
         }
 
-        if ($object instanceof Activity) {
-            $folder = "activity";
+        if ($object instanceof Diploma) {
+            $folder = "diploma";
         }
 
         return $folder;

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DiplomaRepository")
@@ -37,6 +39,14 @@ class Diploma
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $filepath;
+
+    /**
+     * @var File $file
+     *
+     * @Assert\NotBlank(message="Please, upload the file as a PDF file.")
+     * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $file;
 
@@ -87,12 +97,24 @@ class Diploma
         return $this;
     }
 
-    public function getFile(): ?string
+    public function getFilepath(): ?string
+    {
+        return $this->filepath;
+    }
+
+    public function setFilepath(?string $filepath): self
+    {
+        $this->filepath = $filepath;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
     {
         return $this->file;
     }
 
-    public function setFile(?string $file): self
+    public function setFile(?File $file): self
     {
         $this->file = $file;
 

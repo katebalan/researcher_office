@@ -6,6 +6,7 @@ use App\Entity\Publication;
 use App\Entity\User;
 use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
