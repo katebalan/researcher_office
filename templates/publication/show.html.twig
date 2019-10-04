@@ -8,7 +8,7 @@
             </h3>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card flex-md-row mb-4">
+                    <div class="card flex-md-row pb-4 mb-4">
                         <div class="card-body d-flex flex-column align-items-start">
                             <h3 class="mb-2 text-dark">
                                 {{ publication.name }}
@@ -29,6 +29,16 @@
                             <p class="card-text mb-auto">
                                 {{ publication.notes }}
                             </p>
+                            {% if publication.realFilename %}
+                                <div class="ro-show-file__wrapper">
+                                    <a class="text-muted"
+                                       href="{{ path('ro_publication_download', {'id': publication.id}) }}"
+                                       title="{{ 'download_file'|trans }}">
+                                        {{ publication.realFilename }}
+                                    </a>
+                                    <div class="ro-show-file"></div>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

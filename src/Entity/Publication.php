@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\FileTrait;
 use App\Entity\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PublicationRepository")
@@ -16,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Publication
 {
     use TimestampTrait;
+    use FileTrait;
 
     /**
      * @ORM\Id()
@@ -58,19 +58,6 @@ class Publication
      * @ORM\Column(type="text", nullable=true)
      */
     private $notes;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $filepath;
-
-    /**
-     * @var File $file
-     *
-     * @Assert\NotBlank(message="Please, upload the file as a PDF file.")
-     * @Assert\File(mimeTypes={ "application/pdf" })
-     */
-    private $file;
 
     public function __construct()
     {
@@ -161,7 +148,7 @@ class Publication
         return $this->pages;
     }
 
-    public function setPages(string $pages): self
+    public function setPages(?string $pages): self
     {
         $this->pages = $pages;
 
@@ -176,30 +163,6 @@ class Publication
     public function setNotes(?string $notes): self
     {
         $this->notes = $notes;
-
-        return $this;
-    }
-
-    public function getFilepath(): ?string
-    {
-        return $this->filepath;
-    }
-
-    public function setFilepath(?string $filepath): self
-    {
-        $this->filepath = $filepath;
-
-        return $this;
-    }
-
-    public function getFile(): ?File
-    {
-        return $this->file;
-    }
-
-    public function setFile(?File $file): self
-    {
-        $this->file = $file;
 
         return $this;
     }

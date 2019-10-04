@@ -16,6 +16,8 @@ import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.uk.min';
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css';
 
+import './fix_bootstrap_file_loader';
+
 $(() => {
     $('.js-select2').select2();
 
@@ -31,4 +33,6 @@ $(() => {
         format: "dd MM yyyy",
         autoclose: true
     });
+
+    $('.fix-bootstrap-file')._fix_boostrap_file_loader();
 });

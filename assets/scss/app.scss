@@ -34,3 +34,19 @@
   }
 }
 
+.ro-show-file {
+  display: block;
+  width: 70px;
+  height: 50px;
+  background: url("../img/icon_pdf.png") center center no-repeat;
+  background-size: contain;
+
+  &__wrapper {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    display: flex;
+    align-items: center;
+  }
+}
+

@@ -17,12 +17,12 @@
             <div>{{ 'Керівник'|trans }}: {{ diploma.user }}</div>
         </div>
 
-        <p class="col-md-2">
+        <div class="col-md-2">
             {% include 'components/_buttons.thml.twig' with {
                 'id': diploma.id,
                 'edit': 'ro_diploma_edit',
                 'show': 'ro_diploma_show'
             } %}
-        </p>
+        </div>
     </div>
 {% endfor %}

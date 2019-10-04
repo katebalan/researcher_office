@@ -26,6 +26,7 @@ publication: публікацію
 diploma: дипломну роботу
 change_password: Змінити пароль
 reset_password: Скинути пароль
+download_file: Завантажити файл
 
 # forms
 Name: Назва
@@ -53,3 +54,4 @@ Username: Ім'я користувача
 Email: Email
 Scientific degree: Науковий ступінь
 Scientific rank: Вчене звання
+File (PDF file): Файл (PDF)

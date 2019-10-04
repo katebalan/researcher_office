@@ -25,12 +25,12 @@
             <div>{{ publication.notes }}</div>
         </div>
 
-        <p class="col-md-2">
+        <div class="col-md-2">
             {% include 'components/_buttons.thml.twig' with {
                 'id': publication.id,
                 'edit': 'ro_publication_edit',
                 'show': 'ro_publication_show'
             } %}
-        </p>
+        </div>
     </div>
 {% endfor %}

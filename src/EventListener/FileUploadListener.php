@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace App\EventListener;
 
-use App\Entity\Activity;
 use App\Entity\Diploma;
 use App\Entity\Publication;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use App\Entity\Product;
 use App\Service\FileUploader;
 
 /**
@@ -67,25 +65,24 @@ class FileUploadListener
      */
     private function uploadFile($entity)
     {
-        $folder = "";
-        // upload only works for Products entities
+        // upload only works for Publication and Diploma entities
         if (!($entity instanceof Publication or $entity instanceof Diploma)) {
             return;
         }
 
-        $folder = $this->getFolder($entity);
-
+        $folder = $this->uploader->getFolder($entity);
         $file = $entity->getFile();
 
         // only upload new files
         if ($file instanceof UploadedFile) {
             $fileName = $this->uploader->upload($file, $folder);
-            $entity->setFilepath($fileName);
-        } elseif ($this->file instanceof File) {
+            $entity->setFilename($fileName);
+            $entity->setRealFilename($file->getClientOriginalName());
+        } elseif ($file instanceof File) {
             // prevents the full file path being saved on updates
             // as the path is set on the postLoad listener
-            $entity->setFilepath($this->file->getFilename());
-            unset($this->file);
+            $entity->setFilename($file->getFilename());
+            $entity->setRealFilename($file->getBasename());
         }
     }
 
@@ -96,33 +93,17 @@ class FileUploadListener
      */
     public function postLoad(LifecycleEventArgs $args)
     {
-        $folder = "";
         $entity = $args->getEntity();
 
-        if (!($entity instanceof Publication or $entity instanceof Diploma)) {
+        if (!method_exists($entity, 'setFile') and !method_exists($entity, 'getFilename')) {
             return;
         }
 
-        $folder = $this->getFolder($entity);
+        $folder = $this->uploader->getFolder($entity);
 
-        if ($fileName = $entity->getFilepath()) {
+        if ($fileName = $entity->getFilename()) {
             $entity->setFile(new File($this->uploader->getTargetDirectory() . $folder . '/' . $fileName));
             $this->file = $entity->getFile();
         }
-    }
-
-    private function getFolder($object)
-    {
-        $folder = '';
-
-        if ($object instanceof Publication) {
-            $folder = "publication";
-        }
-
-        if ($object instanceof Diploma) {
-            $folder = "diploma";
-        }
-
-        return $folder;
     }
 }

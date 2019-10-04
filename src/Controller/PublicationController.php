@@ -10,6 +10,7 @@ use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -57,8 +58,10 @@ class PublicationController extends AbstractController
     /**
      * @Route("/{id}", name="ro_publication_show", methods={"GET"})
      */
-    public function show(Publication $publication): Response
+    public function show(Publication $publication, FileUploader $fileUploader): Response
     {
+//        $fileUploader->load($publication);
+
         return $this->render('publication/show.html.twig', [
             'publication' => $publication,
         ]);
@@ -96,5 +99,15 @@ class PublicationController extends AbstractController
         }
 
         return $this->redirectToRoute('ro_publication_index');
+    }
+
+    /**
+     * @Route("/{id}/download", name="ro_publication_download", methods={"GET"})
+     */
+    public function download(Publication $publication, FileUploader $fileUploader)
+    {
+        $fileUploader->load($publication);
+
+        return $this->file($publication->getFile(), $publication->getRealFilename(), ResponseHeaderBag::DISPOSITION_INLINE);
     }
 }

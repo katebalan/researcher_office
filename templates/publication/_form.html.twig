@@ -12,7 +12,8 @@
         </div>
         <div class="col-md-12">
             {{ form_row(form.notes) }}
-            {{ form_row(form.file) }}
+            {{ form_row(form.file, {'attr': {'placeholder': form.vars.value.realFilename}}) }}
+            {{ form_row(form.realFilename) }}
             <button class="btn btn-outline-success btn-sm mb-2">{{ button_label|default('save')|trans|capitalize }}</button>
         </div>
     </div>

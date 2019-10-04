@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Diploma;
+use App\Entity\Publication;
 use App\Entity\User;
 use App\Form\DiplomaType;
 use App\Repository\DiplomaRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -53,8 +56,10 @@ class DiplomaController extends AbstractController
     /**
      * @Route("/{id}", name="ro_diploma_show", methods={"GET"})
      */
-    public function show(Diploma $diploma): Response
+    public function show(Diploma $diploma, FileUploader $fileUploader): Response
     {
+//        $fileUploader->load($diploma);
+
         return $this->render('diploma/show.html.twig', [
             'diploma' => $diploma,
         ]);
@@ -92,5 +97,15 @@ class DiplomaController extends AbstractController
         }
 
         return $this->redirectToRoute('ro_diploma_index');
+    }
+
+    /**
+     * @Route("/{id}/download", name="ro_diploma_download", methods={"GET"})
+     */
+    public function download(Diploma $diploma, FileUploader $fileUploader)
+    {
+        $fileUploader->load($diploma);
+
+        return $this->file($diploma->getFile(), $diploma->getRealFilename(), ResponseHeaderBag::DISPOSITION_INLINE);
     }
 }

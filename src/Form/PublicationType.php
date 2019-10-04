@@ -6,6 +6,7 @@ use App\Entity\Publication;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,7 +33,14 @@ class PublicationType extends AbstractType
             ])
             ->add('pages')
             ->add('notes')
-            ->add('file', FileType::class, ['label' => 'File (PDF file)'])
+            ->add('file', FileType::class, [
+                'label' => 'File (PDF file)',
+                'attr' => [
+                    'class' => 'fix-bootstrap-file'
+                ],
+                'required' => false
+            ])
+            ->add('realFilename', HiddenType::class)
         ;
     }
 
