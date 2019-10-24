@@ -2,7 +2,8 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\TimestampTrait;
+use App\Entity\Library\BaseEntity;
+use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,21 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\ScientificInterestRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class ScientificInterest
+class ScientificInterest extends BaseEntity
 {
     use TimestampTrait;
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,24 +34,6 @@ class ScientificInterest
     public function __toString()
     {
         return $this->getName();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        $this->setNameCanonical(str_replace(' ', '_', strtolower($this->name)));
-
-        return $this;
     }
 
     public function getNameCanonical(): ?string

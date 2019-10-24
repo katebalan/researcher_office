@@ -2,30 +2,19 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\FileTrait;
-use App\Entity\Traits\TimestampTrait;
+use App\Entity\Library\BaseEntity;
+use App\Entity\Library\Traits\FileTrait;
+use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DiplomaRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Diploma
+class Diploma extends BaseEntity
 {
     use TimestampTrait;
     use FileTrait;
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -42,23 +31,6 @@ class Diploma
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getAuthor(): ?string
     {

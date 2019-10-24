@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entity\Traits;
+namespace App\Entity\Library\Traits;
 
 
 use Symfony\Component\HttpFoundation\File\File;

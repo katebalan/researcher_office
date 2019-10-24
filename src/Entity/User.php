@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\TimestampTrait;
+use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -110,11 +110,17 @@ class User implements UserInterface
      */
     private $scientificDegree;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Discipline", mappedBy="user", orphanRemoval=true)
+     */
+    private $disciplines;
+
     public function __construct()
     {
         $this->interest = new ArrayCollection();
         $this->publications = new ArrayCollection();
         $this->diplomas = new ArrayCollection();
+        $this->disciplines = new ArrayCollection();
     }
 
     public function __toString()
@@ -420,5 +426,36 @@ class User implements UserInterface
     public function getFullName(): ?string
     {
         return $this->getSecondName() . ' ' . $this->getFirstName() . ' ' . $this->getPatronymic();
+    }
+
+    /**
+     * @return Collection|Discipline[]
+     */
+    public function getDisciplines(): Collection
+    {
+        return $this->disciplines;
+    }
+
+    public function addDiscipline(Discipline $discipline): self
+    {
+        if (!$this->disciplines->contains($discipline)) {
+            $this->disciplines[] = $discipline;
+            $discipline->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscipline(Discipline $discipline): self
+    {
+        if ($this->disciplines->contains($discipline)) {
+            $this->disciplines->removeElement($discipline);
+            // set the owning side to null (unless already changed)
+            if ($discipline->getUser() === $this) {
+                $discipline->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
