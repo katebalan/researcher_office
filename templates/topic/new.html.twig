@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'add'|trans|capitalize ~ ' ' ~ 'topic'|trans }}
+                </h3>
+
+                <div class="border-bottom pb-3 mb-4">
+                    {{ include('topic/_form.html.twig') }}
+
+                    {% include 'components/_buttons.thml.twig' with {
+                        'back': 'true'
+                    } %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

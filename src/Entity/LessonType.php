@@ -16,7 +16,7 @@ class LessonType extends BaseEntity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nmaeCanonical;
+    private $nameCanonical;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,14 +48,19 @@ class LessonType extends BaseEntity
         $this->lessons = new ArrayCollection();
     }
 
-    public function getNmaeCanonical(): ?string
+    public function __toString(): ?string
     {
-        return $this->nmaeCanonical;
+        return $this->getName();
     }
 
-    public function setNmaeCanonical(string $nmaeCanonical): self
+    public function getNameCanonical(): ?string
     {
-        $this->nmaeCanonical = $nmaeCanonical;
+        return $this->nameCanonical;
+    }
+
+    public function setNameCanonical(string $nameCanonical): self
+    {
+        $this->nameCanonical = $nameCanonical;
 
         return $this;
     }

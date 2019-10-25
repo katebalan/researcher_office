@@ -38,6 +38,11 @@ class Discipline extends BaseEntity
         $this->duration = 0;
     }
 
+    public function __toString(): ?string
+    {
+        return $this->getName();
+    }
+
     public function getDuration(): ?float
     {
         return $this->duration;

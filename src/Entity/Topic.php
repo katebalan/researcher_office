@@ -43,6 +43,11 @@ class Topic extends BaseEntity
         $this->lessons = new ArrayCollection();
     }
 
+    public function __toString(): ?string
+    {
+        return $this->getName();
+    }
+
     public function getDiscipline(): ?Discipline
     {
         return $this->discipline;

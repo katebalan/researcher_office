@@ -42,6 +42,11 @@ class Lesson extends BaseEntity
         $this->topics = new ArrayCollection();
     }
 
+    public function __toString(): ?string
+    {
+        return $this->getName();
+    }
+
     public function getHours(): ?float
     {
         return $this->hours;
