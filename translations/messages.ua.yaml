@@ -19,11 +19,13 @@ menu:
     news: новини
     scientific_interest: наукові інтереси
     colleagues: колеги
+    discipline: дисципліни
 
 scientific_interest: науковий інтерес
 colleage: колегу
 publication: публікацію
 diploma: дипломну роботу
+discipline: дисципліну
 change_password: Змінити пароль
 reset_password: Скинути пароль
 download_file: Завантажити файл

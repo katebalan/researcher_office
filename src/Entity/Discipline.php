@@ -35,6 +35,7 @@ class Discipline extends BaseEntity
     public function __construct()
     {
         $this->topics = new ArrayCollection();
+        $this->duration = 0;
     }
 
     public function getDuration(): ?float

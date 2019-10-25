@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'menu.discipline'|trans|capitalize }}
+                </h3>
+
+                {% for discipline in disciplines %}
+                    <div class="border-bottom pb-3 mb-4 row">
+                        <h5 class="font-weight-bold col-md-12">
+                            <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="text-dark">
+                                {{ discipline.name }}
+                            </a>
+                        </h5>
+                        <div class="col-md-10">
+                            <p class="text-muted">
+                                {{ discipline.createdAt|date('D d/M/Y') }} <br />
+                            </p>
+                            <div>{{ 'Загалом годин'|trans }}: {{ discipline.duration }}</div>
+                        </div>
+
+                        <div class="col-md-2">
+                            {% include 'components/_buttons.thml.twig' with {
+                                'id': discipline.id,
+                                'edit': 'ro_discipline_edit',
+                                'show': 'ro_discipline_show'
+                            } %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="mb-4">
+                        {{ 'Інформації не знайдено для користувача'|trans ~ ' ' ~ app.user }}
+                    </p>
+                {% endfor %}
+
+                {% include 'components/_buttons.thml.twig' with {
+                    'create': path('ro_discipline_new', {'id': app.user.id})
+                } %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
