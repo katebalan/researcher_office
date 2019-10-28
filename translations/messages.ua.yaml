@@ -29,6 +29,7 @@ discipline: дисципліну
 change_password: Змінити пароль
 reset_password: Скинути пароль
 download_file: Завантажити файл
+topics: Теми
 
 # forms
 Name: Назва
