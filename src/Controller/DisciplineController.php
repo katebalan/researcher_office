@@ -27,9 +27,9 @@ class DisciplineController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="ro_discipline_new", methods={"GET","POST"})
+     * @Route("/new/step1", name="ro_discipline_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function newStep1(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -43,12 +43,23 @@ class DisciplineController extends AbstractController
             $entityManager->persist($discipline);
             $entityManager->flush();
 
-            return $this->redirectToRoute('ro_discipline_show', ['id' => $discipline->getId()]);
+            return $this->redirectToRoute('ro_discipline_new_step2', ['id' => $discipline->getId()]);
         }
 
-        return $this->render('discipline/new.html.twig', [
+        return $this->render('discipline/new_step1.html.twig', [
             'discipline' => $discipline,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/new/step2/{id}", name="ro_discipline_new_step2", methods={"GET","POST"})
+     */
+    public function newStep2(Request $request, Discipline $discipline): Response
+    {
+        return $this->render('discipline/new_step2.html.twig', [
+            'discipline' => $discipline,
+            'topics' => $discipline->getTopics()
         ]);
     }
 

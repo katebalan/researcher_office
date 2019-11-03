@@ -30,7 +30,7 @@ class TopicController extends AbstractController
             $entityManager->flush();
             $entityManager->clear();
 
-            return $this->redirectToRoute('ro_discipline_show', ['id' => $discipline->getId()]);
+            return $this->redirectToRoute('ro_discipline_new_step2', ['id' => $discipline->getId()]);
         }
 
         return $this->render('topic/new.html.twig', [
