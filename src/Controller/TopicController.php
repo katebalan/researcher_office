@@ -45,9 +45,11 @@ class TopicController extends AbstractController
     public function newSubtopic(Request $request, Topic $topicParent): Response
     {
         $topic = new Topic();
+        $topic->setParentTopic($topicParent);
+
         $discipline = $topicParent->getDiscipline();
         $discipline->addTopic($topic);
-        $topic->setParentTopic($topicParent);
+
         $form = $this->createForm(TopicType::class, $topic);
         $form->handleRequest($request);
 
@@ -66,16 +68,6 @@ class TopicController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-//    /**
-//     * @Route("/{id}", name="topic_show", methods={"GET"})
-//     */
-//    public function show(Topic $topic): Response
-//    {
-//        return $this->render('topic/show.html.twig', [
-//            'topic' => $topic,
-//        ]);
-//    }
 
     /**
      * @Route("/topic/{id}/edit", name="ro_topic_edit", methods={"GET","POST"})

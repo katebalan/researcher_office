@@ -37,6 +37,7 @@ topic:
 distribution_of_hours: розподіл годин
 topics_empty: Жодної теми не знайдено
 actions: дії
+hours: години
 
 # forms
 Name: Назва

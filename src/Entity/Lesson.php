@@ -110,4 +110,14 @@ class Lesson extends BaseEntity
 
         return $this;
     }
+
+    public function getDiscipline(): Collection
+    {
+        $discipline = null;
+
+        if ($this->topics->count() > 0)
+            $discipline = $this->topics->first()->getDiscipline();
+
+        return $discipline;
+    }
 }
