@@ -1,0 +1,30 @@
+{% set id = id is defined ? id : false %}
+{#{% set back = back is defined ? back : false %}#}
+{% set edit = edit is defined ? edit : false %}
+{% set delete = delete is defined ? delete : false %}
+{#{% set show = show is defined ? show : false %}#}
+{% set add = add is defined ? add : false %}
+{#{% set reset = reset is defined ? reset : false %}#}
+
+{% if add %}
+    <a href="{{ add }}" title="{{ 'add'|trans|capitalize }}">
+        <i class="fa fa-plus-square-o"></i>
+    </a>
+{% endif %}
+
+{% if edit %}
+    <a href="{{ edit }}" title="{{ 'edit'|trans|capitalize }}">
+        <i class="fa fa-edit"></i>
+    </a>
+{% endif %}
+
+{% if delete %}
+    <form method="post"
+          action="{{ delete }}"
+          title="{{ 'delete'|trans|capitalize }}"
+          style="display: inline-block;">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ id) }}">
+        <a class="js-submit-form"><i class="fa fa-minus-square-o"></i></a>
+    </form>
+{% endif %}

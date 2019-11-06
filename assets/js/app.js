@@ -34,5 +34,13 @@ $(() => {
         autoclose: true
     });
 
+    $('.js-submit-form').on('click', function (e) {
+        e.preventDefault();
+        let answer=confirm('Are you sure you want to delete this item?');
+
+        if (answer)
+            this.closest('form').submit();
+    });
+
     $('.fix-bootstrap-file')._fix_boostrap_file_loader();
 });

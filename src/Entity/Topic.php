@@ -28,7 +28,7 @@ class Topic extends BaseEntity
     private $parentTopic;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Topic", mappedBy="parentTopic")
+     * @ORM\OneToMany(targetEntity="App\Entity\Topic", mappedBy="parentTopic", cascade={"remove"})
      */
     private $topics;
 

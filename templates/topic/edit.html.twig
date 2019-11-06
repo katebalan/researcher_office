@@ -3,11 +3,23 @@
 {% block title %}Edit Topic{% endblock %}
 
 {% block body %}
-    <h1>Edit Topic</h1>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'add'|trans|capitalize ~ ' ' ~ 'topic.2'|trans }}
+                </h3>
 
-    {{ include('topic/_form.html.twig', {'button_label': 'Update'}) }}
+                <div class="border-bottom pb-3 mb-4">
+                    {{ include('topic/_form.html.twig') }}
 
-    <a href="{{ path('topic_index') }}">back to list</a>
-
-    {{ include('topic/_delete_form.html.twig') }}
+                    {% include 'components/_buttons.thml.twig' with {
+                        'id': topic.id,
+                        'back': 'true',
+                        'delete': 'ro_topic_delete'
+                    } %}
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

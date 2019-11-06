@@ -97,4 +97,17 @@ class Discipline extends BaseEntity
 
         return $this;
     }
+
+    public function getParentTopics(): Collection
+    {
+        $parents = new ArrayCollection();
+
+        /** @var Topic $topic */
+        foreach ($this->topics as $topic) {
+            if (!$topic->getParentTopic())
+                $parents[] = $topic;
+        }
+
+        return $parents;
+    }
 }

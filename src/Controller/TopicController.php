@@ -30,7 +30,35 @@ class TopicController extends AbstractController
             $entityManager->flush();
             $entityManager->clear();
 
-            return $this->redirectToRoute('ro_discipline_new_step2', ['id' => $discipline->getId()]);
+            return $this->redirectToRoute('ro_discipline_show', ['id' => $discipline->getId()]);
+        }
+
+        return $this->render('topic/new.html.twig', [
+            'topic' => $topic,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/topic/{id}/new", name="ro_subtopic_new", methods={"GET","POST"})
+     */
+    public function newSubtopic(Request $request, Topic $topicParent): Response
+    {
+        $topic = new Topic();
+        $discipline = $topicParent->getDiscipline();
+        $discipline->addTopic($topic);
+        $topic->setParentTopic($topicParent);
+        $form = $this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($discipline);
+            $entityManager->persist($topic);
+            $entityManager->flush();
+            $entityManager->clear();
+
+            return $this->redirectToRoute('ro_discipline_show', ['id' => $discipline->getId()]);
         }
 
         return $this->render('topic/new.html.twig', [
@@ -48,35 +76,36 @@ class TopicController extends AbstractController
 //            'topic' => $topic,
 //        ]);
 //    }
-//
-//    /**
-//     * @Route("/{id}/edit", name="topic_edit", methods={"GET","POST"})
-//     */
-//    public function edit(Request $request, Topic $topic): Response
-//    {
-//        $form = $this->createForm(TopicType::class, $topic);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $this->getDoctrine()->getManager()->flush();
-//
-//            return $this->redirectToRoute('topic_index');
-//        }
-//
-//        return $this->render('topic/edit.html.twig', [
-//            'topic' => $topic,
-//            'form' => $form->createView(),
-//        ]);
-//    }
 
     /**
-     * @Route("/{id}", name="ro_topic_delete", methods={"DELETE"})
+     * @Route("/topic/{id}/edit", name="ro_topic_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Topic $topic): Response
+    {
+        $form = $this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('ro_discipline_show', ['id' => $topic->getDiscipline()->getId()]);
+        }
+
+        return $this->render('topic/edit.html.twig', [
+            'topic' => $topic,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/topic/{id}", name="ro_topic_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Topic $topic): Response
     {
         $discipline = $topic->getDiscipline();
 
         if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token'))) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($topic);
             $entityManager->flush();

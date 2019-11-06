@@ -6,9 +6,10 @@ logout: вихід
 login: вхід
 delete: видалити
 edit: редагувати
-add: створити
+create: створити
 show: перегляд
 new: новий елемент
+add: додати
 
 # menu
 menu:
@@ -29,7 +30,13 @@ discipline: дисципліну
 change_password: Змінити пароль
 reset_password: Скинути пароль
 download_file: Завантажити файл
-topics: Теми
+topics: теми
+topic:
+    1: тема
+    2: тему
+distribution_of_hours: розподіл годин
+topics_empty: Жодної теми не знайдено
+actions: дії
 
 # forms
 Name: Назва

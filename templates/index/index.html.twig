@@ -29,7 +29,7 @@
                 {% endif %}
 
                 <div class="p-3 mb-3 bg-light rounded">
-                    <h4>Дії</h4>
+                    <h4>{{ 'actions'|trans|capitalize }}</h4>
                     <div>
                         <a href="{{ path('ro_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-primary mb-2">
                             Редагувати профіль
