@@ -4,11 +4,13 @@
 /.env.local
 /.env.local.php
 /.env.*.local
+/public/build/
 /public/bundles/
 /public/files/publication
 /public/files/diploma
 !/public/files/publication/.gitkeep
 !/public/files/diploma/.gitkeep
+
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
