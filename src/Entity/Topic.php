@@ -33,7 +33,7 @@ class Topic extends BaseEntity
     private $topics;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Lesson", inversedBy="topics")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Lesson", mappedBy="topics")
      */
     private $lessons;
 
@@ -115,6 +115,7 @@ class Topic extends BaseEntity
     {
         if (!$this->lessons->contains($lesson)) {
             $this->lessons[] = $lesson;
+            $lesson->addTopic($this);
         }
 
         return $this;
@@ -124,6 +125,7 @@ class Topic extends BaseEntity
     {
         if ($this->lessons->contains($lesson)) {
             $this->lessons->removeElement($lesson);
+            $lesson->removeTopic($this);
         }
 
         return $this;

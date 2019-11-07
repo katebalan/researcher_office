@@ -110,4 +110,16 @@ class Discipline extends BaseEntity
 
         return $parents;
     }
+
+    public function getLessons(): array
+    {
+        $lessons = [];
+
+        /** @var Topic $topic */
+        foreach ($this->topics as $topic) {
+            $lessons = array_merge($lessons, $topic->getLessons()->toArray());
+        }
+
+        return array_unique($lessons);
+    }
 }

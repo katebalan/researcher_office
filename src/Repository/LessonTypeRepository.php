@@ -19,22 +19,17 @@ class LessonTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, LessonType::class);
     }
 
-    // /**
-    //  * @return LessonType[] Returns an array of LessonType objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return LessonType[] Returns an array of LessonType objects
+      */
+    public function findAllArray()
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?LessonType

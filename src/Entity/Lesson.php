@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Library\BaseEntity;
 use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,9 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\LessonRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Lesson extends BaseEntity
+class Lesson
 {
     use TimestampTrait;
+
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="float")
@@ -33,7 +39,7 @@ class Lesson extends BaseEntity
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Topic", mappedBy="lessons")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Topic", inversedBy="lessons")
      */
     private $topics;
 
@@ -44,7 +50,12 @@ class Lesson extends BaseEntity
 
     public function __toString(): ?string
     {
-        return $this->getName();
+        return $this->getId();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getHours(): ?float
@@ -95,7 +106,6 @@ class Lesson extends BaseEntity
     {
         if (!$this->topics->contains($topic)) {
             $this->topics[] = $topic;
-            $topic->addLesson($this);
         }
 
         return $this;
@@ -105,13 +115,12 @@ class Lesson extends BaseEntity
     {
         if ($this->topics->contains($topic)) {
             $this->topics->removeElement($topic);
-            $topic->removeLesson($this);
         }
 
         return $this;
     }
 
-    public function getDiscipline(): Collection
+    public function getDiscipline(): Discipline
     {
         $discipline = null;
 

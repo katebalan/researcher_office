@@ -26,11 +26,13 @@ class LessonController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($defaultHours = $lesson->getType()->getDefaultHours())
+                $lesson->setHours($defaultHours);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lesson);
             $entityManager->flush();
 
-            return $this->redirectToRoute('ro_discipline_show', ['id' => $lesson->getDiscipline()]);
+            return $this->redirectToRoute('ro_discipline_show', ['id' => $lesson->getDiscipline()->getId()]);
         }
 
         return $this->render('lesson/new.html.twig', [
@@ -50,7 +52,7 @@ class LessonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ro_discipline_show', ['id' => $lesson->getDiscipline()]);
+            return $this->redirectToRoute('ro_discipline_show', ['id' => $lesson->getDiscipline()->getId()]);
         }
 
         return $this->render('lesson/edit.html.twig', [

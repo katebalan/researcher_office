@@ -12,11 +12,16 @@ class LessonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('type')
+            ->add('type', null, [
+                'placeholder' => 'Виберіть опцію',
+            ])
+            ->add('topics', null, [
+                'attr' => [
+                    'class' => 'js-select2'
+                ]
+            ])
             ->add('hours')
             ->add('evaluationType')
-            ->add('topics')
         ;
     }
 
@@ -24,6 +29,9 @@ class LessonType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Lesson::class,
+            'attr' => [
+                'class' => 'js-update-lesson-form'
+            ]
         ]);
     }
 }

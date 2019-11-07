@@ -16,6 +16,11 @@
                 {% include 'components/footer.thml.twig' %}
             </div>
         {% endblock %}
+        {% block window %}
+            <script>
+                window.ro_ajax_list_lesson_type = "{{ path('ro_ajax_list_lesson_type') }}";
+            </script>
+        {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

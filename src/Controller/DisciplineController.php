@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Discipline;
+use App\Entity\Topic;
 use App\Entity\User;
 use App\Form\DisciplineType;
 use App\Repository\DisciplineRepository;
+use App\Service\CalculateHoursService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,13 +68,19 @@ class DisciplineController extends AbstractController
     /**
      * @Route("/{id}", name="ro_discipline_show", methods={"GET"})
      */
-    public function show(Discipline $discipline): Response
+    public function show(Discipline $discipline, CalculateHoursService $hoursService): Response
     {
         $topics = $discipline->getParentTopics();
+        $lessons  = $discipline->getLessons();
+
+        $hoursService->setLessons($lessons);
+        $generalHours = $hoursService->calculate();
 
         return $this->render('discipline/show.html.twig', [
             'discipline' => $discipline,
-            'topics' => $topics
+            'topics' => $topics,
+            'lessons' => $lessons,
+            'generalHours' => $generalHours
         ]);
     }
 

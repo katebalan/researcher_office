@@ -32,7 +32,7 @@
                             </div>
                             {% for topic in topics %}
                                 {% set first_loop_index = loop.index %}
-                                <div class="p-1 mb-1 bg-light rounded">
+                                <div class="p-1 mb-1">
                                     {{ first_loop_index ~ '. ' ~ topic.name }}
 
                                     {% include 'components/_buttons_icon.thml.twig' with {
@@ -70,6 +70,37 @@
                                     {{ 'create'|trans|capitalize }}
                                 </a>
                             </div>
+
+                            {% for lesson in lessons %}
+                                <div class="border-top pt-3 mt-4 row">
+                                    <h5 class="font-weight-bold col-md-12">
+                                        <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="text-dark">
+                                            {{ lesson.type.name }}
+                                        </a>
+                                    </h5>
+                                    <div class="col-md-10">
+                                        <p class="text-muted">
+                                            {% for topic in lesson.topics %}
+                                                {% set comma =  loop.last ? ' ': ', ' %}
+                                                {{ topic ~ comma }}
+                                            {% endfor %}
+                                        </p>
+                                        <div>{{ 'Загалом годин'|trans }}: {{ lesson.hours }}</div>
+                                    </div>
+
+{#                                    <div class="col-md-2">#}
+{#                                        {% include 'components/_buttons.thml.twig' with {#}
+{#                                            'id': discipline.id,#}
+{#                                            'edit': 'ro_discipline_edit',#}
+{#                                            'show': 'ro_discipline_show'#}
+{#                                        } %}#}
+{#                                    </div>#}
+                                </div>
+                            {% else %}
+                                <div class="m-2 text-center text-muted">
+                                    {{ 'lessons_empty'|trans }}
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -78,7 +109,7 @@
                     <div class="p-3 mb-3 bg-light rounded">
                         <h4>{{ 'Загальні години'|trans }}</h4>
                         <div class="form-group">
-                            <input class="form-control" value="{{ discipline.duration }}" disabled>
+                            <input class="form-control" value="{{ generalHours }}" disabled>
                         </div>
                     </div>
                     <div class="p-3 mb-3 bg-light rounded">

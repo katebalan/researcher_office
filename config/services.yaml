@@ -34,3 +34,7 @@ services:
         tags:
             - { name: doctrine.event_listener, event: preUpdate }
             - { name: doctrine.event_listener, event: prePersist }
+
+    app.calculate_hours_service:
+        class: 'App\Service\CalculateHoursService'
+        autowire: false
