@@ -1,0 +1,17 @@
+<div class="card flex-md-row pb-4 mb-4">
+    <div class="card-body">
+
+        <div class="ro-btn-absolute--wrapper">
+            <h4 class="mb-4 text-dark">{{ 'distribution_of_hours'|trans|capitalize }}</h4>
+            <a href="{{ path('ro_lesson_new', {'id': discipline.id}) }}"
+               class="btn btn-sm btn-outline-primary mb-2 ro-btn-absolute">
+                {{ 'create'|trans|capitalize }}
+            </a>
+        </div>
+
+        {% include 'lesson/_list.html.twig' with {
+            'lessons': simpleLessons + controlLessons,
+        } %}
+
+    </div>
+</div>

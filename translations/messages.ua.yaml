@@ -36,8 +36,29 @@ topic:
     2: тему
 distribution_of_hours: розподіл годин
 topics_empty: Жодної теми не знайдено
+lessons_empty: Години ще не розподілені
 actions: дії
 hours: години
+
+# lesson type
+statistic: Статистика
+general_hours: Загалом годин
+
+# lesson type
+lecture: Лекції
+laboratory_work: Лабораторні роботи
+control_work: Контрольні роботи
+term_paper: Курсові роботи
+exam: Екзамени
+credit: Заліки
+differentiated_credit: Диференційні заліки
+practice: Практики
+coursework: Курсові проекти
+settlement_and_graphic_work: Розрахунково-графічні роботи
+dcr: ДКР
+abstract: Реферати
+consultation: Консультації
+
 
 # forms
 Name: Назва

@@ -1,0 +1,12 @@
+<div class="p-3 mb-3 bg-light rounded">
+
+    <h4>{{ 'statistic'|trans }}</h4>
+
+    {% for key, value in statistic %}
+        <div class="form-group">
+            <label>{{ key|trans }}</label>
+            <input class="form-control" value="{{ value }}" disabled>
+        </div>
+    {% endfor %}
+
+</div>

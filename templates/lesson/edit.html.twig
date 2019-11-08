@@ -3,11 +3,21 @@
 {% block title %}Edit Lesson{% endblock %}
 
 {% block body %}
-    <h1>Edit Lesson</h1>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'edit'|trans|capitalize ~ ' ' ~ 'hours'|trans }}
+                </h3>
 
-    {{ include('lesson/_form.html.twig', {'button_label': 'Update'}) }}
+                <div class="border-bottom pb-3 mb-4">
+                    {{ include('lesson/_form.html.twig') }}
 
-    <a href="{{ path('lesson_index') }}">back to list</a>
-
-    {{ include('lesson/_delete_form.html.twig') }}
+                    {% include 'components/_buttons.thml.twig' with {
+                        'back': true
+                    } %}
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

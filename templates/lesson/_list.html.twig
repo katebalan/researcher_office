@@ -1,0 +1,35 @@
+{% for lesson in lessons %}
+    <div class="border-top pt-3 mt-4 row">
+        <h5 class="font-weight-bold col-md-12">
+            <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="text-dark">
+                {{ lesson.count > 1 ? lesson.type.namePlural : lesson.type.name }}
+            </a>
+        </h5>
+
+        {% for item in lesson.items %}
+            <div class="col-md-10 mb-2">
+                <div class="text-muted">
+                    {% for topic in item.topics %}
+                        {% set comma =  loop.last ? ' ': ', ' %}
+                        {{ topic ~ comma }}
+                    {% endfor %}
+                </div>
+                <div>{{ 'hours'|trans|capitalize }}: {{ item.hours }}</div>
+            </div>
+            <div class="col-md-2 mb-2 mt-2">
+                {% include 'components/_buttons_icon.thml.twig' with {
+                    'edit': path('ro_lesson_edit', {'id': item.id}),
+                    'delete': path('ro_topic_delete', {'id': item.id})
+                } %}
+            </div>
+        {% endfor %}
+
+        <div class="col-md-10">
+            <div>{{ 'general_hours'|trans }}: {{ lesson.hours }}</div>
+        </div>
+    </div>
+{% else %}
+    <div class="m-2 text-center text-muted">
+        {{ 'lessons_empty'|trans }}
+    </div>
+{% endfor %}

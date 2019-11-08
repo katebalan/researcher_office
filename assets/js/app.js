@@ -19,8 +19,6 @@ import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css';
 import './fix_bootstrap_file_loader';
 import './updateLessonForm';
 
-
-
 $(() => {
     $('.js-select2').select2();
 

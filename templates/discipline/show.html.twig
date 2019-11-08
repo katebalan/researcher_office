@@ -21,97 +21,11 @@
                         </div>
                     </div>
 
-                    <div class="card flex-md-row pb-4 mb-4">
-                        <div class="card-body">
-                            <div class="ro-btn-absolute--wrapper">
-                                <h4 class="mb-4 text-dark">{{ 'topics'|trans|capitalize }}</h4>
-                                <a href="{{ path('ro_topic_new', {'id': discipline.id}) }}"
-                                   class="btn btn-sm btn-outline-primary mb-2 ro-btn-absolute">
-                                    {{ 'add'|trans|capitalize ~ ' ' ~ 'topic.2'|trans }}
-                                </a>
-                            </div>
-                            {% for topic in topics %}
-                                {% set first_loop_index = loop.index %}
-                                <div class="p-1 mb-1">
-                                    {{ first_loop_index ~ '. ' ~ topic.name }}
-
-                                    {% include 'components/_buttons_icon.thml.twig' with {
-                                        'id': topic.id,
-                                        'edit': path('ro_topic_edit', {'id': topic.id}),
-                                        'add': path('ro_subtopic_new', {'id': topic.id}),
-                                        'delete': path('ro_topic_delete', {'id': topic.id})
-                                    } %}
-                                </div>
-                                {% for subtopic in topic.topics %}
-                                    <div class="p-1 mb-1 ml-4">
-                                        {{ first_loop_index ~ '. ' ~ loop.index ~ '. ' ~ subtopic.name }}
-
-                                        {% include 'components/_buttons_icon.thml.twig' with {
-                                            'id': subtopic.id,
-                                            'edit': path('ro_topic_edit', {'id': subtopic.id}),
-                                            'delete': path('ro_topic_delete', {'id': subtopic.id})
-                                        } %}
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                <div class="m-2 text-center text-muted">
-                                    {{ 'topics_empty'|trans }}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <div class="card flex-md-row pb-4 mb-4">
-                        <div class="card-body">
-                            <div class="ro-btn-absolute--wrapper">
-                                <h4 class="mb-4 text-dark">{{ 'distribution_of_hours'|trans|capitalize }}</h4>
-                                <a href="{{ path('ro_lesson_new') }}"
-                                   class="btn btn-sm btn-outline-primary mb-2 ro-btn-absolute">
-                                    {{ 'create'|trans|capitalize }}
-                                </a>
-                            </div>
-
-                            {% for lesson in lessons %}
-                                <div class="border-top pt-3 mt-4 row">
-                                    <h5 class="font-weight-bold col-md-12">
-                                        <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="text-dark">
-                                            {{ lesson.type.name }}
-                                        </a>
-                                    </h5>
-                                    <div class="col-md-10">
-                                        <p class="text-muted">
-                                            {% for topic in lesson.topics %}
-                                                {% set comma =  loop.last ? ' ': ', ' %}
-                                                {{ topic ~ comma }}
-                                            {% endfor %}
-                                        </p>
-                                        <div>{{ 'Загалом годин'|trans }}: {{ lesson.hours }}</div>
-                                    </div>
-
-{#                                    <div class="col-md-2">#}
-{#                                        {% include 'components/_buttons.thml.twig' with {#}
-{#                                            'id': discipline.id,#}
-{#                                            'edit': 'ro_discipline_edit',#}
-{#                                            'show': 'ro_discipline_show'#}
-{#                                        } %}#}
-{#                                    </div>#}
-                                </div>
-                            {% else %}
-                                <div class="m-2 text-center text-muted">
-                                    {{ 'lessons_empty'|trans }}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+                    {% include 'discipline/_block_theme.html.twig' %}
+                    {% include 'discipline/_block_hours.html.twig' %}
                 </div>
 
                 <div class="col-md-3">
-                    <div class="p-3 mb-3 bg-light rounded">
-                        <h4>{{ 'Загальні години'|trans }}</h4>
-                        <div class="form-group">
-                            <input class="form-control" value="{{ generalHours }}" disabled>
-                        </div>
-                    </div>
                     <div class="p-3 mb-3 bg-light rounded">
                         <h4>{{ 'actions'|trans|capitalize }}</h4>
                         <div>
@@ -123,10 +37,12 @@
                             } %}
                         </div>
                     </div>
+
+                    {% include 'discipline/_block_statictic.html.twig' with {
+                        'statistic': statistic
+                    } only %}
                 </div>
             </div>
         </div>
     </div>
-
-
 {% endblock %}

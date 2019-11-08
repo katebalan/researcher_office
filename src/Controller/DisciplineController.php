@@ -74,13 +74,14 @@ class DisciplineController extends AbstractController
         $lessons  = $discipline->getLessons();
 
         $hoursService->setLessons($lessons);
-        $generalHours = $hoursService->calculate();
+        $statistic = $hoursService->calculate();
 
         return $this->render('discipline/show.html.twig', [
             'discipline' => $discipline,
             'topics' => $topics,
-            'lessons' => $lessons,
-            'generalHours' => $generalHours
+            'simpleLessons' => $hoursService->getSimpleLessons(),
+            'controlLessons' => $hoursService->getControlLessons(),
+            'statistic' => $statistic
         ]);
     }
 
