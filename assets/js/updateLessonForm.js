@@ -1,5 +1,4 @@
-(function ($) {        // fieldHours.prop('disabled', 'disabled');
-        // fieldEvaluationWrap.hide();
+(function ($) {
     $.fn.__update_lesson_form = function () {
         let $that = this,
             fieldHoursWrap = $that.find('#lesson_hours').closest('.form-group'),
@@ -21,10 +20,10 @@
             if (oldLesson) {
                 if (oldLesson.defaultHours === null) {
                     fieldHoursWrap.show();
-                    fieldHours.prop('disabled', false);
+                    fieldHours.prop('readonly', false);
                 } else {
                     fieldHoursWrap.show();
-                    fieldHours.prop('disabled', 'disabled');
+                    fieldHours.prop('readonly', 'readonly');
                     // fieldHours.val(oldLesson.defaultHours);
                 }
 
@@ -50,10 +49,10 @@
                 if (lesson) {
                     if (lesson.defaultHours === null) {
                         fieldHoursWrap.show();
-                        fieldHours.prop('disabled', false);
+                        fieldHours.prop('readonly', false);
                     } else {
                         fieldHoursWrap.show();
-                        fieldHours.prop('disabled', 'disabled');
+                        fieldHours.prop('readonly', 'readonly');
                         fieldHours.val(lesson.defaultHours);
                     }
 
