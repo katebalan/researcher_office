@@ -13,6 +13,9 @@ class DisciplineType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('department')
+            ->add('course')
+            ->add('groupCodes')
         ;
     }
 

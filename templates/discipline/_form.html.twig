@@ -1,6 +1,12 @@
 {{ form_start(form) }}
     <div class="row">
         <div class="col-md-12">{{ form_row(form.name) }}</div>
+        <div class="col-md-12">
+            {{ 'Характеристика груп та потоків'|trans }}
+            {{ form_row(form.department) }}
+            {{ form_row(form.course) }}
+            {{ form_row(form.groupCodes) }}
+        </div>
 
         <div class="col-md-12">
             <button class="btn btn-outline-success btn-sm mb-2">
