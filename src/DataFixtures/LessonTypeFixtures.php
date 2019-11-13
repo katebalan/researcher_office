@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\LessonType;
-use App\Entity\ScientificRank;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class LessonTypeFixtures extends BaseFixture

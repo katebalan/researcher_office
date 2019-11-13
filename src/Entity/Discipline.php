@@ -47,10 +47,31 @@ class Discipline extends BaseEntity
      */
     private $group_codes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\IndividualPlan", mappedBy="disciplines")
+     */
+    private $individualPlans;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $overview;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $goal;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $task;
+
     public function __construct()
     {
         $this->topics = new ArrayCollection();
         $this->duration = 0;
+        $this->individualPlans = new ArrayCollection();
     }
 
     public function __toString(): ?string
@@ -170,6 +191,70 @@ class Discipline extends BaseEntity
     public function setGroupCodes(string $group_codes): self
     {
         $this->group_codes = $group_codes;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IndividualPlan[]
+     */
+    public function getIndividualPlans(): Collection
+    {
+        return $this->individualPlans;
+    }
+
+    public function addIndividualPlan(IndividualPlan $individualPlan): self
+    {
+        if (!$this->individualPlans->contains($individualPlan)) {
+            $this->individualPlans[] = $individualPlan;
+            $individualPlan->addDiscipline($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIndividualPlan(IndividualPlan $individualPlan): self
+    {
+        if ($this->individualPlans->contains($individualPlan)) {
+            $this->individualPlans->removeElement($individualPlan);
+            $individualPlan->removeDiscipline($this);
+        }
+
+        return $this;
+    }
+
+    public function getOverview(): ?string
+    {
+        return $this->overview;
+    }
+
+    public function setOverview(string $overview): self
+    {
+        $this->overview = $overview;
+
+        return $this;
+    }
+
+    public function getGoal(): ?string
+    {
+        return $this->goal;
+    }
+
+    public function setGoal(string $goal): self
+    {
+        $this->goal = $goal;
+
+        return $this;
+    }
+
+    public function getTask(): ?string
+    {
+        return $this->task;
+    }
+
+    public function setTask(string $task): self
+    {
+        $this->task = $task;
 
         return $this;
     }
