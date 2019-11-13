@@ -37,6 +37,11 @@ class Topic extends BaseEntity
      */
     private $lessons;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
     public function __construct()
     {
         $this->topics = new ArrayCollection();
@@ -127,6 +132,18 @@ class Topic extends BaseEntity
             $this->lessons->removeElement($lesson);
             $lesson->removeTopic($this);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

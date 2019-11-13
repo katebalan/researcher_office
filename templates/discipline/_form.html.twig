@@ -1,8 +1,13 @@
 {{ form_start(form) }}
     <div class="row">
-        <div class="col-md-12">{{ form_row(form.name) }}</div>
-        <div class="col-md-12">
-            {{ 'Характеристика груп та потоків'|trans }}
+        <div class="col-md-8">
+            {{ form_row(form.name) }}
+            {{ form_row(form.overview) }}
+            {{ form_row(form.goal) }}
+            {{ form_row(form.task) }}
+        </div>
+        <div class="col-md-4">
+            <h5 class="text-center">{{ 'Характеристика груп та потоків'|trans }}</h5>
             {{ form_row(form.department) }}
             {{ form_row(form.course) }}
             {{ form_row(form.groupCodes) }}
