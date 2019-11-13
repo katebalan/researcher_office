@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                {{ 'Перегляд індивідуального робочого плану'|trans|capitalize }}
+            </h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card flex-md-row pb-4 mb-4">
+                        <div class="card-body d-flex flex-column align-items-start">
+                            <h3 class="mb-2 text-dark">
+                                {{ individual_plan.years }}
+                            </h3>
+                            <div class="mb-3 text-muted">
+                                {{ individual_plan.createdAt ? individual_plan.createdAt|date('M d, Y') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'components/_buttons.thml.twig' with {
+        'id': individual_plan.id,
+        'edit': 'ro_individual_plan_edit',
+        'back': 'ro_individual_plan_index',
+        'delete': 'ro_individual_plan_delete'
+    } %}
+{% endblock %}

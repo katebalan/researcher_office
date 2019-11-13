@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'individual_plan/_list.html.twig' %}
+
+                {% include 'components/_buttons.thml.twig' with {
+                    'create': path('ro_individual_plan_new')
+                } %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

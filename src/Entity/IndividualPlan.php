@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IndividualPlanRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class IndividualPlan
 {
+    use TimestampTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,6 +36,11 @@ class IndividualPlan
      * @ORM\OneToMany(targetEntity="App\Entity\IndividualWork", mappedBy="individualPlan")
      */
     private $works;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="individualPlans")
+     */
+    private $createdBy;
 
     public function __construct()
     {
@@ -109,6 +118,18 @@ class IndividualPlan
                 $work->setIndividualPlan(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

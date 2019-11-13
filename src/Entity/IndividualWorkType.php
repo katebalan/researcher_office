@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IndividualWorkTypeRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class IndividualWorkType
 {
+    use TimestampTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,6 +40,11 @@ class IndividualWorkType
     public function __construct()
     {
         $this->individualWorks = new ArrayCollection();
+    }
+
+    public function __toString(): ?string
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int

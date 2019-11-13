@@ -115,12 +115,18 @@ class User implements UserInterface
      */
     private $disciplines;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IndividualPlan", mappedBy="createdBy")
+     */
+    private $individualPlans;
+
     public function __construct()
     {
         $this->interest = new ArrayCollection();
         $this->publications = new ArrayCollection();
         $this->diplomas = new ArrayCollection();
         $this->disciplines = new ArrayCollection();
+        $this->individualPlans = new ArrayCollection();
     }
 
     public function __toString()
@@ -453,6 +459,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($discipline->getUser() === $this) {
                 $discipline->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IndividualPlan[]
+     */
+    public function getIndividualPlans(): Collection
+    {
+        return $this->individualPlans;
+    }
+
+    public function addIndividualPlan(IndividualPlan $individualPlan): self
+    {
+        if (!$this->individualPlans->contains($individualPlan)) {
+            $this->individualPlans[] = $individualPlan;
+            $individualPlan->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIndividualPlan(IndividualPlan $individualPlan): self
+    {
+        if ($this->individualPlans->contains($individualPlan)) {
+            $this->individualPlans->removeElement($individualPlan);
+            // set the owning side to null (unless already changed)
+            if ($individualPlan->getCreatedBy() === $this) {
+                $individualPlan->setCreatedBy(null);
             }
         }
 

@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IndividualWorkRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class IndividualWork
 {
+    use TimestampTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'edit'|trans|capitalize ~ ' ' ~ 'menu.work_plan'|trans }}
+                </h3>
+
+                <div class="border-bottom pb-3 mb-4">
+                    {{ include('individual_plan/_form.html.twig', {'button_label': 'update', 'individual_plan_id': individual_plan.id}) }}
+
+                    {% include 'components/_buttons.thml.twig' with {
+                        'id': individual_plan.id,
+                        'back': 'ro_individual_plan_index',
+                        'delete': 'ro_individual_plan_delete'
+                    } %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
