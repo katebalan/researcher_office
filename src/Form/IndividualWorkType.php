@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\IndividualWork;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,11 +16,13 @@ class IndividualWorkType extends AbstractType
             ->add('name')
             ->add('hours')
             ->add('ternOfExecution')
-            ->add('mark')
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('mark', ChoiceType::class, [
+                'choices' => [
+                    'виконано' => 'виконано',
+                    'не виконано' => 'не виконано'
+                ]
+            ])
             ->add('type')
-            ->add('individualPlan')
         ;
     }
 

@@ -28,8 +28,13 @@ class IndividualPlanType extends AbstractType
             ])
             ->add('works', CollectionType::class, [
                 'entry_type' => IndividualWorkType::class,
-                'allow_add' => true,
-                'prototype' => true,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'by_reference' => false,
+                'attr' => [
+                    'class' => 'js-dynamic-collection'
+                ]
             ])
         ;
     }

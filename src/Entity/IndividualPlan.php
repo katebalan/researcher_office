@@ -33,7 +33,7 @@ class IndividualPlan
     private $disciplines;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\IndividualWork", mappedBy="individualPlan")
+     * @ORM\OneToMany(targetEntity="App\Entity\IndividualWork", mappedBy="individualPlan", cascade={"persist"})
      */
     private $works;
 

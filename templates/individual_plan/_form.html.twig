@@ -1,22 +1,26 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
 
-        {# store the prototype on the data-prototype attribute #}
-        <ul id="email-fields-list"
-            data-prototype="{{ form_widget(form.works.vars.prototype)|e }}"
-            data-widget-tags="{{ '<li></li>'|e }}"
-            data-widget-counter="{{ form.works|length }}">
-            {% for emailField in form.works %}
-                <li>
-                    {{ form_errors(emailField) }}
-                    {{ form_widget(emailField) }}
+    {% if form.works is defined %}
+        <ul id="" class="js-dynamic-collection" data-prototype="<li class='flexRow dynamic-collection-item'>
+                                    {#todo insert vehicle type#}
+                                    {{ form_widget(form.works.vars.prototype)|e }}
+                                    <a href='#' class='btn btn-danger pull-right clearfix btn-xs dynamic-collection-item-delete'><i class='icon-remove'></i></a>
+                                    </li>">
+            {% for work in form.works %}
+                <li class="dynamic-collection-item row">
+                    <div class="col-12">{{ form_widget(work.name) }}</div>
+                    <div class="col-3">{{ form_widget(work.type) }}</div>
+                    <div class="col-3">{{ form_widget(work.hours) }}</div>
+                    <div class="col-3">{{ form_widget(work.ternOfExecution) }}</div>
+                    <div class="col-3">{{ form_widget(work.mark) }}</div>
+
+                    <a href='#' class='btn btn-danger pull-right clearfix btn-xs dynamic-collection-item-delete'><i class='icon-remove'></i></a>
                 </li>
             {% endfor %}
+            <a href="#" class="dynamic-collection-item-add btn btn-info"><i
+                        class="icon-plus-sign"></i> {{ 'Add work'|trans }}</a>
         </ul>
-
-        <button type="button"
-                class="add-another-collection-widget"
-                data-list-selector="#email-fields-list">Add another email</button>
-
+    {% endif %}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
