@@ -6,12 +6,12 @@
         let prototype = $this.data('prototype');
 
         // Set the initial index of this container
-        $this.data('index', $this.find(':input').length);
+        $this.data('index', $this.find('li').length);
 
         // When the delete link of any existing items is clicked, delete its prototype
         $this.find('.dynamic-collection-item-delete')._init_dynamic_collection_delete();
 
-        $this.on('click', function (e) {
+        $this.find('.dynamic-collection-item-add').on('click', function (e) {
             e.preventDefault(true);
             console.log('ffff');
             // Grab the index

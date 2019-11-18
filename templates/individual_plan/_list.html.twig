@@ -6,13 +6,20 @@
     <div class="border-bottom pb-3 mb-4 row">
         <h5 class="font-weight-bold col-md-12">
             <a href="{{ path('ro_individual_plan_show', {'id': plan.id}) }}" class="text-dark">
-                {{ plan.id }}
+                {{ '%06d'|format( plan.id) ~ " [" ~ plan.years ~ "]" }}
             </a>
         </h5>
         <div class="col-md-10">
             <p class="text-muted">
                 {{ plan.createdAt ? plan.createdAt|date('D d/M/Y') : '' }} <br />
             </p>
+            <div class="ro-group">
+                {% for discipline in plan.disciplines %}
+                    <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="ro-group--link">
+                        {{ discipline.name }}
+                    </a>
+                {% endfor %}
+            </div>
         </div>
 
         <div class="col-md-2">
@@ -21,6 +28,9 @@
                 'edit': 'ro_individual_plan_edit',
                 'show': 'ro_individual_plan_show'
             } %}
+            <a href="{{ path('ro_generate_work_plan', {id: plan.id}) }}" class="btn btn-outline-info btn-sm mb-2">
+                {{ 'generate'|trans|capitalize ~ ' xlsx' }}
+            </a>
         </div>
     </div>
 {% endfor %}

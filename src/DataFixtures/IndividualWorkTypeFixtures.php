@@ -18,7 +18,7 @@ class IndividualWorkTypeFixtures extends BaseFixture
             'name' => 'Organizational work'
         ],
         [
-            'name' => 'Methodical work'
+            'name' => 'Disciplinary work'
         ],
 
     ];

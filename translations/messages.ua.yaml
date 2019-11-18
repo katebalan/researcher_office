@@ -40,10 +40,14 @@ topics_empty: Жодної теми не знайдено
 lessons_empty: Години ще не розподілені
 actions: дії
 hours: години
+work: діяльність
+generate: генерувати
+
 
 # lesson type
 statistic: Статистика
 general_hours: Загалом годин
+
 
 # lesson type
 lecture: Лекції
@@ -94,3 +98,13 @@ Overview: Загальні відомості
 Group codes: Шифри груп
 Course: Курс
 Department: Спеціальність, факультет
+Years: Роки
+Disciplines: Дисципліни
+Hours: Години
+Term of execution: Термін виконання
+Works: Діяльність
+Methodical work: Методична робота
+Scientific work: Наукова робота
+Organizational work: Організаційна робота
+Disciplinary work: Виховна робота
+
