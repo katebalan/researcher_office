@@ -23,8 +23,10 @@ class DisciplineController extends AbstractController
      */
     public function index(DisciplineRepository $disciplineRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('discipline/index.html.twig', [
-            'disciplines' => $disciplineRepository->findAll(),
+            'disciplines' => $disciplineRepository->findBy(['user' => $user]),
         ]);
     }
 

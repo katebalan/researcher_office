@@ -20,6 +20,7 @@ class PublicationController extends AbstractController
 {
     /**
      * @Route("/", name="ro_publication_index", methods={"GET"})
+     * @TODO fix for different users
      */
     public function index(PublicationRepository $publicationRepository): Response
     {

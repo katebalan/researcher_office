@@ -35,13 +35,15 @@
         <div class="card flex-md-row mb-4">
             <div class="card-body d-flex flex-column align-items-start">
                 <h3 class="mb-0">
-                    <a class="text-dark" href="#">Публікацій - {{ user.publications|length }}</a>
+                    <a class="text-dark" href="{{ path('ro_publication_index') }}">Публікацій - {{ user.publications|length }}</a>
                 </h3>
                 <div class="mb-1 text-muted">
                     {% if user.publications|length %}
                         Last at {{ user.publications|last.date|date('M d, Y') }}
-                    {% else %}
+                    {% elseif app.user.id == user.id %}
                         <a href="{{ path('ro_publication_new') }}" class="text-muted">Додати публікацію</a>
+                    {% else %}
+                        {{ 'publication_empty'|trans }}
                     {% endif %}
                 </div>
             </div>
@@ -51,13 +53,15 @@
         <div class="card flex-md-row mb-4">
             <div class="card-body d-flex flex-column align-items-start">
                 <h3 class="mb-0">
-                    <a class="text-dark" href="#">Дипломних проектів - {{ user.diplomas|length }}</a>
+                    <a class="text-dark" href="{{ path('ro_diploma_index', {'id': user.id}) }}">Дипломних проектів - {{ user.diplomas|length }}</a>
                 </h3>
                 <div class="mb-1 text-muted">
                     {% if user.diplomas|length %}
                         Last at {{ user.diplomas|last.date|date('M d, Y') }}
-                    {% else %}
+                    {% elseif app.user.id == user.id %}
                         <a href="{{ path('ro_diploma_new', {'id': user.id}) }}" class="text-muted">Додати дипломний проект</a>
+                    {% else %}
+                        {{ 'diploma_empty'|trans }}
                     {% endif %}
                 </div>
             </div>

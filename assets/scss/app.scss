@@ -20,6 +20,14 @@ a {
   }
 }
 
+h3 a {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .ro {
   &-header-logo{
     display: block;

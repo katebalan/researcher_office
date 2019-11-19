@@ -20,12 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class DiplomaController extends AbstractController
 {
     /**
-     * @Route("/", name="ro_diploma_index", methods={"GET"})
+     * @Route("/{id}", name="ro_diploma_index", methods={"GET"})
      */
-    public function index(DiplomaRepository $diplomaRepository): Response
+    public function index(DiplomaRepository $diplomaRepository, User $user): Response
     {
         return $this->render('diploma/index.html.twig', [
-            'diplomas' => $diplomaRepository->findAll(),
+            'diplomas' => $diplomaRepository->findBy(['author' => $user]),
         ]);
     }
 
