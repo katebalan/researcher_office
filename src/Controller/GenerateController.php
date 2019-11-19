@@ -3,44 +3,46 @@
 namespace App\Controller;
 
 use App\Entity\IndividualPlan;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use App\Helper\XlsxHelper;
+use App\Service\CalculateHoursService;
+use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
 use \PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class GenerateController
+ * @package App\Controller
+ */
 class GenerateController extends AbstractController
 {
     /**
      * @Route("/generate/workplan/{id}", name="ro_generate_work_plan")
      *
      * @param IndividualPlan $individualPlan
+     * @param XlsxHelper $helper
      * @return BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws Exception
      */
-    public function index(IndividualPlan $individualPlan)
+    public function index(IndividualPlan $individualPlan, XlsxHelper $helper)
     {
-//        $inputFileName = './sampleData/example1.xls';
-//        $reader = new XlsxReader();
-//        $spreadsheet = $reader->load($inputFileName);
-
-        $spreadsheet = new Spreadsheet();
+        $reader = new XlsxReader();
+        try {
+            $spreadsheet = $reader->load($helper->getTemplate());
+        } catch (Exception  $e) {
+            throw $e;
+        }
 
         /* @var $sheet Worksheet */
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('C1', 'І. НАВЧАЛЬНА РОБОТА');
-        $sheet->setCellValue('B2', '№ п.п.');
-        $sheet->mergeCells('B2:B6');
-        $sheet->setCellValue('C2', 'Назва навчальних дисциплін, їх загальний обсяг у годинах');
-        $sheet->mergeCells('C2:C6');
-        $sheet->setCellValue('D2', 'Обсяг дисциплін за семестр');
-        $sheet->mergeCells('D2:D6');
-        $sheet->setTitle("Навчальна робота");
+        $helper->fillDisciplineSheet($sheet, $individualPlan);
 
-        // Create your Office 2007 Excel (XLSX Format)
         $writer = new XlsxWriter($spreadsheet);
 
         // Create a Temporary file in the system

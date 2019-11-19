@@ -84,6 +84,8 @@ class CalculateHoursService
      */
     public function calculate()
     {
+        $this->clear();
+
         $this->generalHours = $this->calculateHours($this->lessons);
         $this->writeStatistic('general_hours', $this->generalHours);
 
@@ -138,5 +140,13 @@ class CalculateHoursService
     private function writeStatistic($key, $value)
     {
         $this->statistics[$key] = $value;
+    }
+
+    private function clear()
+    {
+        $this->generalHours = 0;
+        $this->statistics = [];
+        $this->simpleLessons = [];
+        $this->controlLessons = [];
     }
 }

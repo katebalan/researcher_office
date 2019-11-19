@@ -20,11 +20,18 @@ class IndividualPlanType extends AbstractType
                 'attr' => [
                     'class' => 'js-select2'
                 ],
+                'label' => 'discipline_semester_1'
 //                'query_builder' => function(EntityRepository $er) use ($discipline) {
 //                    return $er->createQueryBuilder('d')
 //                        ->where('t.discipline = :id')
 //                        ->setParameter('id', $discipline);
 //                },
+            ])
+            ->add('disciplines2', null, [
+                'attr' => [
+                    'class' => 'js-select2'
+                ],
+                'label' => 'discipline_semester_2'
             ])
             ->add('works', CollectionType::class, [
                 'entry_type' => IndividualWorkType::class,

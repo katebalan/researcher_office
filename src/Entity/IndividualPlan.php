@@ -33,6 +33,12 @@ class IndividualPlan
     private $disciplines;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Discipline", inversedBy="individualPlans")
+     * @ORM\JoinTable(name="individual_plan_discipline2")
+     */
+    private $disciplines2;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\IndividualWork", mappedBy="individualPlan", cascade={"persist"})
      */
     private $works;
@@ -45,6 +51,7 @@ class IndividualPlan
     public function __construct()
     {
         $this->disciplines = new ArrayCollection();
+        $this->disciplines2 = new ArrayCollection();
         $this->works = new ArrayCollection();
     }
 
@@ -86,6 +93,32 @@ class IndividualPlan
     {
         if ($this->disciplines->contains($discipline)) {
             $this->disciplines->removeElement($discipline);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Discipline[]
+     */
+    public function getDisciplines2(): Collection
+    {
+        return $this->disciplines2;
+    }
+
+    public function addDiscipline2(Discipline $discipline2): self
+    {
+        if (!$this->disciplines2->contains($discipline2)) {
+            $this->disciplines2[] = $discipline2;
+        }
+
+        return $this;
+    }
+
+    public function removeDiscipline2(Discipline $discipline2): self
+    {
+        if ($this->disciplines2->contains($discipline2)) {
+            $this->disciplines2->removeElement($discipline2);
         }
 
         return $this;

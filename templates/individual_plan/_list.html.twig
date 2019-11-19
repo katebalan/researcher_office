@@ -13,8 +13,17 @@
             <p class="text-muted">
                 {{ plan.createdAt ? plan.createdAt|date('D d/M/Y') : '' }} <br />
             </p>
+            <h6 class="font-weight-bold">{{ 'discipline_semester_1'|trans }}</h6>
             <div class="ro-group">
                 {% for discipline in plan.disciplines %}
+                    <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="ro-group--link">
+                        {{ discipline.name }}
+                    </a>
+                {% endfor %}
+            </div>
+            <h6 class="font-weight-bold">{{ 'discipline_semester_2'|trans }}</h6>
+            <div class="ro-group">
+                {% for discipline in plan.disciplines2 %}
                     <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="ro-group--link">
                         {{ discipline.name }}
                     </a>
@@ -26,7 +35,8 @@
             {% include 'components/_buttons.thml.twig' with {
                 'id': plan.id,
                 'edit': 'ro_individual_plan_edit',
-                'show': 'ro_individual_plan_show'
+                'show': 'ro_individual_plan_show',
+                'delete': 'ro_individual_plan_delete'
             } %}
             <a href="{{ path('ro_generate_work_plan', {id: plan.id}) }}" class="btn btn-outline-info btn-sm mb-2">
                 {{ 'generate'|trans|capitalize ~ ' xlsx' }}

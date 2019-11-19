@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Topic;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,6 +14,7 @@ class TopicType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('description', CKEditorType::class)
         ;
     }
 
