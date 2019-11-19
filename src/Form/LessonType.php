@@ -27,6 +27,13 @@ class LessonType extends AbstractType
                         ->where('t.discipline = :id')
                         ->setParameter('id', $discipline);
                 },
+                'group_by' => function($choice, $key, $value) {
+                    if ($choice->getParentTopic() === NULL) {
+                        return 'Розділи';
+                    } else {
+                        return 'Розділ "' . $choice->getParentTopic()->getName() . '"';
+                    }
+                }
             ])
             ->add('hours', null, [
                 'required' => false
