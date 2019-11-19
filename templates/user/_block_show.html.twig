@@ -35,7 +35,7 @@
         <div class="card flex-md-row mb-4">
             <div class="card-body d-flex flex-column align-items-start">
                 <h3 class="mb-0">
-                    <a class="text-dark" href="{{ path('ro_publication_index') }}">Публікацій - {{ user.publications|length }}</a>
+                    <a class="text-dark" href="#">Публікацій - {{ user.publications|length }}</a>
                 </h3>
                 <div class="mb-1 text-muted">
                     {% if user.publications|length %}
@@ -53,7 +53,7 @@
         <div class="card flex-md-row mb-4">
             <div class="card-body d-flex flex-column align-items-start">
                 <h3 class="mb-0">
-                    <a class="text-dark" href="{{ path('ro_diploma_index', {'id': user.id}) }}">Дипломних проектів - {{ user.diplomas|length }}</a>
+                    <a class="text-dark" href="#">Дипломних проектів - {{ user.diplomas|length }}</a>
                 </h3>
                 <div class="mb-1 text-muted">
                     {% if user.diplomas|length %}

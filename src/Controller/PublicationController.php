@@ -18,16 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PublicationController extends AbstractController
 {
-    /**
-     * @Route("/", name="ro_publication_index", methods={"GET"})
-     * @TODO fix for different users
-     */
-    public function index(PublicationRepository $publicationRepository): Response
-    {
-        return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findAll(),
-        ]);
-    }
+//    /**
+//     * @Route("/", name="ro_publication_index", methods={"GET"})
+//     * @TODO fix for different users
+//     */
+//    public function index(PublicationRepository $publicationRepository): Response
+//    {
+//        return $this->render('publication/index.html.twig', [
+//            'publications' => $publicationRepository->findAll(),
+//        ]);
+//    }
 
     /**
      * @Route("/new", name="ro_publication_new", methods={"GET","POST"})
@@ -47,7 +47,7 @@ class PublicationController extends AbstractController
             $entityManager->persist($publication);
             $entityManager->flush();
 
-            return $this->redirectToRoute('ro_publication_index');
+            return $this->redirectToRoute('ro_index');
         }
 
         return $this->render('publication/new.html.twig', [
@@ -73,13 +73,14 @@ class PublicationController extends AbstractController
      */
     public function edit(Request $request, Publication $publication): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ro_publication_index');
+            return $this->redirectToRoute('ro_index');
         }
 
         return $this->render('publication/edit.html.twig', [
