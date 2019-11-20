@@ -19,16 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DiplomaController extends AbstractController
 {
-//    /**
-//     * @Route("/{id}", name="ro_diploma_index", methods={"GET"})
-//     */
-//    public function index(DiplomaRepository $diplomaRepository, User $user): Response
-//    {
-//        return $this->render('diploma/index.html.twig', [
-//            'diplomas' => $diplomaRepository->findBy(['author' => $user]),
-//        ]);
-//    }
-
     /**
      * @Route("/{id}/new", name="ro_diploma_new", methods={"GET","POST"})
      */

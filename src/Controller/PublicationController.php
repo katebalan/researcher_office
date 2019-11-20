@@ -18,17 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PublicationController extends AbstractController
 {
-//    /**
-//     * @Route("/", name="ro_publication_index", methods={"GET"})
-//     * @TODO fix for different users
-//     */
-//    public function index(PublicationRepository $publicationRepository): Response
-//    {
-//        return $this->render('publication/index.html.twig', [
-//            'publications' => $publicationRepository->findAll(),
-//        ]);
-//    }
-
     /**
      * @Route("/new", name="ro_publication_new", methods={"GET","POST"})
      */
