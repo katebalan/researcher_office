@@ -19,22 +19,20 @@ class IndividualWorkRepository extends ServiceEntityRepository
         parent::__construct($registry, IndividualWork::class);
     }
 
-    // /**
-    //  * @return IndividualWork[] Returns an array of IndividualWork objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return IndividualWork[] Returns an array of IndividualWork objects
+      */
+    public function findByCanonicalType($value)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
+        return $this->createQueryBuilder('iw')
+            ->leftJoin('iw.type', 'type')
+            ->andWhere('type.canonical = :val')
             ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('iw.createdAt', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?IndividualWork
