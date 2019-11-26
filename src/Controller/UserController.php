@@ -79,8 +79,14 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $entity);
         $form->handleRequest($request);
+//        dump($form);
+//        exit;
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $id = $form->get('apiRozkladId');
+            dump($id);
+            dump($entity);
+            exit;
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute(

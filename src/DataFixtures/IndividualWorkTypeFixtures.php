@@ -20,7 +20,6 @@ class IndividualWorkTypeFixtures extends BaseFixture
         [
             'name' => 'Disciplinary work'
         ],
-
     ];
 
     protected function loadData(ObjectManager $manager)

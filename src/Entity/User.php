@@ -120,6 +120,11 @@ class User implements UserInterface
      */
     private $individualPlans;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $apiRozkladId;
+
     public function __construct()
     {
         $this->interest = new ArrayCollection();
@@ -494,5 +499,21 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiRozkladId()
+    {
+        return $this->apiRozkladId;
+    }
+
+    /**
+     * @param mixed $apiRozkladId
+     */
+    public function setApiRozkladId($apiRozkladId): void
+    {
+        $this->apiRozkladId = $apiRozkladId;
     }
 }

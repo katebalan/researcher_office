@@ -22,6 +22,40 @@ import './js-collection';
 
 $(() => {
     $('.js-select2').select2();
+    $('.js-api-select2').select2({
+        ajax: {
+            url: 'https://api.rozklad.org.ua/v2/teachers/',
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    search: "{'query':'" + params.term + "'}",
+                    ss: `{'query':'${params.term}'}`
+                    // search: {
+                    //     'query': params.term
+                    // }
+                };
+            },
+            processResults: function (data) {
+                console.log(data.data);
+
+                let result = [];
+
+                $.each(data.data, function( index, value ) {
+                    result.push({
+                        'id': value.teacher_id,
+                        'text': `${value.teacher_name} (${value.teacher_id})`
+                    });
+                });
+
+                // Transforms the top-level key of the response object from 'items' to 'results'
+                return {
+                    results: result
+                };
+            }
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        },
+        minimumInputLength: 3,
+    });
 
     $('.js-datepicker').datepicker({
         format: "MM yyyy",

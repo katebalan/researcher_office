@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\ApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,38 +13,37 @@ class ScheduleController extends AbstractController
     /**
      * @Route("/schedule", name="ro_schedule")
      */
-    public function index()
+    public function index(ApiService $apiService)
     {
         /** @var User $user */
         $user = $this->getUser();
 
-        $fullName = $user
-            ? $user->getSecondName() . '+' . $user->getFirstName() . '+' .$user->getPatronymic()
-            : '';
+        if ($user->getApiRozkladId()) {
+            $response = $apiService->send(
+                'GET',
+                'https://api.rozklad.org.ua/v2/teachers/'. $user->getApiRozkladId() . '/lessons'
+            );
 
-        $client = HttpClient::create();
-        $response = $client->request(
-            'GET',
-            'https://api.rozklad.org.ua/v2/teachers/'. $fullName . '/lessons'
-        );
+            $content = false;
+            if ($response->getStatusCode() === 200) {
+                $content = $response->toArray();
+                $content = $this->group_by('lesson_week', $content['data']);
 
-        $content = false;
-        if ($response->getStatusCode() === 200) {
-            $content = $response->toArray();
-            $content = $this->group_by('lesson_week', $content['data']);
+                foreach ($content as &$lesson) {
+                    $lesson = $this->group_by('lesson_number', $lesson);
 
-            foreach ($content as &$lesson) {
-                $lesson = $this->group_by('lesson_number', $lesson);
-
-                foreach ($lesson as &$day) {
-                    $day = $this->group_by('day_number', $day);
+                    foreach ($lesson as &$day) {
+                        $day = $this->group_by('day_number', $day);
+                    }
                 }
             }
-        }
 
-        return $this->render('schedule/index.html.twig', [
-            'content' => $content,
-        ]);
+            return $this->render('schedule/index.html.twig', [
+                'content' => $content,
+            ]);
+        } else {
+
+        }
     }
 
     /**
