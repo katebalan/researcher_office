@@ -45,6 +45,15 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="p-3 mb-3 bg-light rounded js-rating">
+                    <h4>{{ 'Рейтинг з rozklad.org.ua'|trans }}</h4>
+                    <div>{{ 'Якість викладання'|trans }} - <span class="mark_avg_exactingness"></span></div>
+                    <div>{{ 'Вимогливість'|trans }} - <span class="mark_avg_knowledge_subject"></span></div>
+                    <div>{{ 'Толерантність до студентів'|trans }} - <span class="mark_avg_relation_to_the_student"></span></div>
+                    <div>{{ 'Почуття гумору'|trans }} - <span class="mark_avg_sense_of_humor"></span></div>
+                </div>
+
 {#                <div class="p-3">#}
 {#                    <h4 class="font-italic">Archives</h4>#}
 {#                    <ol class="list-unstyled mb-0">#}
@@ -77,3 +86,10 @@
 
     </main><!-- /.container -->
 {% endblock %}
+{% block window %}
+    {{ parent() }}
+    <script>
+        window.ro_ajax_api_rozklad_id = "{{ user.apiRozkladId }}";
+    </script>
+{% endblock %}
+

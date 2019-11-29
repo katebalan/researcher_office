@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\ApiRozkladService;
 use App\Service\ApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
@@ -13,20 +14,17 @@ class ScheduleController extends AbstractController
     /**
      * @Route("/schedule", name="ro_schedule")
      */
-    public function index(ApiService $apiService)
+    public function index(ApiRozkladService $apiRozkladService)
     {
         /** @var User $user */
         $user = $this->getUser();
+        $content = '';
 
         if ($user->getApiRozkladId()) {
-            $response = $apiService->send(
-                'GET',
-                'https://api.rozklad.org.ua/v2/teachers/'. $user->getApiRozkladId() . '/lessons'
-            );
+            $response = $apiRozkladService->getLessons($user->getApiRozkladId());
 
-            $content = false;
-            if ($response->getStatusCode() === 200) {
-                $content = $response->toArray();
+//            if ($response->getStatusCode() === 200) {
+                $content = $response;
                 $content = $this->group_by('lesson_week', $content['data']);
 
                 foreach ($content as &$lesson) {
@@ -36,14 +34,14 @@ class ScheduleController extends AbstractController
                         $day = $this->group_by('day_number', $day);
                     }
                 }
-            }
-
-            return $this->render('schedule/index.html.twig', [
-                'content' => $content,
-            ]);
+//            }
         } else {
-
+            $content = 'No content, please fill in your profile (rozklad.kpi)';
         }
+
+        return $this->render('schedule/index.html.twig', [
+            'content' => $content,
+        ]);
     }
 
     /**

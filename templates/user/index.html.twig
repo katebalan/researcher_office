@@ -42,3 +42,8 @@
         </div>
     </main>
 {% endblock %}
+{% block window %}
+    <script>
+        window.ro_ajax_api_rozklad_id = "{{ user.apiRozkladId }}";
+    </script>
+{% endblock %}

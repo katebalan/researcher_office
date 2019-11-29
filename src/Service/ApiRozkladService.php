@@ -23,4 +23,23 @@ class ApiRozkladService
 
         return [$data->data->teacher_name => $id];
     }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     */
+    public function getLessons($id)
+    {
+        $response = $this->apiService->send(
+            'GET',
+            'https://api.rozklad.org.ua/v2/teachers/'. $id . '/lessons'
+        );
+
+        return $response->toArray();
+    }
 }

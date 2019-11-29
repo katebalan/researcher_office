@@ -5,6 +5,7 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 require('../scss/app.scss');
+// require('progressbar');
 
 const $ = require('jquery');
 
@@ -19,6 +20,7 @@ import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css';
 import './fix_bootstrap_file_loader';
 import './updateLessonForm';
 import './js-collection';
+import './rating';
 
 $(() => {
     $('.js-select2').select2();
@@ -81,4 +83,5 @@ $(() => {
     $('.fix-bootstrap-file')._fix_boostrap_file_loader();
     $('.js-update-lesson-form').__update_lesson_form();
     $('.js-dynamic-collection')._init_dynamic_collection();
+    $('.js-rating')._init_rating();
 });
