@@ -3,15 +3,28 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Service\ApiRozkladService;
+use App\Service\ApiService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
+    private $apiService;
+
+    public function __construct(ApiRozkladService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -38,13 +51,15 @@ class UserType extends AbstractType
                     'class' => 'js-select2'
                 ]
             ])
-            ->add('apiRozkladId', ChoiceType::class, [
-                'attr' => [
-                    'class' => 'js-api-select2'
-                ],
-                'mapped' => false,
-                'required' => false
-            ])
+            ->add('apiRozkladId', HiddenType::class)
+            ->addEventListener(
+                FormEvents::PRE_SET_DATA,
+                [$this, 'onPreSetData']
+            )
+            ->addEventListener(
+                FormEvents::PRE_SUBMIT,
+                [$this, 'onPreSubmit']
+            )
         ;
     }
 
@@ -52,6 +67,44 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'allow_extra_fields' => true
         ]);
+    }
+
+    public function onPreSetData(FormEvent $event)
+    {
+        /** @var User $data */
+        $data = $event->getData();
+        $form = $event->getForm();
+
+        $choices = [];
+        if (($id = $data->getApiRozkladId()) != null) {
+            $choices[] = $this->apiService->getChoice($id);
+        }
+
+        $form
+            ->add('fakeApiRozkladId', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'js-api-select2',
+                ],
+                'mapped' => false,
+                'choices' => $choices,
+                'label' => 'api_rozklad_id'
+            ]);
+    }
+
+    public function onPreSubmit(FormEvent $event)
+    {
+        /** @var array $data */
+        $data = $event->getData();
+        $form = $event->getForm();
+
+        if ($data['fakeApiRozkladId'] != null) {
+            $data['apiRozkladId'] = $data['fakeApiRozkladId'];
+        }
+
+        $form->remove('fakeApiRozkladId');
+
+        $event->setData($data);
     }
 }

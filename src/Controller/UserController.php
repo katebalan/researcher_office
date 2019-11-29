@@ -7,6 +7,7 @@ use App\Form\ChangePasswordType;
 use App\Form\ResetPasswordType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\ApiService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,7 +41,7 @@ class UserController extends AbstractController
      * @Route("/new", name="ro_user_new", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ApiService $apiService): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -75,18 +76,12 @@ class UserController extends AbstractController
      * @Route("/{id}/edit", name="ro_user_edit", methods={"GET","POST"})
      * @Security("is_granted('ROLE_ADMIN') or user == entity")
      */
-    public function edit(Request $request, User $entity): Response
+    public function edit(Request $request, User $entity, ApiService $apiService): Response
     {
         $form = $this->createForm(UserType::class, $entity);
         $form->handleRequest($request);
-//        dump($form);
-//        exit;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $id = $form->get('apiRozkladId');
-            dump($id);
-            dump($entity);
-            exit;
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute(
