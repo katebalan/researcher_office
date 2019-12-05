@@ -39,11 +39,13 @@ distribution_of_hours: розподіл годин
 topics_empty: Жодної теми не знайдено
 lessons_empty: Години ще не розподілені
 publication_empty: Жодної публіцації не знайдено
-diploma_empty: Жодного диплому не знайдено
+diploma_empty: Жодного дипломника не знайдено
 actions: дії
 hours: години
 work: діяльність
 generate: генерувати
+publication_count: Кількість публікацій
+diplomas_count: Кількість дипломників
 
 
 # lesson type

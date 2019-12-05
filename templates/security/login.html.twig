@@ -15,39 +15,48 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post" class="ro-login">
-        <div class="text-center">
-            <a class="ro-header-logo text-dark" href="{{ path('ro_index') }}"></a>
-        </div>
-
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('ro_logout') }}">Logout</a>
+    <div class="ro-login">
+        <form method="post" class="mb-4">
+            <div class="text-center">
+                <a class="ro-header-logo text-dark" href="{{ path('ro_index') }}"></a>
             </div>
-        {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control mb-2" placeholder="Username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required>
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('ro_logout') }}">Logout</a>
+                </div>
+            {% endif %}
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+            <h1 class="h3 mt-3 mb-0 font-weight-normal text-center">{{ 'Вхід'|trans|capitalize }}</h1>
+            <h5 class="mb-4 font-weight-normal text-center">{{ 'в особістий кабінет'|trans }}</h5>
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control mb-2" placeholder="Username" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+
+            <div class="checkbox mb-2">
+                <label class="text-muted">
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+
+            <button class="btn btn-primary btn-block" type="submit">
+                Sign in
+            </button>
+        </form>
+
+        <div class="text-center">
+            <a href="{{ path('ro_analitics_index') }}" class="btn btn-block btn-outline-secondary btn-sm mb-2">
+                {{ 'Огляд дослідницької роботи'|trans|capitalize }}
+            </a>
         </div>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign in
-        </button>
-    </form>
+    </div>
 {% endblock %}

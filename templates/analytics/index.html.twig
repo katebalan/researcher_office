@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        html, body {
+            padding: 40px 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="text-center col-md-12">
+                <a class="ro-header-logo text-dark" href="{{ path('ro_index') }}"></a>
+            </div>
+
+            <h1 class="h3 m-4 pb-2 font-weight-normal col-md-12 text-center">
+                {{ 'Огляд дослідницької роботи'|trans }}
+            </h1>
+
+            <div class="col-md-10">
+                {% for user in users %}
+                        <div class="card flex-md-row mb-4">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <h3 class="mb-0">
+                                    <a class="text-dark" href="#">{{ user.fullName }}</a>
+                                </h3>
+
+                                <div class="mb-1 text-muted">
+                                    <div>
+                                        {% if user.publications|length %}
+                                            {{ 'publication_count'|trans ~ ': ' ~ user.publications|length }}
+                                        {% else %}
+                                            {{ 'publication_empty'|trans }}
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        {% if user.diplomas|length %}
+                                            {{ 'diplomas_count'|trans ~ ': ' ~ user.diplomas|length }}
+                                        {% else %}
+                                            {{ 'diploma_empty'|trans }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                {% if user.publications|length > 0 %}
+                                    <div class="mb-1">
+                                        <h4 class="mb-0">
+                                            {{ 'menu.publication'|trans|capitalize }}
+                                        </h4>
+                                        <div>
+                                            {% for publication in user.publications %}
+                                                {{ formatLink(publication) }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-2">
+                <a href="{{ path('ro_login') }}" class="btn btn-outline-primary btn-sm mb-2">
+                    {{ 'Вхід в особістий кабінет'|trans|capitalize }}
+                </a>
+                <a href="#" class="btn btn-outline-secondary btn-sm mb-2">
+                    {{ 'Огляд дослідницької роботи в pdf'|trans|capitalize }}
+                </a>
+                <a href="#" class="btn btn-outline-secondary btn-sm mb-2">
+                    {{ 'Огляд дослідницької роботи в docx'|trans|capitalize }}
+                </a>
+                <a href="#" class="btn btn-outline-secondary btn-sm mb-2">
+                    {{ 'Огляд дослідницької роботи в xlsx'|trans|capitalize }}
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
