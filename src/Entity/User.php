@@ -121,9 +121,14 @@ class User implements UserInterface
     private $individualPlans;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $apiRozkladId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ScientificIdentity", mappedBy="user")
+     */
+    private $scientificIdentities;
 
     public function __construct()
     {
@@ -132,6 +137,7 @@ class User implements UserInterface
         $this->diplomas = new ArrayCollection();
         $this->disciplines = new ArrayCollection();
         $this->individualPlans = new ArrayCollection();
+        $this->scientificIdentities = new ArrayCollection();
     }
 
     public function __toString()
@@ -515,5 +521,36 @@ class User implements UserInterface
     public function setApiRozkladId($apiRozkladId): void
     {
         $this->apiRozkladId = $apiRozkladId;
+    }
+
+    /**
+     * @return Collection|ScientificIdentity[]
+     */
+    public function getScientificIdentities(): Collection
+    {
+        return $this->scientificIdentities;
+    }
+
+    public function addScientificIdentity(ScientificIdentity $scientificIdentity): self
+    {
+        if (!$this->scientificIdentities->contains($scientificIdentity)) {
+            $this->scientificIdentities[] = $scientificIdentity;
+            $scientificIdentity->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScientificIdentity(ScientificIdentity $scientificIdentity): self
+    {
+        if ($this->scientificIdentities->contains($scientificIdentity)) {
+            $this->scientificIdentities->removeElement($scientificIdentity);
+            // set the owning side to null (unless already changed)
+            if ($scientificIdentity->getUser() === $this) {
+                $scientificIdentity->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
