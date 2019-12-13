@@ -1,22 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <style>
-        html, body {
-            padding: 40px 0;
-        }
-    </style>
+{% block header %}
+    {% include 'components/header.html.twig' %}
 {% endblock %}
 
-{% block content %}
+{% block body %}
     <main role="main" class="container">
         <div class="row">
-            <div class="text-center col-md-12">
-                <a class="ro-header-logo text-dark" href="{{ path('ro_index') }}"></a>
-            </div>
-
             <h1 class="h3 m-4 pb-2 font-weight-normal col-md-12 text-center">
                 {{ 'Огляд дослідницької роботи'|trans }}
             </h1>

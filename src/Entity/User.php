@@ -126,9 +126,19 @@ class User implements UserInterface
     private $apiRozkladId;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ScientificIdentity", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\ScientificIdentity", mappedBy="user", cascade={"persist"})
      */
     private $scientificIdentities;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="user")
+     */
+    private $notes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="user")
+     */
+    private $feedback;
 
     public function __construct()
     {
@@ -138,6 +148,8 @@ class User implements UserInterface
         $this->disciplines = new ArrayCollection();
         $this->individualPlans = new ArrayCollection();
         $this->scientificIdentities = new ArrayCollection();
+        $this->notes = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function __toString()
@@ -548,6 +560,68 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($scientificIdentity->getUser() === $this) {
                 $scientificIdentity->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getUser() === $this) {
+                $note->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Feedback[]
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback[] = $feedback;
+            $feedback->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedback->contains($feedback)) {
+            $this->feedback->removeElement($feedback);
+            // set the owning side to null (unless already changed)
+            if ($feedback->getUser() === $this) {
+                $feedback->setUser(null);
             }
         }
 

@@ -12,6 +12,7 @@ const $ = require('jquery');
 import 'select2';
 import 'select2/dist/css/select2.css';
 
+import 'bootstrap';
 import 'bootstrap-datepicker';
 import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.uk.min';
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';

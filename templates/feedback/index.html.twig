@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+                    {{ 'feedback'|trans|capitalize }}
+                </h3>
+
+                {% for feedback in feedbacks %}
+                    <div class="border-bottom pb-3 mb-4 row">
+                        <h5 class="font-weight-bold col-md-12">
+                            <a href="{{ path('ro_publication_show', {'id': feedback.id}) }}" class="text-dark">
+                                {{ '# ' ~ feedback.id }}
+                            </a>
+                        </h5>
+                        <div class="col-md-10">
+                            <p class="text-muted">
+                                {{ feedback.problem }}
+                            </p>
+                        </div>
+
+                        <div class="col-md-2">
+                            {% include 'components/_buttons.thml.twig' with {
+                                'id': feedback.id,
+                                'delete': 'ro_feedback_delete'
+                            } %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% include 'components/_buttons.thml.twig' with {
+                    'back': true
+                } %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

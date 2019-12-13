@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {% include 'components/header.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="pb-3 mb-4 font-weight-normal text-center border-bottom">
+                    {{ 'add'|trans|capitalize ~ ' ' ~ 'feedback'|trans }}
+                </h3>
+
+                <div class="border-bottom pb-3 mb-4">
+                    {{ include('feedback/_form.html.twig') }}
+
+                    {% include 'components/_buttons.thml.twig' with {
+                        'back': 'ro_index'
+                    } %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

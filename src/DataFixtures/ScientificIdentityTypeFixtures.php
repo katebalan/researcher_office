@@ -10,27 +10,27 @@ class ScientificIdentityTypeFixtures extends BaseFixture
     private static $types = [
         [
             'name' => 'OCRID',
-            'url' => 'https://orcid.org/'
+            'link' => 'https://orcid.org/'
         ],
         [
             'name' => 'ResearchGate',
-            'url' => ''
+            'link' => ''
         ],
         [
             'name' => 'ResearcherID',
-            'url' => 'http://www.researcherid.com/rid/'
+            'link' => 'http://www.researcherid.com/rid/'
         ]
     ];
 
     protected function loadData(ObjectManager $manager)
     {
-        $this->createMany(
-            ScientificIdentityType::class, count(self::$types),
-            function (ScientificIdentityType $identityType, $count) {
-                $identityType->setName(self::$types[$count]);
-                $identityType->setCode(str_replace(' ', '_', strtolower(self::$types[$count])));
+        foreach (self::$types as $type) {
+            $entity = new ScientificIdentityType();
+            foreach ($type as $key => $value) {
+                $entity->{'set' . ucfirst($key)}($value);
             }
-        );
+            $manager->persist($entity);
+        }
 
         $manager->flush();
     }

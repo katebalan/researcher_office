@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-12">
+        {{ form_row(form.email) }}
+        {{ form_row(form.problem) }}
+    </div>
+    <div class="col-md-12">
+        <button class="btn btn-outline-success btn-sm mb-2">{{ button_label|default('save')|trans|capitalize }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

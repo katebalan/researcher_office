@@ -1,0 +1,23 @@
+<div class="py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+        <a class="p-2 text-muted" href="{{ path('ro_index') }}">{{ 'menu.main'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_schedule') }}">{{ 'menu.schedule'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_individual_plan_index') }}">{{ 'menu.work_plan'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_discipline_index') }}">{{ 'menu.discipline'|trans|capitalize }}</a>
+        <a class="p-2 text-muted" href="{{ path('ro_news') }}">{{ 'menu.news'|trans|capitalize }}</a>
+
+        {% if is_granted("ROLE_ADMIN") %}
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle p-2 text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ 'admin'|trans|capitalize }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-muted" href="{{ path('ro_scientific_interest_index') }}">{{ 'menu.scientific_interest'|trans|capitalize }}</a>
+                    <a class="dropdown-item text-muted"href="{{ path('ro_user_index') }}">{{ 'menu.colleagues'|trans|capitalize }}</a>
+                    <div class="dropdown-divider text-muted"></div>
+                    <a class="dropdown-item text-muted" href="{{ path('ro_feedback_index') }}">{{ 'feedback'|trans|capitalize }}</a>
+                </div>
+            </div>
+        {% endif %}
+    </nav>
+</div>

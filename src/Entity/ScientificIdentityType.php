@@ -43,6 +43,11 @@ class ScientificIdentityType
         $this->scientificIdentities = new ArrayCollection();
     }
 
+    public function __toString(): ?string
+    {
+        return $this->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,6 +61,7 @@ class ScientificIdentityType
     public function setName(string $name): self
     {
         $this->name = $name;
+        $this->setCode(str_replace(' ', '_', strtolower($name)));
 
         return $this;
     }

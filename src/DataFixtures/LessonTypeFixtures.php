@@ -120,10 +120,6 @@ class LessonTypeFixtures extends BaseFixture
             $entity = new LessonType();
             foreach ($lessonType as $key => $value) {
                 $entity->{'set' . ucfirst($key)}($value);
-//                var_dump($key);
-//                var_dump($value);
-//                var_dump('get' . ucfirst($key));
-//                exit;
             }
             $manager->persist($entity);
         }

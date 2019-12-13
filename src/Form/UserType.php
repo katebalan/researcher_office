@@ -7,6 +7,7 @@ use App\Service\ApiRozkladService;
 use App\Service\ApiService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -46,6 +47,17 @@ class UserType extends AbstractType
             ->add('scientificDegree')
             ->add('scientificRank')
             ->add('biography')
+            ->add('scientificIdentities', CollectionType::class, [
+                'entry_type' => ScientificIdentityType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'by_reference' => false,
+                'attr' => [
+                    'class' => 'js-dynamic-collection'
+                ],
+                'label' => 'scientific_identity'
+            ])
             ->add('interest', null, [
                 'attr' => [
                     'class' => 'js-select2'

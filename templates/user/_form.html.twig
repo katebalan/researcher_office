@@ -6,8 +6,34 @@
             {{ form_row(form.secondName) }}
             {{ form_row(form.firstName) }}
             {{ form_row(form.patronymic) }}
+            {% if form.scientificIdentities is defined %}
+                {{ form_label(form.scientificIdentities) }}
+                <ul id="" class="js-dynamic-collection" data-prototype="<li class='dynamic-collection-item row mb-1'>
+                                    <div class='col-5 mb-1'>{{ form_widget(form.scientificIdentities.vars.prototype.type)|e }}</div>
+                                    <div class='col-6 mb-1'>{{ form_widget(form.scientificIdentities.vars.prototype.identifier)|e }}</div>
+                                    <div class='col-1 mb-1'>
+                                        <a href='#' class='btn btn-outline-danger pull-right clearfix dynamic-collection-item-delete'>
+                                            <i class='fa fa-trash'></i>
+                                        </a>
+                                    </div>
+                                    </li>">
+                    {% for scientificIdentity in form.scientificIdentities %}
+                        <li class="dynamic-collection-item row mb-1">
+                            <div class="col-5 mb-1">{{ form_widget(scientificIdentity.type) }}</div>
+                            <div class="col-6 mb-1">{{ form_widget(scientificIdentity.identifier) }}</div>
+                            <div class="col-1 mb-1">
+                                <a href='#' class='btn btn-outline-danger pull-right clearfix dynamic-collection-item-delete'>
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <a href="#" class="dynamic-collection-item-add btn btn-outline-info">
+                        <i class="fa fa-plus-square-o"></i> {{ 'add'|trans|capitalize ~ ' ' ~ 'scientific_identity'|trans }}
+                    </a>
+                </ul>
+            {% endif %}
             {{ form_row(form.biography) }}
-            {{ form_row(form.fakeApiRozkladId) }}
         </div>
         <div class="col-md-6">
             {{ form_row(form.birthDate) }}
@@ -15,6 +41,7 @@
             {{ form_row(form.education) }}
             {{ form_row(form.scientificDegree) }}
             {{ form_row(form.scientificRank) }}
+            {{ form_row(form.fakeApiRozkladId) }}
             {{ form_row(form.interest) }}
         </div>
         <div class="col-md-12">

@@ -10,3 +10,10 @@
         'delete': 'ro_user_delete'
     } %}
 {% endblock %}
+
+{% block window %}
+    {{ parent() }}
+    <script>
+        window.ro_ajax_api_rozklad_id = "{{ user.apiRozkladId }}";
+    </script>
+{% endblock %}

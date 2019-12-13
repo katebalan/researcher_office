@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ScientificIdentityRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class ScientificIdentity
 {
+    use TimestampTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
