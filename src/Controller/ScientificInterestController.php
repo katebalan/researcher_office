@@ -36,6 +36,9 @@ class ScientificInterestController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $scientificInterest->setNameCanonical(
+                str_replace(' ', '_', strtolower($scientificInterest->getName()))
+            );
             $entityManager->persist($scientificInterest);
             $entityManager->flush();
 

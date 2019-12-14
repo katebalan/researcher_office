@@ -35,6 +35,14 @@
                                 'back': 'ro_discipline_index',
                                 'delete': 'ro_discipline_delete'
                             } %}
+                            <a href="{{ path('ro_generate_discipline_program', {'id': discipline.id}) }}"
+                               class="btn btn-sm btn-outline-info mb-2">
+                                {{ 'generate'|trans|capitalize ~ ' ' ~ 'credit_module'|trans }}
+                            </a>
+                            <a href="{{ path('ro_generate_credit_module_program', {'id': discipline.id}) }}"
+                               class="btn btn-sm btn-outline-info mb-2">
+                                {{ 'generate'|trans|capitalize ~ ' ' ~ 'discipline_program'|trans }}
+                            </a>
                         </div>
                     </div>
 
