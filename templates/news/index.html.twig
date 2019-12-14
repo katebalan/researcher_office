@@ -20,7 +20,7 @@
 
                         <p>{{ article.description }}</p>
                         <p>
-                            <a href="{{ article.url }}" class="text-muted">Читати з джерела</a>
+                            <a href="{{ article.url }}" class="text-muted" target="_blank">Читати з джерела</a>
                         </p>
                     </div>
                 {% endfor %}
@@ -32,7 +32,7 @@
                         <h4 class="font-weight-bold">Джерела</h4>
                         <div class="ro-group">
                             {% for source in sources.sources %}
-                                <a href="{{ source.url }}" class="ro-group--link">
+                                <a href="{{ source.url }}" class="ro-group--link" target="_blank">
                                     {{ source.name }}
                                 </a>
                             {% endfor %}

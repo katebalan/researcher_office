@@ -111,7 +111,7 @@ class UserType extends AbstractType
         $data = $event->getData();
         $form = $event->getForm();
 
-        if ($data['fakeApiRozkladId'] != null) {
+        if (key_exists('fakeApiRozkladId', $data) && $data['fakeApiRozkladId'] != null) {
             $data['apiRozkladId'] = $data['fakeApiRozkladId'];
         }
 

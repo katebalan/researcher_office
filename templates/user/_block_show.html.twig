@@ -18,7 +18,7 @@
         <div class="font-weight-bold">Email</div>
         <div class="font-weight-bold">Учачник проекту з</div>
     </div>
-    <div class="col-md-9 px-0">
+    <div class="col-md-8 px-0">
         <div class="">{{ user.birthDate|date('M d, Y') }}</div>
         <div class="">{{ user.birthPlace }}</div>
         <div class="">{{ user.education }}</div>
@@ -27,6 +27,13 @@
         <div class="">{{ user.username }}</div>
         <div class="">{{ user.email }}</div>
         <div class="">{{ user.createdAt|date }}</div>
+    </div>
+    <div class="col-md-1 px-0">
+        {% for identity in user.scientificIdentities %}
+            <a href="{{ identity.type.link ~ identity.identifier }}" title="{{ identity.type.name }}" target="_blank">
+                <i class="icon fa fa-{{ identity.type.code }}"></i>
+            </a>
+        {% endfor %}
     </div>
 </div>
 

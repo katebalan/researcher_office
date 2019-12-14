@@ -12,7 +12,7 @@
             {% if app.user %}
                 <a class="btn btn-sm btn-outline-secondary" href="{{ path('ro_logout') }}">{{ 'logout'|trans }}</a>
             {% else %}
-                <a class="btn btn-sm btn-outline-secondary" href="{{ path('ro_login') }}">{{ 'login'|trans }}</a>
+                <a class="btn btn-sm btn-outline-secondary" href="{{ path('ro_login') }}">{{ 'login'|trans|capitalize }}</a>
             {% endif %}
         </div>
     </div>

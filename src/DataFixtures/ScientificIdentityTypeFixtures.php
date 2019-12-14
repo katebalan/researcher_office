@@ -9,17 +9,21 @@ class ScientificIdentityTypeFixtures extends BaseFixture
 {
     private static $types = [
         [
-            'name' => 'OCRID',
-            'link' => 'https://orcid.org/'
-        ],
+            'name' => 'ORCID',
+            'link' => 'https://orcid.org/',
+        ], // 0000-0002-9079-593X
         [
-            'name' => 'ResearchGate',
-            'link' => ''
-        ],
+            'name' => 'Scopus Author ID',
+            'link' => 'https://www.scopus.com/authid/detail.uri?authorId=',
+        ], // 55817517600
         [
             'name' => 'ResearcherID',
-            'link' => 'http://www.researcherid.com/rid/'
-        ]
+            'link' => 'http://www.researcherid.com/rid/',
+        ],// A-9150-2010
+        [
+            'name' => 'Google Scholar',
+            'link' => 'https://scholar.google.com.ua/citations?user=',
+        ] // 6Uj6kQ8AAAAJ
     ];
 
     protected function loadData(ObjectManager $manager)
