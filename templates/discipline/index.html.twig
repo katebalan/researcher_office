@@ -19,11 +19,11 @@
                             <p class="text-muted">
                                 {{ discipline.createdAt|date('D d/M/Y') }} <br />
                             </p>
-                            <div>{{ 'Загалом годин'|trans }}: {{ discipline.duration }}</div>
+                            <div>{{ 'Загалом годин'|trans }}: {{ 66 }}</div>
                         </div>
 
                         <div class="col-md-2">
-                            {% include 'components/_buttons.thml.twig' with {
+                            {% include 'components/_buttons.html.twig' with {
                                 'id': discipline.id,
                                 'edit': 'ro_discipline_edit',
                                 'show': 'ro_discipline_show'
@@ -36,7 +36,7 @@
                     </p>
                 {% endfor %}
 
-                {% include 'components/_buttons.thml.twig' with {
+                {% include 'components/_buttons.html.twig' with {
                     'create': path('ro_discipline_new')
                 } %}
             </div>

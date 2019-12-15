@@ -11,7 +11,7 @@
                 <div class="border-bottom pb-3 mb-4">
                     {{ include('discipline/_form.html.twig', {'button_label': 'update', 'discipline_id': discipline.id}) }}
 
-                    {% include 'components/_buttons.thml.twig' with {
+                    {% include 'components/_buttons.html.twig' with {
                         'id': discipline.id,
                         'back': 'ro_discipline_index',
                         'delete': 'ro_discipline_delete'

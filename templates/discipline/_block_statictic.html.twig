@@ -5,8 +5,10 @@
     {% for key, value in statistic %}
         <div class="form-group">
             <label>{{ key|trans }}</label>
-            <input class="form-control" value="{{ value }}" disabled>
+            <input class="form-control" value="{{ value ~ ' год.' }}" disabled>
         </div>
     {% endfor %}
 
 </div>
+
+{# Оновлення лабораторних робіт з курсу “Об’єктно-орієнтоване програмування” #}

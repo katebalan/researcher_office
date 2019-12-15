@@ -24,7 +24,7 @@
                             </div>
 
                             <p class="col-md-4">
-                                {% include 'components/_buttons.thml.twig' with {
+                                {% include 'components/_buttons.html.twig' with {
                                     'id': user.id,
                                     'edit': 'ro_user_edit',
                                     'show': 'ro_user_show',
@@ -35,7 +35,7 @@
                     {% endfor %}
                 </div>
 
-                {% include 'components/_buttons.thml.twig' with {
+                {% include 'components/_buttons.html.twig' with {
                     'create': path('ro_user_new')
                 } %}
             </div>

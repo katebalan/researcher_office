@@ -3,7 +3,7 @@
 {% block body %}
     {% include 'user/_block_show.html.twig' with {'user': user} %}
 
-    {% include 'components/_buttons.thml.twig' with {
+    {% include 'components/_buttons.html.twig' with {
         'id': user.id,
         'edit': 'ro_user_edit',
         'back': 'ro_user_index',

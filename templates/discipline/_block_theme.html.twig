@@ -14,7 +14,7 @@
             <div class="p-1 mb-1">
                 {{ first_loop_index ~ '. ' ~ topic.name }}
 
-                {% include 'components/_buttons_icon.thml.twig' with {
+                {% include 'components/_buttons_icon.html.twig' with {
                     'id': topic.id,
                     'edit': path('ro_topic_edit', {'id': topic.id}),
                     'add': path('ro_subtopic_new', {'id': topic.id}),
@@ -25,7 +25,7 @@
                 <div class="p-1 mb-1 ml-4">
                     {{ first_loop_index ~ '. ' ~ loop.index ~ '. ' ~ subtopic.name }}
 
-                    {% include 'components/_buttons_icon.thml.twig' with {
+                    {% include 'components/_buttons_icon.html.twig' with {
                         'id': subtopic.id,
                         'edit': path('ro_topic_edit', {'id': subtopic.id}),
                         'delete': path('ro_topic_delete', {'id': subtopic.id})

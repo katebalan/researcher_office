@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="col-md-2">
-                            {% include 'components/_buttons.thml.twig' with {
+                            {% include 'components/_buttons.html.twig' with {
                                 'id': feedback.id,
                                 'delete': 'ro_feedback_delete'
                             } %}
@@ -30,7 +30,7 @@
                     </div>
                 {% endfor %}
 
-                {% include 'components/_buttons.thml.twig' with {
+                {% include 'components/_buttons.html.twig' with {
                     'back': true
                 } %}
             </div>
