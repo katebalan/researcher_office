@@ -4,7 +4,7 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-/public/build/
+!/public/build/
 /public/bundles/
 /public/files/publication
 /public/files/diploma
