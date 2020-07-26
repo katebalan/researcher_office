@@ -7,7 +7,8 @@
 require('../scss/app.scss');
 // require('progressbar');
 
-const $ = require('jquery');
+// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
+import $ from 'jquery';
 
 import 'select2';
 import 'select2/dist/css/select2.css';

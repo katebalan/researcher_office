@@ -21,9 +21,9 @@ class ScheduleController extends AbstractController
         $content = '';
 
         if ($user->getApiRozkladId()) {
-            $response = $apiRozkladService->getLessons($user->getApiRozkladId());
+            try {
+                $response = $apiRozkladService->getLessons($user->getApiRozkladId());
 
-//            if ($response->getStatusCode() === 200) {
                 $content = $response;
                 $content = $this->group_by('lesson_week', $content['data']);
 
@@ -34,7 +34,9 @@ class ScheduleController extends AbstractController
                         $day = $this->group_by('day_number', $day);
                     }
                 }
-//            }
+            } catch (\Exception $exception) {
+                $content = 'No lessons found';
+            }
         } else {
             $content = 'No content, please fill in your profile (rozklad.kpi)';
         }

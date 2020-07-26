@@ -20,27 +20,29 @@
                             <th scope="col">Середа</th>
                             <th scope="col">Четвер</th>
                             <th scope="col">П'ятниця</th>
-    {#                        <th scope="col">Субота</th>#}
-    {#                        <th scope="col">Неділя</th>#}
+                            <th scope="col">Субота</th>
+                            <th scope="col">Неділя</th>
                         </tr>
                         </thead>
                         <tbody>
-                            {% for lesson in content[1] if content[1] is defined %}
-                                <tr>
-                                    <td>
-                                        {{ lesson|first|first.lesson_number }}<br />
-                                        {{ lesson|first|first.time_start[:5] }}<br />
-                                        {{ lesson|first|first.time_end[:5] }}
-                                    </td>
-                                    {% include 'schedule/_item.html.twig' with {'key': 1} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 2} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 3} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 4} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 5} %}
-    {#                                {% include 'schedule/_item.html.twig' with {'key': 6} %}#}
-    {#                                {% include 'schedule/_item.html.twig' with {'key': 7} %}#}
-                                </tr>
-                            {% endfor %}
+                            {% if content[1] %}
+                                {% for lesson in content[1] %}
+                                    <tr>
+                                        <td>
+                                            {{ lesson|first|first.lesson_number }}<br />
+                                            {{ lesson|first|first.time_start[:5] }}<br />
+                                            {{ lesson|first|first.time_end[:5] }}
+                                        </td>
+                                        {% include 'schedule/_item.html.twig' with {'key': 1} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 2} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 3} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 4} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 5} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 6} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 7} %}
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
                     <h4 class="mb-4">
@@ -58,22 +60,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {% for lesson in content[2] if content[2] is defined %}
-                                <tr>
-                                    <td>
-                                        {{ lesson|first|first.lesson_number }}<br />
-                                        {{ lesson|first|first.time_start[:5] }}<br />
-                                        {{ lesson|first|first.time_end[:5] }}
-                                    </td>
-                                    {% include 'schedule/_item.html.twig' with {'key': 1} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 2} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 3} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 4} %}
-                                    {% include 'schedule/_item.html.twig' with {'key': 5} %}
-                                    {# {% include 'schedule/_item.html.twig' with {'key': 6} %}#}
-                                    {# {% include 'schedule/_item.html.twig' with {'key': 7} %}#}
-                                </tr>
-                            {% endfor %}
+                            {% if content['2'] is defined %}
+                                {% for lesson in content[2] %}
+                                    <tr>
+                                        <td>
+                                            {{ lesson|first|first.lesson_number }}<br />
+                                            {{ lesson|first|first.time_start[:5] }}<br />
+                                            {{ lesson|first|first.time_end[:5] }}
+                                        </td>
+                                        {% include 'schedule/_item.html.twig' with {'key': 1} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 2} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 3} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 4} %}
+                                        {% include 'schedule/_item.html.twig' with {'key': 5} %}
+                                         {% include 'schedule/_item.html.twig' with {'key': 6} %}
+                                         {% include 'schedule/_item.html.twig' with {'key': 7} %}
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
                 {% else %}
