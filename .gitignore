@@ -5,6 +5,7 @@
 /.env.local.php
 /.env.*.local
 !/public/build/
+/config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /public/files/publication
 /public/files/diploma
