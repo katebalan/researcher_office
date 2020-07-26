@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\IndividualWork;
+use App\Entity\Individual\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method IndividualWork|null find($id, $lockMode = null, $lockVersion = null)
- * @method IndividualWork|null findOneBy(array $criteria, array $orderBy = null)
- * @method IndividualWork[]    findAll()
- * @method IndividualWork[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Work|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Work|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Work[]    findAll()
+ * @method Work[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class IndividualWorkRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, IndividualWork::class);
+        parent::__construct($registry, Work::class);
     }
 
      /**
-      * @return IndividualWork[] Returns an array of IndividualWork objects
+      * @return Work[] Returns an array of IndividualWork objects
       */
     public function findByCanonicalType($value)
     {

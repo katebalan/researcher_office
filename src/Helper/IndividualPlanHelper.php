@@ -4,7 +4,7 @@
 namespace App\Helper;
 
 
-use App\Entity\IndividualPlan;
+use App\Entity\Individual\Plan;
 use App\Helper\Xlsx\XlsxDisciplineHelper;
 use App\Helper\Xlsx\XlsxWorkHelper;
 use App\Service\CalculateHoursService;
@@ -68,10 +68,10 @@ class IndividualPlanHelper
 
     /**
      * @param Spreadsheet $spreadsheet
-     * @param IndividualPlan $individualPlan
+     * @param Plan $individualPlan
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    public function generateIndividualPlan(Spreadsheet &$spreadsheet, IndividualPlan $individualPlan): void
+    public function generateIndividualPlan(Spreadsheet &$spreadsheet, Plan $individualPlan): void
     {
         /* @var $sheet Worksheet */
         $sheet = $spreadsheet->getSheet(0);

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Discipline;
-use App\Entity\IndividualPlan;
+use App\Entity\Individual\Plan;
 use App\Helper\IndividualPlanHelper;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
@@ -26,12 +26,12 @@ class GenerateController extends AbstractController
     /**
      * @Route("workplan/{id}", name="ro_generate_work_plan")
      *
-     * @param IndividualPlan $individualPlan
+     * @param Plan $individualPlan
      * @param IndividualPlanHelper $helper
      * @return BinaryFileResponse
      * @throws Exception
      */
-    public function workPlan(IndividualPlan $individualPlan, IndividualPlanHelper $helper)
+    public function workPlan(Plan $individualPlan, IndividualPlanHelper $helper)
     {
         $reader = new XlsxReader();
         try {

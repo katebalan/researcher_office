@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Individual;
 
 use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,8 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IndividualWorkRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(name="individual_work")
  */
-class IndividualWork
+class Work
 {
     use TimestampTrait;
 
@@ -41,13 +42,13 @@ class IndividualWork
     private $mark;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\IndividualWorkType", inversedBy="individualWorks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Individual\WorkType", inversedBy="individualWorks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\IndividualPlan", inversedBy="works")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Individual\Plan", inversedBy="works")
      */
     private $individualPlan;
 
@@ -104,24 +105,24 @@ class IndividualWork
         return $this;
     }
 
-    public function getType(): ?IndividualWorkType
+    public function getType(): ?WorkType
     {
         return $this->type;
     }
 
-    public function setType(?IndividualWorkType $type): self
+    public function setType(?WorkType $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getIndividualPlan(): ?IndividualPlan
+    public function getIndividualPlan(): ?Plan
     {
         return $this->individualPlan;
     }
 
-    public function setIndividualPlan(?IndividualPlan $individualPlan): self
+    public function setIndividualPlan(?Plan $individualPlan): self
     {
         $this->individualPlan = $individualPlan;
 

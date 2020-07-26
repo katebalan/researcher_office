@@ -9,7 +9,7 @@
         {% if is_granted("ROLE_ADMIN") %}
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle p-2 text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ 'admin'|trans|capitalize }}
+                    {{ 'menu.admin'|trans|capitalize }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item text-muted" href="{{ path('ro_scientific_interest_index') }}">{{ 'menu.scientific_interest'|trans|capitalize }}</a>

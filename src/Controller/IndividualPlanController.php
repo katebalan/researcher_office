@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\IndividualPlan;
+use App\Entity\Individual\Plan;
 use App\Entity\User;
 use App\Form\IndividualPlanType;
 use App\Repository\IndividualPlanRepository;
@@ -35,7 +35,7 @@ class IndividualPlanController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $individualPlan = new IndividualPlan();
+        $individualPlan = new Plan();
         $individualPlan->setCreatedBy($user);
 
         $form = $this->createForm(IndividualPlanType::class, $individualPlan);
@@ -58,7 +58,7 @@ class IndividualPlanController extends AbstractController
     /**
      * @Route("/{id}", name="ro_individual_plan_show", methods={"GET"})
      */
-    public function show(IndividualPlan $individualPlan): Response
+    public function show(Plan $individualPlan): Response
     {
         return $this->render('individual_plan/show.html.twig', [
             'individual_plan' => $individualPlan,
@@ -68,7 +68,7 @@ class IndividualPlanController extends AbstractController
     /**
      * @Route("/{id}/edit", name="ro_individual_plan_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, IndividualPlan $individualPlan): Response
+    public function edit(Request $request, Plan $individualPlan): Response
     {
         $form = $this->createForm(IndividualPlanType::class, $individualPlan);
         $form->handleRequest($request);
@@ -88,7 +88,7 @@ class IndividualPlanController extends AbstractController
     /**
      * @Route("/{id}", name="ro_individual_plan_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, IndividualPlan $individualPlan): Response
+    public function delete(Request $request, Plan $individualPlan): Response
     {
         if ($this->isCsrfTokenValid('delete'.$individualPlan->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

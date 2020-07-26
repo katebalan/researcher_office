@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Individual;
 
 use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,8 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IndividualWorkTypeRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(name="individual_work_type")
  */
-class IndividualWorkType
+class WorkType
 {
     use TimestampTrait;
 
@@ -33,7 +34,7 @@ class IndividualWorkType
     private $canonical;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\IndividualWork", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\Work", mappedBy="type")
      */
     private $individualWorks;
 
@@ -78,14 +79,14 @@ class IndividualWorkType
     }
 
     /**
-     * @return Collection|IndividualWork[]
+     * @return Collection|Work[]
      */
     public function getIndividualWorks(): Collection
     {
         return $this->individualWorks;
     }
 
-    public function addIndividualWork(IndividualWork $individualWork): self
+    public function addIndividualWork(Work $individualWork): self
     {
         if (!$this->individualWorks->contains($individualWork)) {
             $this->individualWorks[] = $individualWork;
@@ -95,7 +96,7 @@ class IndividualWorkType
         return $this;
     }
 
-    public function removeIndividualWork(IndividualWork $individualWork): self
+    public function removeIndividualWork(Work $individualWork): self
     {
         if ($this->individualWorks->contains($individualWork)) {
             $this->individualWorks->removeElement($individualWork);

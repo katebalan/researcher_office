@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Individual\Plan;
 use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -116,7 +117,7 @@ class User implements UserInterface
     private $disciplines;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\IndividualPlan", mappedBy="createdBy")
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\Plan", mappedBy="createdBy")
      */
     private $individualPlans;
 
@@ -489,14 +490,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|IndividualPlan[]
+     * @return Collection|Plan[]
      */
     public function getIndividualPlans(): Collection
     {
         return $this->individualPlans;
     }
 
-    public function addIndividualPlan(IndividualPlan $individualPlan): self
+    public function addIndividualPlan(Plan $individualPlan): self
     {
         if (!$this->individualPlans->contains($individualPlan)) {
             $this->individualPlans[] = $individualPlan;
@@ -506,7 +507,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeIndividualPlan(IndividualPlan $individualPlan): self
+    public function removeIndividualPlan(Plan $individualPlan): self
     {
         if ($this->individualPlans->contains($individualPlan)) {
             $this->individualPlans->removeElement($individualPlan);

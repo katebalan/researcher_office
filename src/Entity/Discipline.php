@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Individual\PlanDisciplines;
 use App\Entity\Library\BaseEntity;
 use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -48,9 +49,9 @@ class Discipline extends BaseEntity
     private $group_codes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\IndividualPlan", mappedBy="disciplines")
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\PlanDisciplines", mappedBy="disciplines")
      */
-    private $individualPlans;
+    private $individualPlansDisciplines;
 
     /**
      * @ORM\Column(type="text")
@@ -71,7 +72,7 @@ class Discipline extends BaseEntity
     {
         $this->topics = new ArrayCollection();
         $this->duration = 0;
-        $this->individualPlans = new ArrayCollection();
+        $this->individualPlansDisciplines = new ArrayCollection();
     }
 
     public function __toString(): ?string
@@ -196,28 +197,33 @@ class Discipline extends BaseEntity
     }
 
     /**
-     * @return Collection|IndividualPlan[]
+     * @return Collection|PlanDisciplines[]
      */
-    public function getIndividualPlans(): Collection
+    public function getIndividualPlansDisciplines(): Collection
     {
-        return $this->individualPlans;
+        return $this->individualPlansDisciplines;
     }
 
-    public function addIndividualPlan(IndividualPlan $individualPlan): self
+    public function addIndividualPlansDiscipline(PlanDisciplines $individualPlansDisciplines): self
     {
-        if (!$this->individualPlans->contains($individualPlan)) {
-            $this->individualPlans[] = $individualPlan;
-            $individualPlan->addDiscipline($this);
+        if (!$this->individualPlansDisciplines->contains($individualPlansDisciplines)) {
+            $this->individualPlansDisciplines[] = $individualPlansDisciplines;
+
+            $individualPlansDisciplines->setDiscipline($this);
         }
 
         return $this;
     }
 
-    public function removeIndividualPlan(IndividualPlan $individualPlan): self
+    public function removeIndividualPlansDiscipline(PlanDisciplines $individualPlansDisciplines): self
     {
-        if ($this->individualPlans->contains($individualPlan)) {
-            $this->individualPlans->removeElement($individualPlan);
-            $individualPlan->removeDiscipline($this);
+        if ($this->individualPlansDisciplines->contains($individualPlansDisciplines)) {
+            $this->individualPlansDisciplines->removeElement($individualPlansDisciplines);
+
+            // set the owning side to null (unless already changed)
+            if ($individualPlansDisciplines->getDiscipline() === $this) {
+                $individualPlansDisciplines->setDiscipline(null);
+            }
         }
 
         return $this;

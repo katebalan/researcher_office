@@ -14,18 +14,19 @@
                 {{ plan.createdAt ? plan.createdAt|date('D d/M/Y') : '' }} <br />
             </p>
             <h6 class="font-weight-bold">{{ 'discipline_semester_1'|trans }}</h6>
+
             <div class="ro-group">
-                {% for discipline in plan.disciplines %}
-                    <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="ro-group--link">
-                        {{ discipline.name }}
+                {% for v in plan.individualPlansDisciplines|filter(v => v.semester == 1) %}
+                    <a href="{{ path('ro_discipline_show', {'id': v.discipline.id}) }}" class="ro-group--link">
+                        {{ v.discipline.name }}
                     </a>
                 {% endfor %}
             </div>
             <h6 class="font-weight-bold">{{ 'discipline_semester_2'|trans }}</h6>
             <div class="ro-group">
-                {% for discipline in plan.disciplines2 %}
-                    <a href="{{ path('ro_discipline_show', {'id': discipline.id}) }}" class="ro-group--link">
-                        {{ discipline.name }}
+                {% for v in plan.individualPlansDisciplines|filter(v => v.semester == 2) %}
+                    <a href="{{ path('ro_discipline_show', {'id': v.discipline.id}) }}" class="ro-group--link">
+                        {{ v.discipline.name }}
                     </a>
                 {% endfor %}
             </div>

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Individual;
 
 use App\Entity\Library\Traits\TimestampTrait;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,8 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IndividualPlanRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(name="individual_plan")
  */
-class IndividualPlan
+class Plan
 {
     use TimestampTrait;
 
@@ -28,18 +30,12 @@ class IndividualPlan
     private $years;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Discipline", inversedBy="individualPlans")
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\PlanDisciplines", mappedBy="individualPlan")
      */
-    private $disciplines;
+    private $individualPlansDisciplines;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Discipline", inversedBy="individualPlans")
-     * @ORM\JoinTable(name="individual_plan_discipline2")
-     */
-    private $disciplines2;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\IndividualWork", mappedBy="individualPlan", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\Work", mappedBy="individualPlan", cascade={"persist"})
      */
     private $works;
 
@@ -50,8 +46,7 @@ class IndividualPlan
 
     public function __construct()
     {
-        $this->disciplines = new ArrayCollection();
-        $this->disciplines2 = new ArrayCollection();
+        $this->individualPlansDisciplines = new ArrayCollection();
         $this->works = new ArrayCollection();
     }
 
@@ -73,66 +68,47 @@ class IndividualPlan
     }
 
     /**
-     * @return Collection|Discipline[]
+     * @return Collection|PlanDisciplines[]
      */
-    public function getDisciplines(): Collection
+    public function getIndividualPlansDisciplines(): Collection
     {
-        return $this->disciplines;
+        return $this->individualPlansDisciplines;
     }
 
-    public function addDiscipline(Discipline $discipline): self
+    public function addIndividualPlansDiscipline(PlanDisciplines $individualPlansDisciplines): self
     {
-        if (!$this->disciplines->contains($discipline)) {
-            $this->disciplines[] = $discipline;
+        if (!$this->individualPlansDisciplines->contains($individualPlansDisciplines)) {
+            $this->individualPlansDisciplines[] = $individualPlansDisciplines;
+
+            $individualPlansDisciplines->setIndividualPlan($this);
         }
 
         return $this;
     }
 
-    public function removeDiscipline(Discipline $discipline): self
+    public function removeIndividualPlansDiscipline(PlanDisciplines $individualPlansDisciplines): self
     {
-        if ($this->disciplines->contains($discipline)) {
-            $this->disciplines->removeElement($discipline);
+        if ($this->individualPlansDisciplines->contains($individualPlansDisciplines)) {
+            $this->individualPlansDisciplines->removeElement($individualPlansDisciplines);
+
+            // set the owning side to null (unless already changed)
+            if ($individualPlansDisciplines->getDiscipline() === $this) {
+                $individualPlansDisciplines->setIndividualPlan(null);
+            }
         }
 
         return $this;
     }
 
     /**
-     * @return Collection|Discipline[]
-     */
-    public function getDisciplines2(): Collection
-    {
-        return $this->disciplines2;
-    }
-
-    public function addDiscipline2(Discipline $discipline2): self
-    {
-        if (!$this->disciplines2->contains($discipline2)) {
-            $this->disciplines2[] = $discipline2;
-        }
-
-        return $this;
-    }
-
-    public function removeDiscipline2(Discipline $discipline2): self
-    {
-        if ($this->disciplines2->contains($discipline2)) {
-            $this->disciplines2->removeElement($discipline2);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|IndividualWork[]
+     * @return Collection|Work[]
      */
     public function getWorks(): Collection
     {
         return $this->works;
     }
 
-    public function addWork(IndividualWork $work): self
+    public function addWork(Work $work): self
     {
         if (!$this->works->contains($work)) {
             $this->works[] = $work;
@@ -142,7 +118,7 @@ class IndividualPlan
         return $this;
     }
 
-    public function removeWork(IndividualWork $work): self
+    public function removeWork(Work $work): self
     {
         if ($this->works->contains($work)) {
             $this->works->removeElement($work);
