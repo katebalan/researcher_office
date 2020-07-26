@@ -17,7 +17,7 @@ security:
 
         main:
             pattern: ^/
-            anonymous: true
+            anonymous: lazy
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
