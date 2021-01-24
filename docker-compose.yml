@@ -16,12 +16,11 @@ services:
   db:
     image: mysql:5.7.22
     container_name: ro_mysql
-    restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - 3307:3306
     environment:
-      MYSQL_DATABASE: symfony
+      MYSQL_DATABASE: researcher_office
       MYSQL_ROOT_PASSWORD: symfony
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
