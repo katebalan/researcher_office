@@ -26,39 +26,9 @@ php bin/console make:auth
 composer require orm-fixtures --dev
 bin/console make:fixtures
 
-composer require symfony/asset
 
 Webpack
 yarn encore dev
 yarn encore dev --watch
 yarn encore production
 
-```apacheconfig
-<VirtualHost *:80>
-    ServerName researcher.loc
-
-    DocumentRoot "/var/www/researcher_office/public"
-    <Directory "/var/www/researcher_office/public">
-        AllowOverride None
-        Order Allow,Deny
-        Allow from All
-
-        <IfModule mod_rewrite.c>
-            Options -MultiViews
-            RewriteEngine On
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteRule ^(.*)$ index.php [QSA,L]
-        </IfModule>
-    </Directory>
-
-    <Directory /var/www/researcher_office/public/bundles>
-        <IfModule mod_rewrite.c>
-            RewriteEngine Off
-        </IfModule>
-    </Directory>
-
-    ErrorLog /var/log/apache2/tenders_symfony.log
-    CustomLog /var/log/apache2/tenders_symfony.log combined
-</VirtualHost>
-```
-composer require annotations

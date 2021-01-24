@@ -1,5 +1,5 @@
 FROM php:7.4-fpm-buster
-#FROM php:7.2-fpm
+
 # Copy composer.lock and composer.json
 #COPY composer.lock composer.json /var/www/
 
@@ -7,57 +7,19 @@ FROM php:7.4-fpm-buster
 WORKDIR /var/www
 
 # Install dependencies
-#RUN apt-get update && apt-get install -y \
-#    build-essential \
-#    libpng-dev \
-#    libjpeg62-turbo-dev \
-#    libfreetype6-dev \
-#    locales \
-#    zip \
-#    jpegoptim optipng pngquant gifsicle \
-#    docker-php-ext-install \
-#    vim \
-#    unzip \
-#    git \
-#    curl
-
+# Install extensions
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-#       for composer
-        git \
-#       for zip php extension
-        libzip-dev \
-#       for odbc extension
-        gnupg2 \
-#       for php intl extension
-        libicu-dev \
-#       for php pdo_pgsql extension
-        libpq-dev \
-#       for php http extension
-#        libcurl4-openssl-dev \
-#       for php http extension
-#        libssl-dev \
-#       for CI
-        ssh \
-        rsync \
-        zip \
-        unzip \
-    && docker-php-ext-install \
-#        bcmath \
-        pdo \
-        pdo_mysql \
-        opcache \
-        intl \
-#        sockets \
-        zip
+        git libzip-dev gnupg2 libicu-dev libpq-dev ssh rsync zip unzip nodejs npm curl \
+    && docker-php-ext-install pdo pdo_mysql opcache intl zip
+
+# Install yarn
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt update && apt install yarn
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install extensions
-#RUN docker-php-ext-install pdo_mysql mbstring zip intl opcache pdo
-#RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
-#RUN docker-php-ext-install gd
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\LessonType;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class LessonTypeFixtures extends BaseFixture
 {

@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\ScientificIdentityType;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class ScientificIdentityTypeFixtures extends BaseFixture
 {

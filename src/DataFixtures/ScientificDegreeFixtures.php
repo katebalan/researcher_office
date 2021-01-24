@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\ScientificDegree;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class ScientificDegreeFixtures extends BaseFixture
 {

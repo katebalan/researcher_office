@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\IndividualWorkType;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class IndividualWorkTypeFixtures extends BaseFixture
 {
@@ -24,14 +24,14 @@ class IndividualWorkTypeFixtures extends BaseFixture
 
     protected function loadData(ObjectManager $manager)
     {
-        foreach (self::$types as $type) {
-            $entity = new IndividualWorkType();
-            foreach ($type as $key => $value) {
-                $entity->{'set' . ucfirst($key)}($value);
-            }
-            $manager->persist($entity);
-        }
-
-        $manager->flush();
+//        foreach (self::$types as $type) {
+//            $entity = new IndividualWorkType();
+//            foreach ($type as $key => $value) {
+//                $entity->{'set' . ucfirst($key)}($value);
+//            }
+//            $manager->persist($entity);
+//        }
+//
+//        $manager->flush();
     }
 }
