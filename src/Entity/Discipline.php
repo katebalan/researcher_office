@@ -51,7 +51,7 @@ class Discipline extends BaseEntity
     private $group_codes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Individual\PlanDisciplines", mappedBy="disciplines")
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\PlanDisciplines", mappedBy="discipline")
      */
     private $individualPlansDisciplines;
 

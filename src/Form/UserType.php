@@ -38,6 +38,7 @@ class UserType extends AbstractType
                 ],
                 'widget' => 'single_text',
                 'format' => 'dd MMMM yyyy',
+                'html5' => false
             ])
             ->add('email')
             ->add('patronymic')
