@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Entity\Individual\PlanDisciplines;
@@ -141,8 +143,9 @@ class Discipline extends BaseEntity
 
         /** @var Topic $topic */
         foreach ($this->topics as $topic) {
-            if (!$topic->getParentTopic())
+            if (!$topic->getParentTopic()) {
                 $parents[] = $topic;
+            }
         }
 
         return $parents;
@@ -154,10 +157,10 @@ class Discipline extends BaseEntity
 
         /** @var Topic $topic */
         foreach ($this->topics as $topic) {
-            $lessons = array_merge($lessons, $topic->getLessons()->toArray());
+            $lessons = \array_merge($lessons, $topic->getLessons()->toArray());
         }
 
-        return array_unique($lessons);
+        return \array_unique($lessons);
     }
 
     public function getDepartment(): ?string

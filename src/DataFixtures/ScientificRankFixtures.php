@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\ScientificRank;
@@ -10,23 +12,23 @@ class ScientificRankFixtures extends BaseFixture
     private static $ranks = [
         [
             'name' => 'Асистент',
-            'shortName' => 'ас.'
+            'shortName' => 'ас.',
         ],
         [
             'name' => 'Cтарший викладач',
-            'shortName' => 'ст.н.сп.'
+            'shortName' => 'ст.н.сп.',
         ],
         [
             'name' => 'Доцент',
-            'shortName' => 'доц.'
+            'shortName' => 'доц.',
         ],
         [
             'name' => 'Професор',
-            'shortName' => 'проф.'
-        ]
+            'shortName' => 'проф.',
+        ],
     ];
 
-    protected function loadData(ObjectManager $manager)
+    protected function loadData(ObjectManager $manager): void
     {
         foreach (self::$ranks as $rank) {
             $entity = new ScientificRank($rank['name'], $rank['shortName']);

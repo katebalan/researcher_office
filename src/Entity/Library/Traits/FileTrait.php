@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Entity\Library\Traits;
-
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,7 +20,7 @@ trait FileTrait
     private $realFilename;
 
     /**
-     * @var File $file
+     * @var File
      *
      * @Assert\File(mimeTypes={ "application/pdf"}, mimeTypesMessage="mime_type_message")
      */

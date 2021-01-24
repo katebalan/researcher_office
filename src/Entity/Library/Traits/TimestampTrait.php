@@ -1,36 +1,39 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity\Library\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Trait UpdateTimestampsTrait
- * @package App\Entity\Traits
+ * Trait UpdateTimestampsTrait.
  */
 trait TimestampTrait
 {
     /**
-     * Created at
-     * @var \DateTime $createdAt
+     * Updated at.
      *
-     * @ORM\Column(type="datetime")
-     * @Assert\DateTime()
-     */
-    private $createdAt;
-
-    /**
-     * Updated at
-     * @var \DateTime $updatedAt
+     * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
-     * @Assert\DateTime()
+     * @Assert\Type("\DateTimeInterface")
      */
     protected $updatedAt;
 
     /**
-     * Get created at
+     * Created at.
+     *
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     * @Assert\Type("\DateTimeInterface")
+     */
+    private $createdAt;
+
+    /**
+     * Get created at.
      *
      * @return \DateTime
      */
@@ -40,7 +43,7 @@ trait TimestampTrait
     }
 
     /**
-     * Set created at
+     * Set created at.
      *
      * @param \DateTime $createdAt
      */
@@ -50,7 +53,7 @@ trait TimestampTrait
     }
 
     /**
-     * Get created at
+     * Get created at.
      *
      * @return \DateTime
      */
@@ -60,9 +63,7 @@ trait TimestampTrait
     }
 
     /**
-     * Set created at
-     *
-     * @param \DateTime $updatedAt
+     * Set created at.
      */
     public function setUpdatedAt(\DateTime $updatedAt): void
     {
@@ -76,6 +77,7 @@ trait TimestampTrait
     public function updatedTimestamps(): void
     {
         $this->setUpdatedAt(new \DateTime('now'));
+
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new \DateTime('now'));
         }

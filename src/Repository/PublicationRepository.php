@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Publication;
@@ -19,9 +21,9 @@ class PublicationRepository extends ServiceEntityRepository
         parent::__construct($registry, Publication::class);
     }
 
-     /**
-      * @return Publication[] Returns an array of Publication objects
-      */
+    /**
+     * @return Publication[] Returns an array of Publication objects
+     */
     public function findByCoAuthor($value)
     {
         return $this->createQueryBuilder('p')
@@ -30,8 +32,7 @@ class PublicationRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     /*

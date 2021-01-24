@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Entity\Library\Traits\TimestampTrait;
@@ -124,8 +126,9 @@ class Lesson
     {
         $discipline = null;
 
-        if ($this->topics->count() > 0)
+        if ($this->topics->count() > 0) {
             $discipline = $this->topics->first()->getDiscipline();
+        }
 
         return $discipline;
     }

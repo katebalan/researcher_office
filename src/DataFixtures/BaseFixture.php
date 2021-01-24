@@ -1,18 +1,18 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\DataFixtures;
-
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 abstract class BaseFixture extends Fixture
 {
-    /** @var ObjectManager $manager */
+    /** @var ObjectManager */
     private $manager;
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
 
@@ -21,7 +21,7 @@ abstract class BaseFixture extends Fixture
 
     abstract protected function loadData(ObjectManager $manager);
 
-    protected function createMany(string $className, int $count, callable $factory)
+    protected function createMany(string $className, int $count, callable $factory): void
     {
         for ($i = 0; $i < $count; $i++) {
             $entity = new $className();

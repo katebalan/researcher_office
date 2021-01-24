@@ -1,28 +1,26 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Helper\Xlsx;
 
-
 use App\Entity\IndividualPlan;
 use App\Entity\IndividualWork;
-use App\Entity\IndividualWorkType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class XlsxWorkHelper
- * @package App\Helper\Xlsx
+ * Class XlsxWorkHelper.
  */
 final class XlsxWorkHelper extends XlsxHelper
 {
-    /** @var EntityManager $em */
+    /** @var EntityManager */
     private $em;
 
     /** @var string */
     private $type;
 
-    /** @var IndividualWork $individualWork */
+    /** @var IndividualWork */
     private $work;
 
     /**
@@ -39,14 +37,6 @@ final class XlsxWorkHelper extends XlsxHelper
         $this->type = $type;
     }
 
-    private function setIndividualWork(IndividualWork $individualWork): void
-    {
-        $this->work = $individualWork;
-    }
-
-    /**
-     * @param IndividualPlan $individualPlan
-     */
     public function fillSheet(IndividualPlan $individualPlan): void
     {
         $this->clear();
@@ -74,5 +64,10 @@ final class XlsxWorkHelper extends XlsxHelper
     {
         $this->line = 3;
         $this->count = 1;
+    }
+
+    private function setIndividualWork(IndividualWork $individualWork): void
+    {
+        $this->work = $individualWork;
     }
 }

@@ -43,3 +43,10 @@ services:
     app.calculate_hours_service:
         class: 'App\Service\CalculateHoursService'
         autowire: false
+
+    app.listener.entity:
+        class: App\EventListener\EntityListener
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }

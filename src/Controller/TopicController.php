@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Discipline;
 use App\Entity\Topic;
 use App\Form\TopicType;
-use App\Repository\TopicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -96,8 +97,7 @@ class TopicController extends AbstractController
     {
         $discipline = $topic->getDiscipline();
 
-        if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token'))) {
-
+        if ($this->isCsrfTokenValid('delete' . $topic->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($topic);
             $entityManager->flush();

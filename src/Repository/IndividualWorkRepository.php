@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Individual\Work;
@@ -19,9 +21,9 @@ class IndividualWorkRepository extends ServiceEntityRepository
         parent::__construct($registry, Work::class);
     }
 
-     /**
-      * @return Work[] Returns an array of IndividualWork objects
-      */
+    /**
+     * @return Work[] Returns an array of IndividualWork objects
+     */
     public function findByCanonicalType($value)
     {
         return $this->createQueryBuilder('iw')
@@ -30,8 +32,7 @@ class IndividualWorkRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->orderBy('iw.createdAt', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     /*

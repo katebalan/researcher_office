@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Entity\Individual\Plan;
@@ -155,11 +157,12 @@ class User implements UserInterface
 
     public function __toString()
     {
-        $name = mb_substr($this->getFirstName(), 0, 1);
-        $patronymic = mb_substr($this->getPatronymic(), 0, 1);
+        $name = \mb_substr($this->getFirstName(), 0, 1);
+        $patronymic = \mb_substr($this->getPatronymic(), 0, 1);
 
         $initials = $name ? $name . '. ' : '';
         $initials = $patronymic ? $initials . $patronymic . '.' : $initials;
+
         return $this->getSecondName() . ' ' . $initials;
     }
 
@@ -194,7 +197,7 @@ class User implements UserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return \array_unique($roles);
     }
 
     public function setRoles(array $roles): self
@@ -222,7 +225,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): void
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
@@ -230,7 +233,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

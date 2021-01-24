@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Controller;
-
 
 use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -24,7 +24,7 @@ class AnalyticsController extends AbstractController
         $users = $repository->findAll();
 
         return [
-            'users' => $users
+            'users' => $users,
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\ScientificInterest;
@@ -38,11 +40,11 @@ class ScientificInterestFixtures extends BaseFixture
 //        'Графіка',
     ];
 
-    protected function loadData(ObjectManager $manager)
+    protected function loadData(ObjectManager $manager): void
     {
-        $this->createMany(ScientificInterest::class, count(self::$interests), function (ScientificInterest $interest, $count) {
+        $this->createMany(ScientificInterest::class, \count(self::$interests), function (ScientificInterest $interest, $count): void {
             $interest->setName(self::$interests[$count]);
-            $interest->setNameCanonical(str_replace(' ', '_', strtolower(self::$interests[$count])));
+            $interest->setNameCanonical(\str_replace(' ', '_', \strtolower(self::$interests[$count])));
         });
 
         $manager->flush();

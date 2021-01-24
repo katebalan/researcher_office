@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Discipline;
 use App\Entity\Individual\Plan;
 use App\Helper\IndividualPlanHelper;
 use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
-use \PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,8 +19,8 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class GenerateController
- * @package App\Controller
+ * Class GenerateController.
+ *
  * @Route("/generate/")
  */
 class GenerateController extends AbstractController
@@ -26,10 +28,9 @@ class GenerateController extends AbstractController
     /**
      * @Route("workplan/{id}", name="ro_generate_work_plan")
      *
-     * @param Plan $individualPlan
-     * @param IndividualPlanHelper $helper
-     * @return BinaryFileResponse
      * @throws Exception
+     *
+     * @return BinaryFileResponse
      */
     public function workPlan(Plan $individualPlan, IndividualPlanHelper $helper)
     {
@@ -44,8 +45,8 @@ class GenerateController extends AbstractController
         $writer = new XlsxWriter($spreadsheet);
 
         // Create a Temporary file in the system
-        $fileName = sprintf('%06d', $individualPlan->getId()) . '.xlsx';
-        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+        $fileName = \sprintf('%06d', $individualPlan->getId()) . '.xlsx';
+        $temp_file = \tempnam(\sys_get_temp_dir(), $fileName);
 
         // Create the excel file in the tmp directory of the system
         $writer->save($temp_file);
@@ -55,14 +56,14 @@ class GenerateController extends AbstractController
     }
 
     /**
- * @Route("disciplinecredit/{id}", name="ro_generate_discipline_program")
- */
+     * @Route("disciplinecredit/{id}", name="ro_generate_discipline_program")
+     */
     public function disciplineProgram(Request $request, Discipline $discipline)
     {
         $publicResourcesFolderPath = $this->getParameter('projectDir') . '/templates/files/';
-        $filename = "oop-rp.pdf";
+        $filename = 'oop-rp.pdf';
 
-        return new BinaryFileResponse($publicResourcesFolderPath.$filename);
+        return new BinaryFileResponse($publicResourcesFolderPath . $filename);
     }
 
     /**
@@ -103,8 +104,8 @@ class GenerateController extends AbstractController
 //
 //        return $response;
         $publicResourcesFolderPath = $this->getParameter('projectDir') . '/templates/files/';
-        $filename = "oop-np.pdf";
+        $filename = 'oop-np.pdf';
 
-        return new BinaryFileResponse($publicResourcesFolderPath.$filename);
+        return new BinaryFileResponse($publicResourcesFolderPath . $filename);
     }
 }

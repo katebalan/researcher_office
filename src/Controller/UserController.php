@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -33,7 +35,7 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('user/index.html.twig', [
-            'users' => array_diff($users, [$user]),
+            'users' => \array_diff($users, [$user]),
         ]);
     }
 
@@ -103,7 +105,7 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
@@ -124,7 +126,6 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $oldPassword = $form['oldPassword']->getData();
 
             if ($passwordEncoder->isPasswordValid($entity, $oldPassword)) {
@@ -139,15 +140,14 @@ class UserController extends AbstractController
                         ? 'ro_index'
                         : 'ro_user_index'
                 );
-            } else {
-                $form->addError(new FormError('Старий пароль неправильний'));
             }
+            $form->addError(new FormError('Старий пароль неправильний'));
         }
 
-        return $this->render('user/change_password.html.twig', array(
+        return $this->render('user/change_password.html.twig', [
             'form' => $form->createView(),
-            'label' => 'change_password'
-        ));
+            'label' => 'change_password',
+        ]);
     }
 
     /**
@@ -170,9 +170,9 @@ class UserController extends AbstractController
             return $this->redirectToRoute('ro_user_index');
         }
 
-        return $this->render('user/change_password.html.twig', array(
+        return $this->render('user/change_password.html.twig', [
             'form' => $form->createView(),
-            'label' => 'reset_password'
-        ));
+            'label' => 'reset_password',
+        ]);
     }
 }

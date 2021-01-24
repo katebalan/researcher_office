@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Helper\Xlsx;
 
@@ -7,30 +8,25 @@ use App\Entity\IndividualPlan;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 /**
- * Abstract class XlsxHelper
- * @package App\Helper\Xlsx
+ * Abstract class XlsxHelper.
  */
 abstract class XlsxHelper
 {
-    /** @var Worksheet $sheet */
+    /** @var Worksheet */
     protected $sheet;
 
-    /** @var int $line */
+    /** @var int */
     protected $line;
 
-    /** @var int $count */
+    /** @var int */
     protected $count = 1;
 
-    /**
-     * @param Worksheet $sheet
-     */
     public function setSheet(Worksheet &$sheet): void
     {
         $this->sheet = $sheet;
     }
 
     /**
-     * @param IndividualPlan $individualPlan
      * @return mixed
      */
     abstract public function fillSheet(IndividualPlan $individualPlan): void;

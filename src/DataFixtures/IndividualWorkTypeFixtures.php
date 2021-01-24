@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\IndividualWorkType;
@@ -9,20 +11,20 @@ class IndividualWorkTypeFixtures extends BaseFixture
 {
     private static $types = [
         [
-            'name' => 'Methodical work'
+            'name' => 'Methodical work',
         ],
         [
-            'name' => 'Scientific work'
+            'name' => 'Scientific work',
         ],
         [
-            'name' => 'Organizational work'
+            'name' => 'Organizational work',
         ],
         [
-            'name' => 'Disciplinary work'
+            'name' => 'Disciplinary work',
         ],
     ];
 
-    protected function loadData(ObjectManager $manager)
+    protected function loadData(ObjectManager $manager): void
     {
 //        foreach (self::$types as $type) {
 //            $entity = new IndividualWorkType();

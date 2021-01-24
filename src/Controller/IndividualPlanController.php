@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Individual\Plan;
@@ -90,7 +92,7 @@ class IndividualPlanController extends AbstractController
      */
     public function delete(Request $request, Plan $individualPlan): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$individualPlan->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $individualPlan->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($individualPlan);
             $entityManager->flush();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Discipline;
@@ -27,8 +29,9 @@ class LessonController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($defaultHours = $lesson->getType()->getDefaultHours())
+            if ($defaultHours = $lesson->getType()->getDefaultHours()) {
                 $lesson->setHours($defaultHours);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lesson);
             $entityManager->flush();
@@ -54,8 +57,9 @@ class LessonController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($defaultHours = $lesson->getType()->getDefaultHours())
+            if ($defaultHours = $lesson->getType()->getDefaultHours()) {
                 $lesson->setHours($defaultHours);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('ro_discipline_show', ['id' => $discipline->getId()]);
@@ -72,7 +76,7 @@ class LessonController extends AbstractController
      */
     public function delete(Request $request, Lesson $lesson): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $lesson->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($lesson);
             $entityManager->flush();

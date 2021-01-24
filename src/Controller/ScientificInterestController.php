@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\ScientificInterest;
@@ -37,7 +39,7 @@ class ScientificInterestController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $scientificInterest->setNameCanonical(
-                str_replace(' ', '_', strtolower($scientificInterest->getName()))
+                \str_replace(' ', '_', \strtolower($scientificInterest->getName()))
             );
             $entityManager->persist($scientificInterest);
             $entityManager->flush();
@@ -76,7 +78,7 @@ class ScientificInterestController extends AbstractController
      */
     public function delete(Request $request, ScientificInterest $scientificInterest): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$scientificInterest->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $scientificInterest->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($scientificInterest);
             $entityManager->flush();

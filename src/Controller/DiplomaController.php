@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Diploma;
-use App\Entity\Publication;
 use App\Entity\User;
 use App\Form\DiplomaType;
-use App\Repository\DiplomaRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +80,7 @@ class DiplomaController extends AbstractController
      */
     public function delete(Request $request, Diploma $diploma): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$diploma->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $diploma->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($diploma);
             $entityManager->flush();
