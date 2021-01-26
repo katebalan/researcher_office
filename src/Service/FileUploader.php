@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service;
@@ -10,18 +11,18 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class FileUploader
- * @package App\Service
+ * Class FileUploader.
  */
 class FileUploader
 {
     /**
-     * @var $targetDirectory
+     * @var
      */
     private $targetDirectory;
 
     /**
      * FileUploader constructor.
+     *
      * @param $targetDirectory
      */
     public function __construct($targetDirectory)
@@ -31,12 +32,12 @@ class FileUploader
 
     /**
      * @param UploadedFile|File $file
-     * @param String $folder
+     *
      * @return string
      */
     public function upload(UploadedFile $file, string $folder)
     {
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $fileName = \md5(\uniqid()) . '.' . $file->guessExtension();
 
         try {
             $file->move($this->getTargetDirectory() . $folder . '/', $fileName);
@@ -49,7 +50,7 @@ class FileUploader
 
     public function load(&$entity)
     {
-        if (!method_exists($entity, 'setFile') and !method_exists($entity, 'getFilename')) {
+        if (!\method_exists($entity, 'setFile') && !\method_exists($entity, 'getFilename')) {
             return false;
         }
 
@@ -74,11 +75,11 @@ class FileUploader
         $folder = '';
 
         if ($object instanceof Publication) {
-            $folder = "publication";
+            $folder = 'publication';
         }
 
         if ($object instanceof Diploma) {
-            $folder = "diploma";
+            $folder = 'diploma';
         }
 
         return $folder;

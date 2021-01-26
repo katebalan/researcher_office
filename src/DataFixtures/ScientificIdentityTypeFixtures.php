@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\ScientificIdentityType;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class ScientificIdentityTypeFixtures extends BaseFixture
 {
@@ -19,19 +21,19 @@ class ScientificIdentityTypeFixtures extends BaseFixture
         [
             'name' => 'ResearcherID',
             'link' => 'http://www.researcherid.com/rid/',
-        ],// A-9150-2010
+        ], // A-9150-2010
         [
             'name' => 'Google Scholar',
             'link' => 'https://scholar.google.com.ua/citations?user=',
-        ] // 6Uj6kQ8AAAAJ
+        ], // 6Uj6kQ8AAAAJ
     ];
 
-    protected function loadData(ObjectManager $manager)
+    protected function loadData(ObjectManager $manager): void
     {
         foreach (self::$types as $type) {
             $entity = new ScientificIdentityType();
             foreach ($type as $key => $value) {
-                $entity->{'set' . ucfirst($key)}($value);
+                $entity->{'set' . \ucfirst($key)}($value);
             }
             $manager->persist($entity);
         }

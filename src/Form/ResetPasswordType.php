@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -12,34 +14,33 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResetPasswordType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Обидва паролі повинні бути однаковими',
-                'options' => array(
-                    'attr' => array(
+                'options' => [
+                    'attr' => [
                         'class' => 'password-field',
-                        'autocomplete' => 'off'
-                    )
-                ),
+                        'autocomplete' => 'off',
+                    ],
+                ],
                 'required' => true,
                 'first_options' => [
-                    'label' => 'New password'
+                    'label' => 'New password',
                 ],
-                'second_options' => ['label' => 'Repeat password']
-            ))
-            ->add('submit', SubmitType::class, array(
-                'attr' => array(
-                    'class' => 'btn btn-sm btn-outline-success mb-2'
-                ),
-                'label' => 'save'
-            ))
-        ;
+                'second_options' => ['label' => 'Repeat password'],
+            ])
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-sm btn-outline-success mb-2',
+                ],
+                'label' => 'save',
+            ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,

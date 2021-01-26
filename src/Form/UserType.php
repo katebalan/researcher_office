@@ -1,20 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\User;
 use App\Service\ApiRozkladService;
-use App\Service\ApiService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
@@ -26,7 +25,7 @@ class UserType extends AbstractType
         $this->apiService = $apiService;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('username')
@@ -35,10 +34,11 @@ class UserType extends AbstractType
             ->add('birthDate', DateType::class, [
                 'attr' => [
                     'class' => 'js-datepicker-full',
-                    'autocomplete' => 'off'
+                    'autocomplete' => 'off',
                 ],
                 'widget' => 'single_text',
-                'format' => 'dd MMMM yyyy'
+                'format' => 'dd MMMM yyyy',
+                'html5' => false
             ])
             ->add('email')
             ->add('patronymic')
@@ -49,19 +49,19 @@ class UserType extends AbstractType
             ->add('biography')
             ->add('scientificIdentities', CollectionType::class, [
                 'entry_type' => ScientificIdentityType::class,
-                'allow_add'    => true,
+                'allow_add' => true,
                 'allow_delete' => true,
-                'prototype'    => true,
+                'prototype' => true,
                 'by_reference' => false,
                 'attr' => [
-                    'class' => 'js-dynamic-collection'
+                    'class' => 'js-dynamic-collection',
                 ],
-                'label' => 'scientific_identity'
+                'label' => 'scientific_identity',
             ])
             ->add('interest', null, [
                 'attr' => [
-                    'class' => 'js-select2'
-                ]
+                    'class' => 'js-select2',
+                ],
             ])
             ->add('apiRozkladId', HiddenType::class)
             ->addEventListener(
@@ -71,19 +71,18 @@ class UserType extends AbstractType
             ->addEventListener(
                 FormEvents::PRE_SUBMIT,
                 [$this, 'onPreSubmit']
-            )
-        ;
+            );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'allow_extra_fields' => true
+            'allow_extra_fields' => true,
         ]);
     }
 
-    public function onPreSetData(FormEvent $event)
+    public function onPreSetData(FormEvent $event): void
     {
         /** @var User $data */
         $data = $event->getData();
@@ -101,17 +100,17 @@ class UserType extends AbstractType
                 ],
                 'mapped' => false,
                 'choices' => $choices,
-                'label' => 'api_rozklad_id'
+                'label' => 'api_rozklad_id',
             ]);
     }
 
-    public function onPreSubmit(FormEvent $event)
+    public function onPreSubmit(FormEvent $event): void
     {
         /** @var array $data */
         $data = $event->getData();
         $form = $event->getForm();
 
-        if (key_exists('fakeApiRozkladId', $data) && $data['fakeApiRozkladId'] != null) {
+        if (\array_key_exists('fakeApiRozkladId', $data) && $data['fakeApiRozkladId'] != null) {
             $data['apiRozkladId'] = $data['fakeApiRozkladId'];
         }
 

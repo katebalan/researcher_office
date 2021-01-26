@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Feedback;
@@ -65,7 +67,7 @@ class FeedbackController extends AbstractController
      */
     public function delete(Request $request, Feedback $feedback): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$feedback->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $feedback->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($feedback);
             $entityManager->flush();

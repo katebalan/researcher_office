@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Discipline;
-use App\Entity\Topic;
 use App\Entity\User;
 use App\Form\DisciplineType;
 use App\Repository\DisciplineRepository;
@@ -73,7 +74,7 @@ class DisciplineController extends AbstractController
     public function show(Discipline $discipline, CalculateHoursService $hoursService): Response
     {
         $topics = $discipline->getParentTopics();
-        $lessons  = $discipline->getLessons();
+        $lessons = $discipline->getLessons();
 
         $hoursService->setLessons($lessons);
         $statistic = $hoursService->calculate();
@@ -83,7 +84,7 @@ class DisciplineController extends AbstractController
             'topics' => $topics,
             'simpleLessons' => $hoursService->getSimpleLessons(),
             'controlLessons' => $hoursService->getControlLessons(),
-            'statistic' => $statistic
+            'statistic' => $statistic,
         ]);
     }
 
@@ -112,7 +113,7 @@ class DisciplineController extends AbstractController
      */
     public function delete(Request $request, Discipline $discipline): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$discipline->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $discipline->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($discipline);
             $entityManager->flush();

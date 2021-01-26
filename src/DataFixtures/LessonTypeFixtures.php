@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\LessonType;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class LessonTypeFixtures extends BaseFixture
 {
@@ -14,7 +16,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Лекції',
             'isControl' => 0,
             'isEvaluated' => 0,
-            'defaultHours' => 2
+            'defaultHours' => 2,
         ],
         [
             'name' => 'Лабораторна робота',
@@ -22,7 +24,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Лабораторні роботи',
             'isControl' => 0,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Контрольна робота',
@@ -30,7 +32,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Контрольні роботи',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Курсова робота',
@@ -38,7 +40,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Курсові роботи',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Екзамен',
@@ -46,7 +48,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Екзамени',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Залік',
@@ -54,7 +56,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Заліки',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Диференційний залік',
@@ -62,7 +64,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Диференційні заліки',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Практичне заняття',
@@ -70,7 +72,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Практичні заняття',
             'isControl' => 0,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Курсовий проект',
@@ -78,7 +80,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Курсові проекти',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Розрахунково–графічна робота',
@@ -86,7 +88,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Розрахунково-графічні роботи',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'ДКР',
@@ -94,7 +96,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'ДКР',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Реферат',
@@ -102,7 +104,7 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Реферати',
             'isControl' => 1,
             'isEvaluated' => 1,
-            'defaultHours' => null
+            'defaultHours' => null,
         ],
         [
             'name' => 'Консультація',
@@ -110,16 +112,16 @@ class LessonTypeFixtures extends BaseFixture
             'namePlural' => 'Консультації',
             'isControl' => 0,
             'isEvaluated' => 0,
-            'defaultHours' => 2
+            'defaultHours' => 2,
         ],
     ];
 
-    protected function loadData(ObjectManager $manager)
+    protected function loadData(ObjectManager $manager): void
     {
         foreach (self::$lessonType as $lessonType) {
             $entity = new LessonType();
             foreach ($lessonType as $key => $value) {
-                $entity->{'set' . ucfirst($key)}($value);
+                $entity->{'set' . \ucfirst($key)}($value);
             }
             $manager->persist($entity);
         }

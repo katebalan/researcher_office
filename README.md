@@ -1,64 +1,47 @@
-composer create-project symfony/skeleton researcher_office
+# Research office project
 
-git init
-git commit -m "initial commit"
-git remote add origin git@github.com:katebalan/researcher_office.git
-git push -u origin master
+* Symfony 5
+* MySql
+* Docker
+* Doctrine
 
-composer require server
-composer require annotations
-composer require sec-checker
-composer require twig
+## Install
 
-composer require symfony/maker-bundle --dev
- php bin/console list make
+1. Clone project and enter to the project's folder
+2. Build docker images
+```bash
+docker-compose build
+```
+3. Start all containers
+```bash
+docker-compose up -d
+```
+4. Enter the ro_php container and create database
+```bash
+docker exec -it ro_php bash
+./bin/console doctrine:database:create
+```
+5. Run migrations and run fixtures (optional)
+```
+./bin/console doctrine:migartion:migrate
+./bin/console doctrine:fixtures:load
+```
 
-composer require profiler --dev
-composer require debug --dev
+## Webpack
 
-composer require security
-composer require symfony/expression-language
-composer require orm
-composer require doctrine
-php bin/console make:user
-php bin/console make:auth
-
-composer require orm-fixtures --dev
-bin/console make:fixtures
-
-composer require symfony/asset
-
-Webpack
+``` bash
 yarn encore dev
 yarn encore dev --watch
 yarn encore production
-
-```apacheconfig
-<VirtualHost *:80>
-    ServerName researcher.loc
-
-    DocumentRoot "/var/www/researcher_office/public"
-    <Directory "/var/www/researcher_office/public">
-        AllowOverride None
-        Order Allow,Deny
-        Allow from All
-
-        <IfModule mod_rewrite.c>
-            Options -MultiViews
-            RewriteEngine On
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteRule ^(.*)$ index.php [QSA,L]
-        </IfModule>
-    </Directory>
-
-    <Directory /var/www/researcher_office/public/bundles>
-        <IfModule mod_rewrite.c>
-            RewriteEngine Off
-        </IfModule>
-    </Directory>
-
-    ErrorLog /var/log/apache2/tenders_symfony.log
-    CustomLog /var/log/apache2/tenders_symfony.log combined
-</VirtualHost>
 ```
-composer require annotations
+
+## CS fixer
+
+* check if everything is ok
+    ``` bash
+    composer cs-check
+    ```
+* make everything according code style configuration
+    ``` bash
+    composer cs-fix
+    ```

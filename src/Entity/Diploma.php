@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Entity\Library\BaseEntity;
@@ -13,8 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Diploma extends BaseEntity
 {
-    use TimestampTrait;
     use FileTrait;
+    use TimestampTrait;
 
     /**
      * @ORM\Column(type="string", length=255)

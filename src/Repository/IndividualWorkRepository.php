@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Individual\Work;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Work|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,9 +21,9 @@ class IndividualWorkRepository extends ServiceEntityRepository
         parent::__construct($registry, Work::class);
     }
 
-     /**
-      * @return Work[] Returns an array of IndividualWork objects
-      */
+    /**
+     * @return Work[] Returns an array of IndividualWork objects
+     */
     public function findByCanonicalType($value)
     {
         return $this->createQueryBuilder('iw')
@@ -30,8 +32,7 @@ class IndividualWorkRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->orderBy('iw.createdAt', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     /*

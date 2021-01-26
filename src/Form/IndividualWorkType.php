@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\IndividualWork;
@@ -10,37 +12,36 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class IndividualWorkType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', null, [
                 'attr' => [
-                    'placeholder' => 'Name'
-                ]
+                    'placeholder' => 'Name',
+                ],
             ])
             ->add('hours', null, [
                 'attr' => [
-                    'placeholder' => 'Hours'
-                ]
+                    'placeholder' => 'Hours',
+                ],
             ])
             ->add('ternOfExecution', null, [
                 'attr' => [
-                    'placeholder' => 'Term of execution'
-                ]
+                    'placeholder' => 'Term of execution',
+                ],
             ])
             ->add('mark', ChoiceType::class, [
                 'choices' => [
                     'виконано' => 'виконано',
-                    'не виконано' => 'не виконано'
+                    'не виконано' => 'не виконано',
                 ],
             ])
             ->add('type', null, [
-                'choice_translation_domain' => 'messages'
-            ])
-        ;
+                'choice_translation_domain' => 'messages',
+            ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => IndividualWork::class,

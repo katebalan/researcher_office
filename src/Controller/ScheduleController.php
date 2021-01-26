@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\ApiRozkladService;
-use App\Service\ApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ScheduleController extends AbstractController
@@ -49,18 +49,20 @@ class ScheduleController extends AbstractController
     /**
      * Function that groups an array of associative arrays by some key.
      *
-     * @param {String} $key Property to sort by.
-     * @param {Array} $data Array that stores multiple associative arrays.
+     * @param {String} $key  Property to sort by
+     * @param {Array}  $data Array that stores multiple associative arrays
+     *
      * @return array
      */
-    function group_by($key, $data) {
-        $result = array();
+    public function group_by($key, $data)
+    {
+        $result = [];
 
         foreach ($data as $val) {
-            if (array_key_exists($key, $val)) {
+            if (\array_key_exists($key, $val)) {
                 $result[$val[$key]][] = $val;
             } else {
-                $result[""][] = $val;
+                $result[''][] = $val;
             }
         }
 

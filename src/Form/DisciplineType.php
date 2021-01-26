@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Discipline;
@@ -10,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DisciplineType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
@@ -19,11 +21,10 @@ class DisciplineType extends AbstractType
             ->add('groupCodes')
             ->add('overview', CKEditorType::class)
             ->add('goal', CKEditorType::class)
-            ->add('task', CKEditorType::class)
-        ;
+            ->add('task', CKEditorType::class);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Discipline::class,

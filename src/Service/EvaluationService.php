@@ -1,16 +1,14 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Service;
 
-
 class EvaluationService
 {
-    static public $evaluations = [
+    public static $evaluations = [
         'simple',
         'two_step',
-        'three_step'
+        'three_step',
     ];
-
-
 }

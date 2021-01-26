@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Diploma;
@@ -12,31 +14,30 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DiplomaType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
             ->add('author')
-            ->add('date',DateType::class, [
+            ->add('date', DateType::class, [
                 'widget' => 'single_text',
-                'format'      => 'MMMM yyyy',
+                'format' => 'MMMM yyyy',
                 'attr' => [
                     'class' => 'js-datepicker',
-                    'autocomplete' => 'off'
-                ]
+                    'autocomplete' => 'off',
+                ],
             ])
             ->add('file', FileType::class, [
                 'label' => 'File (PDF file)',
                 'attr' => [
-                    'class' => 'fix-bootstrap-file'
+                    'class' => 'fix-bootstrap-file',
                 ],
-                'required' => false
+                'required' => false,
             ])
-            ->add('realFilename', HiddenType::class)
-        ;
+            ->add('realFilename', HiddenType::class);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Diploma::class,

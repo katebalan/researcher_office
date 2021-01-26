@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use App\Entity\User;
@@ -24,8 +26,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     use TargetPathTrait;
 
     private $entityManager;
+
     private $urlGenerator;
+
     private $csrfTokenManager;
+
     /**
      * @var UserPasswordEncoderInterface
      */

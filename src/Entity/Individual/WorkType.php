@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity\Individual;
 
 use App\Entity\Library\Traits\TimestampTrait;
@@ -61,7 +63,7 @@ class WorkType
     public function setName(string $name): self
     {
         $this->name = $name;
-        $this->setCanonical((str_replace(' ', '_', strtolower($name))));
+        $this->setCanonical((\str_replace(' ', '_', \strtolower($name))));
 
         return $this;
     }

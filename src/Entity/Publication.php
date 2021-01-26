@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Entity\Library\BaseEntity;
+use App\Entity\Library\Traits\BlamableTrait;
 use App\Entity\Library\Traits\FileTrait;
 use App\Entity\Library\Traits\TimestampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,8 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Publication extends BaseEntity
 {
-    use TimestampTrait;
+    use BlamableTrait;
     use FileTrait;
+    use TimestampTrait;
 
     /**
      * @ORM\Column(type="text", nullable=true)

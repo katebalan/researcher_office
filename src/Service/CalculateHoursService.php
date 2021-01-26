@@ -1,41 +1,41 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Entity\Lesson;
 use App\Entity\LessonType;
 
 /**
- * Class CalculateHoursService
- * @package App\Service
+ * Class CalculateHoursService.
+ *
  * @author kate@inuits.eu
  */
 class CalculateHoursService
 {
     /**
-     * @var float $generalHours
+     * @var float
      */
     private $generalHours;
 
     /**
-     * @var array $lessons
+     * @var array
      */
     private $lessons = [];
 
     /**
-     * @var array $simpleLessons
+     * @var array
      */
     private $simpleLessons = [];
 
     /**
-     * @var array $controlLessons
+     * @var array
      */
     private $controlLessons = [];
 
     /**
-     * @var array $statistics
+     * @var array
      */
     private $statistics = [];
 
@@ -50,7 +50,7 @@ class CalculateHoursService
     /**
      * @param $lessons
      */
-    public function setLessons($lessons)
+    public function setLessons($lessons): void
     {
         $this->lessons = $lessons;
     }
@@ -109,18 +109,18 @@ class CalculateHoursService
 
     private function transformLessons(): void
     {
-        foreach($this->lessons as $lesson) {
+        foreach ($this->lessons as $lesson) {
             /** @var LessonType $type */
             $type = $lesson->getType();
 
             if ($type->getIsControl()) {
                 $this->controlLessons[$type->getId()]['type'] = $type;
                 $this->controlLessons[$type->getId()]['items'][] = $lesson;
-                $this->controlLessons[$type->getId()]['count'] = count($this->controlLessons[$type->getId()]['items']);
+                $this->controlLessons[$type->getId()]['count'] = \count($this->controlLessons[$type->getId()]['items']);
             } else {
                 $this->simpleLessons[$type->getId()]['type'] = $type;
                 $this->simpleLessons[$type->getId()]['items'][] = $lesson;
-                $this->simpleLessons[$type->getId()]['count'] = count($this->simpleLessons[$type->getId()]['items']);
+                $this->simpleLessons[$type->getId()]['count'] = \count($this->simpleLessons[$type->getId()]['items']);
             }
         }
     }
@@ -137,12 +137,12 @@ class CalculateHoursService
         return $hours;
     }
 
-    private function writeStatistic($key, $value)
+    private function writeStatistic($key, $value): void
     {
         $this->statistics[$key] = $value;
     }
 
-    private function clear()
+    private function clear(): void
     {
         $this->generalHours = 0;
         $this->statistics = [];

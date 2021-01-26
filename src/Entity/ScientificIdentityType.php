@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -61,7 +63,7 @@ class ScientificIdentityType
     public function setName(string $name): self
     {
         $this->name = $name;
-        $this->setCode(str_replace(' ', '_', strtolower($name)));
+        $this->setCode(\str_replace(' ', '_', \strtolower($name)));
 
         return $this;
     }

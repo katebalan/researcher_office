@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Helper;
-
 
 use App\Entity\Individual\Plan;
 use App\Helper\Xlsx\XlsxDisciplineHelper;
@@ -13,62 +13,50 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class IndividualPlanHelper
- * @package App\Helper
+ * Class IndividualPlanHelper.
  */
 class IndividualPlanHelper
 {
-    /** @var KernelInterface $kernel */
-    private $kernel;
-
-    /** @var CalculateHoursService $hoursService */
-    private $hoursService;
-
-    /** @var XlsxDisciplineHelper $disciplineHelper */
-    private $disciplineHelper;
-
-    /** @var XlsxWorkHelper $workHelper */
-    private $workHelper;
-
-    static public $workTypes = [
+    public static $workTypes = [
         '3' => 'methodical_work',
         '4' => 'scientific_work',
         '5' => 'organizational_work',
-        '6' => 'disciplinary_work'
+        '6' => 'disciplinary_work',
     ];
+
+    /** @var KernelInterface */
+    private $kernel;
+
+    /** @var CalculateHoursService */
+    private $hoursService;
+
+    /** @var XlsxDisciplineHelper */
+    private $disciplineHelper;
+
+    /** @var XlsxWorkHelper */
+    private $workHelper;
 
     /**
      * IndividualPlanHelper constructor.
-     *
-     * @param KernelInterface $kernel
-     * @param CalculateHoursService $hoursService
-     * @param XlsxDisciplineHelper $disciplineHelper
-     * @param XlsxWorkHelper $workHelper
      */
     public function __construct(
         KernelInterface $kernel,
         CalculateHoursService $hoursService,
         XlsxDisciplineHelper $disciplineHelper,
         XlsxWorkHelper $workHelper
-    )
-    {
+    ) {
         $this->kernel = $kernel;
         $this->hoursService = $hoursService;
         $this->disciplineHelper = $disciplineHelper;
         $this->workHelper = $workHelper;
     }
 
-    /**
-     * @return string
-     */
     public function getTemplate(): string
     {
         return $this->kernel->getProjectDir() . '/templates/files/ind_plan_example.xlsx';
     }
 
     /**
-     * @param Spreadsheet $spreadsheet
-     * @param Plan $individualPlan
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     public function generateIndividualPlan(Spreadsheet &$spreadsheet, Plan $individualPlan): void

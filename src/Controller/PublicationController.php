@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Publication;
 use App\Entity\User;
 use App\Form\PublicationType;
-use App\Repository\PublicationRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,7 +84,7 @@ class PublicationController extends AbstractController
      */
     public function delete(Request $request, Publication $publication): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$publication->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $publication->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($publication);
             $entityManager->flush();

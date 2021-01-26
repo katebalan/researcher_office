@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Entity\Individual;
 
 use App\Entity\Discipline;
 use App\Entity\Library\Traits\TimestampTrait;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -17,7 +18,7 @@ class PlanDisciplines
 {
     use TimestampTrait;
 
-    const SEMESTER = [1, 2];
+    public const SEMESTER = [1, 2];
 
     /**
      * @ORM\Id()

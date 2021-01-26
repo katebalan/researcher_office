@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +24,7 @@ class NewsController extends AbstractController
 
         return $this->render('news/index.html.twig', [
             'content' => $content,
-            'sources' => $sources
+            'sources' => $sources,
         ]);
     }
 }

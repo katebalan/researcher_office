@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends BaseFixture
@@ -16,7 +18,7 @@ class UserFixtures extends BaseFixture
             'patronymic' => 'Вікторович',
             'email' => 'admin2@admin.com',
             'birthDate' => '01-01-1990',
-            'roles' => ['ROLE_ADMIN']
+            'roles' => ['ROLE_ADMIN'],
         ],
         [
             'username' => 'admin',
@@ -25,7 +27,7 @@ class UserFixtures extends BaseFixture
             'patronymic' => 'Григорівна',
             'email' => 'ket11141@gmail.com',
             'birthDate' => '18-11-1996',
-            'roles' => ['ROLE_ADMIN']
+            'roles' => ['ROLE_ADMIN'],
         ],
         [
             'username' => 'user01',
@@ -34,8 +36,8 @@ class UserFixtures extends BaseFixture
             'patronymic' => 'Юрійович',
             'email' => 'user01@admin.com',
             'birthDate' => '01-01-1990',
-            'roles' => []
-        ]
+            'roles' => [],
+        ],
     ];
 
     /**
@@ -48,7 +50,7 @@ class UserFixtures extends BaseFixture
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    protected function loadData(ObjectManager $manager)
+    protected function loadData(ObjectManager $manager): void
     {
         foreach (self::$users as $user) {
             $entity = new User();
@@ -57,7 +59,7 @@ class UserFixtures extends BaseFixture
             $entity->setSecondName($user['secondName']);
             $entity->setPatronymic($user['patronymic']);
             $entity->setEmail($user['email']);
-            $entity->setBirthDate(new \DateTime(sprintf('-%d years', rand(30, 70))));
+            $entity->setBirthDate(new \DateTime(\sprintf('-%d years', \random_int(30, 70))));
             $entity->setPassword($this->passwordEncoder->encodePassword($entity, 'admin'));
             $entity->setRoles($user['roles']);
             $manager->persist($entity);

@@ -1,24 +1,24 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\EventListener;
 
 use App\Entity\Diploma;
 use App\Entity\Publication;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\File\File;
+use App\Service\FileUploader;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class FileUploadListener
- * @package App\EventListener
+ * Class FileUploadListener.
  */
 class FileUploadListener
 {
     /**
-     * @var FileUploader $uploader
+     * @var FileUploader
      */
     private $uploader;
 
@@ -26,8 +26,6 @@ class FileUploadListener
 
     /**
      * FileUploadListener constructor.
-     *
-     * @param FileUploader $uploader
      */
     public function __construct(FileUploader $uploader)
     {
@@ -35,11 +33,9 @@ class FileUploadListener
     }
 
     /**
-     * Listen create actions
-     *
-     * @param LifecycleEventArgs $args
+     * Listen create actions.
      */
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 
@@ -47,11 +43,9 @@ class FileUploadListener
     }
 
     /**
-     * Listen update actions
-     *
-     * @param PreUpdateEventArgs $args
+     * Listen update actions.
      */
-    public function preUpdate(PreUpdateEventArgs $args)
+    public function preUpdate(PreUpdateEventArgs $args): void
     {
         $entity = $args->getEntity();
 
@@ -59,14 +53,33 @@ class FileUploadListener
     }
 
     /**
-     * Upload new file and save new path into entity
+     * Listen Edit actions.
+     */
+    public function postLoad(LifecycleEventArgs $args): void
+    {
+        $entity = $args->getEntity();
+
+        if (!\method_exists($entity, 'setFile') && !\method_exists($entity, 'getFilename')) {
+            return;
+        }
+
+        $folder = $this->uploader->getFolder($entity);
+
+        if ($fileName = $entity->getFilename()) {
+            $entity->setFile(new File($this->uploader->getTargetDirectory() . $folder . '/' . $fileName));
+            $this->file = $entity->getFile();
+        }
+    }
+
+    /**
+     * Upload new file and save new path into entity.
      *
      * @param $entity
      */
-    private function uploadFile($entity)
+    private function uploadFile($entity): void
     {
         // upload only works for Publication and Diploma entities
-        if (!($entity instanceof Publication or $entity instanceof Diploma)) {
+        if (!($entity instanceof Publication || $entity instanceof Diploma)) {
             return;
         }
 
@@ -83,27 +96,6 @@ class FileUploadListener
             // as the path is set on the postLoad listener
             $entity->setFilename($file->getFilename());
             $entity->setRealFilename($file->getBasename());
-        }
-    }
-
-    /**
-     * Listen Edit actions
-     *
-     * @param LifecycleEventArgs $args
-     */
-    public function postLoad(LifecycleEventArgs $args)
-    {
-        $entity = $args->getEntity();
-
-        if (!method_exists($entity, 'setFile') and !method_exists($entity, 'getFilename')) {
-            return;
-        }
-
-        $folder = $this->uploader->getFolder($entity);
-
-        if ($fileName = $entity->getFilename()) {
-            $entity->setFile(new File($this->uploader->getTargetDirectory() . $folder . '/' . $fileName));
-            $this->file = $entity->getFile();
         }
     }
 }

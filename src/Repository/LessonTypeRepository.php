@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\LessonType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method LessonType|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,17 +21,15 @@ class LessonTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, LessonType::class);
     }
 
-     /**
-      * @return LessonType[] Returns an array of LessonType objects
-      */
+    /**
+     * @return LessonType[] Returns an array of LessonType objects
+     */
     public function findAllArray()
     {
         return $this->createQueryBuilder('l')
             ->getQuery()
-            ->getArrayResult()
-        ;
+            ->getArrayResult();
     }
-
 
     /*
     public function findOneBySomeField($value): ?LessonType
