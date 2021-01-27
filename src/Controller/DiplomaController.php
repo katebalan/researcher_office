@@ -86,7 +86,8 @@ class DiplomaController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('ro_diploma_index');
+        // TODO return something else for users which are not log in
+        return $this->redirectToRoute('ro_index');
     }
 
     /**

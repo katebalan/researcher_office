@@ -43,6 +43,21 @@ class PlanDisciplines
      */
     private $semester;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $department;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $course;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $group_codes;
+
     public function getIndividualPlan(): ?Plan
     {
         return $this->individualPlan;
@@ -75,6 +90,42 @@ class PlanDisciplines
     public function setSemester(int $semester): self
     {
         $this->semester = $semester;
+
+        return $this;
+    }
+
+    public function getDepartment(): ?string
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(string $department): self
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    public function getCourse(): ?string
+    {
+        return $this->course;
+    }
+
+    public function setCourse(string $course): self
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    public function getGroupCodes(): ?string
+    {
+        return $this->group_codes;
+    }
+
+    public function setGroupCodes(string $group_codes): self
+    {
+        $this->group_codes = $group_codes;
 
         return $this;
     }

@@ -26,6 +26,7 @@ class DiplomaType extends AbstractType
                     'class' => 'js-datepicker',
                     'autocomplete' => 'off',
                 ],
+                'html5' => false
             ])
             ->add('file', FileType::class, [
                 'label' => 'File (PDF file)',

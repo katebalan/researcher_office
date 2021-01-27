@@ -36,21 +36,6 @@ class Discipline extends BaseEntity
     private $topics;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $department;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $course;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $group_codes;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Individual\PlanDisciplines", mappedBy="discipline")
      */
     private $individualPlansDisciplines;
@@ -161,42 +146,6 @@ class Discipline extends BaseEntity
         }
 
         return \array_unique($lessons);
-    }
-
-    public function getDepartment(): ?string
-    {
-        return $this->department;
-    }
-
-    public function setDepartment(string $department): self
-    {
-        $this->department = $department;
-
-        return $this;
-    }
-
-    public function getCourse(): ?string
-    {
-        return $this->course;
-    }
-
-    public function setCourse(string $course): self
-    {
-        $this->course = $course;
-
-        return $this;
-    }
-
-    public function getGroupCodes(): ?string
-    {
-        return $this->group_codes;
-    }
-
-    public function setGroupCodes(string $group_codes): self
-    {
-        $this->group_codes = $group_codes;
-
-        return $this;
     }
 
     /**

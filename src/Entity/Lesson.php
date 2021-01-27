@@ -52,7 +52,7 @@ class Lesson
 
     public function __toString(): ?string
     {
-        return $this->getId();
+        return (string) $this->getId();
     }
 
     public function getId(): ?int
