@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Individual;
 
+use App\Entity\Library\Traits\BlamableTrait;
 use App\Entity\Library\Traits\TimestampTrait;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Plan
 {
     use TimestampTrait;
+    use BlamableTrait;
 
     /**
      * @ORM\Id()
@@ -40,11 +42,6 @@ class Plan
      * @ORM\OneToMany(targetEntity="App\Entity\Individual\Work", mappedBy="individualPlan", cascade={"persist"})
      */
     private $works;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="individualPlans")
-     */
-    private $createdBy;
 
     public function __construct()
     {
@@ -129,18 +126,6 @@ class Plan
                 $work->setIndividualPlan(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy;
-    }
-
-    public function setCreatedBy(?User $createdBy): self
-    {
-        $this->createdBy = $createdBy;
 
         return $this;
     }

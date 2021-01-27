@@ -16,9 +16,6 @@ class DisciplineType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('department')
-            ->add('course')
-            ->add('groupCodes')
             ->add('overview', CKEditorType::class)
             ->add('goal', CKEditorType::class)
             ->add('task', CKEditorType::class);
