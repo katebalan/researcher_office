@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helper\Xlsx;
 
-use App\Entity\IndividualPlan;
+use App\Entity\Individual\Plan;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 /**
@@ -29,7 +29,7 @@ abstract class XlsxHelper
     /**
      * @return mixed
      */
-    abstract public function fillSheet(IndividualPlan $individualPlan): void;
+    abstract public function fillSheet(Plan $individualPlan): void;
 
     /**
      * @return mixed

@@ -13,7 +13,7 @@
 
         $this.find('.dynamic-collection-item-add').on('click', function (e) {
             e.preventDefault(true);
-            console.log('ffff');
+
             // Grab the index
             let index = $this.data('index');
 

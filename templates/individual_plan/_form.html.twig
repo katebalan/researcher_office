@@ -4,14 +4,20 @@
         <div class="col-md-12">
             {{ form_row(form.years) }}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             {{ form_label(form.individualPlansDisciplines) }}
-            <ul id="{{ form.individualPlansDisciplines.vars.id}}" class="js-dynamic-collection" data-prototype="<li class='dynamic-collection-item row mb-4'>
-                                <div class='col-12 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.discipline)|e }}</div>
-                                <div class='col-3 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.department)|e }}</div>
-                                <div class='col-2 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.course)|e }}</div>
-                                <div class='col-3 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.group_codes)|e }}</div>
-                                <div class='col-3 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.semester)|e }}</div>
+            <ul id="{{ form.individualPlansDisciplines.vars.id}}" class="js-dynamic-collection2" data-prototype="<li class='dynamic-collection-item row mb-4'>
+                                <div class='col-6 mb-0 text-muted'>{{ form_label(form.individualPlansDisciplines.vars.prototype.discipline)|e }}</div>
+                                <div class='col-6 mb-0 text-muted'>{{ form_label(form.individualPlansDisciplines.vars.prototype.department)|e }}</div>
+                                <div class='col-6 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.discipline)|e }}</div>
+                                <div class='col-6 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.department)|e }}</div>
+                                <div class='col-3 mb-0 text-muted'>{{ form_label(form.individualPlansDisciplines.vars.prototype.course)|e }}</div>
+                                <div class='col-4 mb-0 text-muted'>{{ form_label(form.individualPlansDisciplines.vars.prototype.group_codes)|e }}</div>
+                                <div class='col-4 mb-0 text-muted'>{{ form_label(form.individualPlansDisciplines.vars.prototype.semester)|e }}</div>
+                                <div class='col-1 mb-0'></div>
+                                <div class='col-3 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.course)|e }}</div>
+                                <div class='col-4 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.group_codes)|e }}</div>
+                                <div class='col-4 mb-2'>{{ form_widget(form.individualPlansDisciplines.vars.prototype.semester)|e }}</div>
                                 <div class='col-1 mb-2'>
                                     <a href='#' class='btn btn-outline-danger btn-sm pull-right clearfix dynamic-collection-item-delete'>
                                         <i class='fa fa-trash'></i>
@@ -20,12 +26,18 @@
                                 </li>">
                 {% for pd in form.individualPlansDisciplines %}
                     <li class="dynamic-collection-item row mb-4">
-                        <div class="col-12 mb-2">{{ form_widget(pd.discipline) }}</div>
-                        <div class="col-3 mb-2">{{ form_widget(pd.department) }}</div>
-                        <div class="col-2 mb-2">{{ form_widget(pd.course) }}</div>
-                        <div class="col-3 mb-2">{{ form_widget(pd.group_codes) }}</div>
-                        <div class="col-3 mb-2">{{ form_widget(pd.semester) }}</div>
+                        <div class="col-6 mb-0 text-muted">{{ form_label(pd.discipline) }}</div>
+                        <div class="col-6 mb-0 text-muted">{{ form_label(pd.department) }}</div>
+                        <div class="col-6 mb-2">{{ form_widget(pd.discipline) }}</div>
+                        <div class="col-6 mb-2">{{ form_widget(pd.department) }}</div>
 
+                        <div class="col-3 mb-0 text-muted">{{ form_label(pd.course) }}</div>
+                        <div class="col-4 mb-0 text-muted">{{ form_label(pd.group_codes) }}</div>
+                        <div class="col-4 mb-0 text-muted">{{ form_label(pd.semester) }}</div>
+                        <div class='col-1 mb-0'></div>
+                        <div class="col-3 mb-2">{{ form_widget(pd.course) }}</div>
+                        <div class="col-4 mb-2">{{ form_widget(pd.group_codes) }}</div>
+                        <div class="col-4 mb-2">{{ form_widget(pd.semester) }}</div>
                         <div class="col-1 mb-2">
                             <a href='#' class='btn btn-outline-danger btn-sm pull-right clearfix dynamic-collection-item-delete'>
                                 <i class="fa fa-trash"></i>
@@ -36,15 +48,20 @@
                     {% do form.individualPlansDisciplines.setRendered %}
                 {% endfor %}
                 <a href="#" class="dynamic-collection-item-add btn btn-outline-info btn-sm">
-                    <i class="fa fa-plus-square-o"></i> {{ 'add'|trans|capitalize ~ ' ' ~ 'work'|trans }}
+                    <i class="fa fa-plus-square-o"></i> {{ 'add'|trans|capitalize ~ ' ' ~ 'discipline'|trans }}
                 </a>
             </ul>
         </div>
-        <div class="col-md-6">
-            {# TODO separete type field #}
+        <div class="col-md-12">
             {{ form_label(form.works) }}
             <ul id="{{ form.works.vars.id}}" class="js-dynamic-collection" data-prototype="<li class='dynamic-collection-item row mb-4'>
+                                <div class='col-12 mb-0 text-muted'>{{ form_label(form.works.vars.prototype.name)|e }}</div>
                                 <div class='col-12 mb-2'>{{ form_widget(form.works.vars.prototype.name)|e }}</div>
+                                <div class='col-3 mb-0 text-muted'>{{ form_label(form.works.vars.prototype.type)|e }}</div>
+                                <div class='col-2 mb-0 text-muted'>{{ form_label(form.works.vars.prototype.hours)|e }}</div>
+                                <div class='col-3 mb-0 text-muted'>{{ form_label(form.works.vars.prototype.ternOfExecution)|e }}</div>
+                                <div class='col-3 mb-0 text-muted'>{{ form_label(form.works.vars.prototype.mark)|e }}</div>
+                                <div class='col-1 mb-0'></div>
                                 <div class='col-3 mb-2'>{{ form_widget(form.works.vars.prototype.type)|e }}</div>
                                 <div class='col-2 mb-2'>{{ form_widget(form.works.vars.prototype.hours)|e }}</div>
                                 <div class='col-3 mb-2'>{{ form_widget(form.works.vars.prototype.ternOfExecution)|e }}</div>
@@ -57,7 +74,14 @@
                                 </li>">
                 {% for work in form.works %}
                     <li class="dynamic-collection-item row mb-4">
+                        <div class="col-12 mb-0 text-muted">{{ form_label(work.name) }}</div>
                         <div class="col-12 mb-2">{{ form_widget(work.name) }}</div>
+
+                        <div class="col-3 mb-0 text-muted">{{ form_label(work.type) }}</div>
+                        <div class="col-2 mb-0 text-muted">{{ form_label(work.hours) }}</div>
+                        <div class="col-3 mb-0 text-muted">{{ form_label(work.ternOfExecution) }}</div>
+                        <div class="col-3 mb-0 text-muted">{{ form_label(work.mark) }}</div>
+                        <div class='col-1 mb-0'></div>
                         <div class="col-3 mb-2">{{ form_widget(work.type) }}</div>
                         <div class="col-2 mb-2">{{ form_widget(work.hours) }}</div>
                         <div class="col-3 mb-2">{{ form_widget(work.ternOfExecution) }}</div>

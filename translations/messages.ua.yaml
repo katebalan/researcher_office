@@ -109,6 +109,7 @@ Course: Курс
 Department: Спеціальність, факультет
 Years: Роки
 Disciplines: Дисципліни
+Discipline: Дисципліни
 Hours: Години
 Term of execution: Термін виконання
 Works: Діяльність
@@ -125,3 +126,8 @@ Demanding: Вимогливість
 Tolerance for students: Толерантність до студентів
 Sense of humor: Почуття гумору
 Rating from rozklad.org.ua: Рейтинг з rozklad.org.ua
+Individual plans disciplines: Дисципліни
+Semester: Cеместр
+done: виконано
+not_done: не виконано
+discipline_review: Перегляд диcципліни

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helper\Xlsx;
 
-use App\Entity\IndividualPlan;
-use App\Entity\IndividualWork;
+use App\Entity\Individual\Plan;
+use App\Entity\Individual\Work;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -20,7 +20,7 @@ final class XlsxWorkHelper extends XlsxHelper
     /** @var string */
     private $type;
 
-    /** @var IndividualWork */
+    /** @var Work */
     private $work;
 
     /**
@@ -37,11 +37,11 @@ final class XlsxWorkHelper extends XlsxHelper
         $this->type = $type;
     }
 
-    public function fillSheet(IndividualPlan $individualPlan): void
+    public function fillSheet(Plan $individualPlan): void
     {
         $this->clear();
 
-        $works = $this->em->getRepository(IndividualWork::class)
+        $works = $this->em->getRepository(Work::class)
             ->findByCanonicalType($this->type);
 
         foreach ($works as $work) {
@@ -66,7 +66,7 @@ final class XlsxWorkHelper extends XlsxHelper
         $this->count = 1;
     }
 
-    private function setIndividualWork(IndividualWork $individualWork): void
+    private function setIndividualWork(Work $individualWork): void
     {
         $this->work = $individualWork;
     }

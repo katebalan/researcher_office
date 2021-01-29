@@ -85,5 +85,6 @@ $(() => {
     $('.fix-bootstrap-file')._fix_boostrap_file_loader();
     $('.js-update-lesson-form').__update_lesson_form();
     $('.js-dynamic-collection')._init_dynamic_collection();
+    $('.js-dynamic-collection2')._init_dynamic_collection();
     $('.js-rating')._init_rating();
 });

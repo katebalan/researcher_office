@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Helper\Xlsx;
 
 use App\Entity\Discipline;
-use App\Entity\IndividualPlan;
+use App\Entity\Individual\Plan;
 use App\Service\CalculateHoursService;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -56,10 +56,11 @@ final class XlsxDisciplineHelper extends XlsxHelper
     /**
      * @throws Exception
      */
-    public function fillSheet(IndividualPlan $individualPlan): void
+    public function fillSheet(Plan $individualPlan): void
     {
         $this->clear();
 
+        // TODO rewrite generation of the file here
         foreach ($individualPlan->getDisciplines() as $discipline) {
             $this->setDiscipline($discipline);
             $this->fillRow();

@@ -10,8 +10,10 @@ WORKDIR /var/www
 # Install extensions
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        git libzip-dev gnupg2 libicu-dev libpq-dev ssh rsync zip unzip nodejs npm curl \
-    && docker-php-ext-install pdo pdo_mysql opcache intl zip
+        git libzip-dev gnupg2 libicu-dev libpq-dev libpng-dev libjpeg-dev libfreetype6-dev ssh rsync zip unzip nodejs npm curl \
+    && docker-php-ext-install pdo pdo_mysql opcache intl zip \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install gd
 
 # Install yarn
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -

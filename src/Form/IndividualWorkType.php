@@ -15,30 +15,16 @@ class IndividualWorkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', null, [
-                'attr' => [
-                    'placeholder' => 'Name',
-                ],
-            ])
-            ->add('hours', null, [
-                'attr' => [
-                    'placeholder' => 'Hours',
-                ],
-            ])
-            ->add('ternOfExecution', null, [
-                'attr' => [
-                    'placeholder' => 'Term of execution',
-                ],
-            ])
+            ->add('name')
+            ->add('hours')
+            ->add('ternOfExecution')
             ->add('mark', ChoiceType::class, [
                 'choices' => [
-                    'виконано' => 'виконано',
-                    'не виконано' => 'не виконано',
+                    'done' => 'done',
+                    'not_done' => 'not_done',
                 ],
             ])
-            ->add('type', null, [
-                'choice_translation_domain' => 'messages',
-            ]);
+            ->add('type');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

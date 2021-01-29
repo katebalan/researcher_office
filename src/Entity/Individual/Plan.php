@@ -34,14 +34,19 @@ class Plan
     private $years;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Individual\PlanDisciplines", mappedBy="individualPlan")
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\PlanDisciplines", mappedBy="individualPlan", cascade={"persist", "remove"})
      */
     private $individualPlansDisciplines;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Individual\Work", mappedBy="individualPlan", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Individual\Work", mappedBy="individualPlan", cascade={"persist", "remove"})
      */
     private $works;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="individualPlans")
+     */
+    private $createdBy;
 
     public function __construct()
     {
@@ -91,7 +96,7 @@ class Plan
             $this->individualPlansDisciplines->removeElement($individualPlansDisciplines);
 
             // set the owning side to null (unless already changed)
-            if ($individualPlansDisciplines->getDiscipline() === $this) {
+            if ($individualPlansDisciplines->getIndividualPlan() === $this) {
                 $individualPlansDisciplines->setIndividualPlan(null);
             }
         }

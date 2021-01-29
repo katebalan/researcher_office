@@ -8,6 +8,7 @@ use App\Entity\Individual\Plan;
 use App\Entity\User;
 use App\Form\IndividualPlanType;
 use App\Repository\IndividualPlanRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,7 +64,7 @@ class IndividualPlanController extends AbstractController
     public function show(Plan $individualPlan): Response
     {
         return $this->render('individual_plan/show.html.twig', [
-            'individual_plan' => $individualPlan,
+            'plan' => $individualPlan,
         ]);
     }
 
@@ -72,11 +73,36 @@ class IndividualPlanController extends AbstractController
      */
     public function edit(Request $request, Plan $individualPlan): Response
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $originalWorks = new ArrayCollection();
+        $originalDisciplines = new ArrayCollection();
+
+        foreach ($individualPlan->getWorks() as $work) {
+            $originalWorks->add($work);
+        }
+        foreach ($individualPlan->getIndividualPlansDisciplines() as $discipline) {
+            $originalDisciplines->add($discipline);
+        }
+
         $form = $this->createForm(IndividualPlanType::class, $individualPlan);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            foreach ($originalWorks as $work) {
+                if (false === $individualPlan->getWorks()->contains($work)) {
+                    $em->remove($work);
+                }
+            }
+
+            foreach ($originalDisciplines as $discipline) {
+                if (false === $individualPlan->getIndividualPlansDisciplines()->contains($discipline)) {
+                    $em->remove($discipline);
+                }
+            }
+
+            $em->flush();
 
             return $this->redirectToRoute('ro_individual_plan_index');
         }
